@@ -266,7 +266,7 @@
     .card svg { width: 100%; height: auto; display: block; background: #f3e7c0; }
     .card img { width: 100%; height: auto; display: block; background: #f3e7c0; }
     #lb-art img { max-width: 100%; max-height: 72vh; display: block; margin: 0 auto; }
-    .card figcaption {
+    .card .cap {
       font-family: "Archivo", sans-serif;
       font-size: .72rem;
       margin-top: .4rem;
@@ -779,11 +779,11 @@
       ]
     },
     artists: [
-      { id: "greg", name: "Brother Greg", handle: "san_clemente_tattoo", instagram: "https://www.instagram.com/san_clemente_tattoo/", role: "Owner", bio: "Owner of San Clemente Tattoo.", confirm: false },
-      { id: "james", name: "James Whelan", handle: "_jameswhelan", instagram: "https://www.instagram.com/_jameswhelan/", role: "Artist", bio: "Work shown; lineup per Greg.", confirm: false },
-      { id: "brian", name: "Brian Taylor", handle: "into_the_grave", instagram: "https://www.instagram.com/into_the_grave/", role: "Artist", bio: "Work shown; lineup per Greg.", confirm: false },
-      { id: "chas", name: "Chas Byassee", handle: "cebyassee", instagram: "https://www.instagram.com/cebyassee/", role: "Artist", bio: "Work shown; lineup per Greg.", confirm: false },
-      { id: "thad", name: "Thad", handle: "thadart", instagram: "https://www.instagram.com/thadart/", role: "Artist", bio: "Work shown; lineup per Greg.", confirm: false }
+      { id: "greg", name: "Brother Greg Rancourt", handle: "brothergreg", instagram: "https://www.instagram.com/brothergreg/", role: "Owner", bio: "Tattooer, painter, and owner of San Clemente Tattoo.", confirm: false },
+      { id: "james", name: "James Whelan", handle: "_jameswhelan", instagram: "https://www.instagram.com/_jameswhelan/", role: "Artist", bio: "Tattooer at San Clemente Tattoo. DM or swing by the shop to book.", confirm: false },
+      { id: "brian", name: "Brian Taylor", handle: "into_the_grave", instagram: "https://www.instagram.com/into_the_grave/", role: "Artist", bio: "Tattoo maker at San Clemente Tattoo. Books always open: DM or email to book.", confirm: false },
+      { id: "chas", name: "Chas Byassee", handle: "cebyassee", instagram: "https://www.instagram.com/cebyassee/", role: "Artist", bio: "Professional tattooer since 1997.", confirm: false },
+      { id: "thad", name: "Thadius Gardner", handle: "thadart", instagram: "https://www.instagram.com/thadart/", role: "Artist", bio: "Tattoo artist at San Clemente Tattoo.", confirm: false }
     ],
     styles: ["Traditional", "Black & grey", "Color", "Lettering", "Cover-ups", "Paintings"],
     faq: [
@@ -1072,9 +1072,9 @@
       grid.innerHTML = visible.map((item, i) => `
         <button class="card" type="button" data-id="${item.id}" data-i="${i}" id="piece-${item.id}">
           ${item.src ? `<img src="${item.src}" alt="${item.caption}" loading="lazy">` : motifSVG(item.motif)}
-          <figcaption>
+          <span class="cap">
             <span>${item.style} · ${artistName(item.artistId)}</span>
-          </figcaption>
+          </span>
         </button>`).join("");
       empty.classList.toggle("hidden", visible.length > 0);
       grid.querySelectorAll(".card").forEach(btn => btn.addEventListener("click", () => openLB(+btn.dataset.i)));
@@ -1142,11 +1142,14 @@
       `<li><span>${d.day}</span><span>Noon – 8 pm</span></li>`).join("");
   }
 
-  document.getElementById("booking-form").addEventListener("submit", e => {
+  document.getElementById("booking-form").addEventListener("submit", async e => {
     e.preventDefault();
-    const fd = new FormData(e.target);
+    const form = e.target;
+    const fd = new FormData(form);
     if (fd.get("bot-field")) return;
-    const body = [
+    const box = document.getElementById("form-result");
+    box.hidden = false;
+    const mailBody = [
       `Idea: ${fd.get("idea")}`,
       `Artist: ${fd.get("artist") || "No preference"}`,
       `Size: ${fd.get("size")}`,
@@ -1157,12 +1160,22 @@
       `Email: ${fd.get("email")}`,
       `18+ confirmed: ${fd.get("age18") ? "Yes" : "No"}`
     ].join("\n");
-    const box = document.getElementById("form-result");
-    box.hidden = false;
-    box.className = "form-ok";
-    box.innerHTML = `Request ready. On Netlify this lands in Forms. Until the host is wired, it opens an email to the shop.`;
-    const mail = `mailto:${SHOP.emailUse}?subject=${encodeURIComponent("Booking request — " + fd.get("name"))}&body=${encodeURIComponent(body)}`;
-    window.location.href = mail;
+    const mailto = `mailto:${SHOP.emailUse}?subject=${encodeURIComponent("Booking request — " + fd.get("name"))}&body=${encodeURIComponent(mailBody)}`;
+    try {
+      const res = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(fd).toString()
+      });
+      if (!res.ok) throw new Error("form post failed");
+      box.className = "form-ok";
+      box.innerHTML = `Request sent. The shop answers during open hours. Prefer email? <a href="${SHOP.emailUse ? "mailto:" + SHOP.emailUse : "#"}">${SHOP.emailUse}</a>`;
+      form.reset();
+    } catch (err) {
+      box.className = "form-ok";
+      box.innerHTML = `The online form hiccuped, so we opened an email to the shop instead. Just hit send.`;
+      window.location.href = mailto;
+    }
   });
 
   const lb = document.getElementById("lightbox");
