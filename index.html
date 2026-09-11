@@ -265,6 +265,34 @@
     }
     .card svg { width: 100%; height: auto; display: block; background: #f3e7c0; }
     .card img { width: 100%; height: auto; display: block; background: #f3e7c0; }
+    .card { position: relative; }
+    .set-badge {
+      position: absolute;
+      top: .7rem;
+      right: .7rem;
+      display: inline-flex;
+      align-items: center;
+      gap: .25rem;
+      background: rgba(20,17,12,.85);
+      color: #f7f1dc;
+      font-family: "Archivo", sans-serif;
+      font-size: .7rem;
+      font-weight: 700;
+      padding: .2rem .45rem;
+      border-radius: 999px;
+      pointer-events: none;
+    }
+    .lb-setpos {
+      display: inline-block;
+      background: var(--ink);
+      color: var(--cream);
+      font-size: .68rem;
+      font-weight: 700;
+      padding: .1rem .5rem;
+      border-radius: 999px;
+      margin-left: .4rem;
+      vertical-align: middle;
+    }
     #lb-art img { max-width: 100%; max-height: 72vh; display: block; margin: 0 auto; }
     .card .cap {
       font-family: "Archivo", sans-serif;
@@ -798,31 +826,29 @@
   };
 
     const GALLERY = [
-    { id: "orig-os-5526748", artistId: "shop", style: "Black & grey", caption: "Sacred heart, chest", src: "photos/orig-os-5526748.jpg" },
+    { id: "orig-os-5526748", style: "Black & grey", caption: "Sacred heart, chest", src: "photos/orig-os-5526748.jpg" },
     { id: "orig-ig-193725", artistId: "brian", style: "Color", caption: "Chrysanthemum and peony sleeve", src: "photos/orig-ig-193725.jpg" },
     { id: "orig-ig-193735", artistId: "chas", style: "Paintings", caption: "Severed samurai head painting with sword", src: "photos/orig-ig-193735.jpg" },
     { id: "orig-ig-193732", artistId: "chas", style: "Color", caption: "Severed head with dagger", src: "photos/orig-ig-193732.jpg" },
-    { id: "orig-ig-193739", artistId: "shop", style: "Paintings", caption: "'Don\\'t Tread On Me' eagle and ship design", src: "photos/orig-ig-193739.jpg" },
-    { id: "orig-ig-193742", artistId: "shop", style: "Paintings", caption: "'F-Around and Find Out' eagle and ship design", src: "photos/orig-ig-193742.jpg" },
+    { id: "orig-ig-193739", artistId: "greg", style: "Paintings", caption: "'Don\\'t Tread On Me' eagle and ship design", src: "photos/orig-ig-193739.jpg" },
+    { id: "orig-ig-193742", artistId: "greg", style: "Paintings", caption: "'F-Around and Find Out' eagle and ship design", src: "photos/orig-ig-193742.jpg" },
     { id: "orig-ig-193745", artistId: "greg", style: "Paintings", caption: "Cross and serpent watercolor", src: "photos/orig-ig-193745.jpg" },
     { id: "orig-ig-193751", artistId: "james", style: "Color", caption: "Eagle, color", src: "photos/orig-ig-193751.jpg" },
     { id: "orig-ig-193753", artistId: "james", style: "Traditional", caption: "Eagle", src: "photos/orig-ig-193753.jpg" },
     { id: "orig-ig-193804", artistId: "brian", style: "Color", caption: "Full back piece, goddess and flowers", src: "photos/orig-ig-193804.jpg" },
-    { id: "orig-ig-193806", artistId: "brian", style: "Color", caption: "Back piece, color portrait", src: "photos/orig-ig-193806.jpg" },
-    { id: "orig-ig-193809", artistId: "brian", style: "Color", caption: "Full back piece, woman with headdress", src: "photos/orig-ig-193809.jpg" },
+    { id: "orig-ig-193809", artistId: "brian", style: "Color", caption: "Woman with headdress backpiece", src: "photos/orig-ig-193809.jpg", set: "set-brian-lady-back" },
+    { id: "orig-ig-193806", artistId: "brian", style: "Color", caption: "Back piece, color portrait", src: "photos/orig-ig-193806.jpg", set: "set-brian-lady-back" },
     { id: "orig-ig-193813", artistId: "james", style: "Black & grey", caption: "Lady head with rose", src: "photos/orig-ig-193813.jpg" },
-    { id: "orig-ig-193817", artistId: "thad", style: "Black & grey", caption: "Playing cards, dice and rose sleeve", src: "photos/orig-ig-193817.jpg" },
     { id: "orig-ig-193822", artistId: "greg", style: "Paintings", caption: "Eagle and cross Memorial Day art", src: "photos/orig-ig-193822.jpg" },
-    { id: "orig-ig-193825", artistId: "brian", style: "Color", caption: "Virgin Mary backpiece", src: "photos/orig-ig-193825.jpg" },
-    { id: "orig-ig-193830", artistId: "brian", style: "Color", caption: "Virgin Mary backpiece, shoulder detail", src: "photos/orig-ig-193830.jpg" },
+    { id: "orig-ig-193825", artistId: "brian", style: "Color", caption: "Virgin Mary backpiece", src: "photos/orig-ig-193825.jpg", set: "set-brian-mary-back" },
+    { id: "orig-ig-193830", artistId: "brian", style: "Color", caption: "Virgin Mary backpiece, shoulder detail", src: "photos/orig-ig-193830.jpg", set: "set-brian-mary-back" },
     { id: "orig-ig-193851", artistId: "james", style: "Paintings", caption: "Dragon backpiece design, up for grabs", src: "photos/orig-ig-193851.jpg" },
-    { id: "orig-ig-193842", artistId: "james", style: "Paintings", caption: "Dragon and eagle backpiece designs", src: "photos/orig-ig-193842.jpg" },
     { id: "orig-ig-193848", artistId: "james", style: "Paintings", caption: "Eagle backpiece design, up for grabs", src: "photos/orig-ig-193848.jpg" },
     { id: "orig-ig-193909", artistId: "james", style: "Color", caption: "Demon mask", src: "photos/orig-ig-193909.jpg" },
     { id: "orig-ig-193916", artistId: "brian", style: "Black & grey", caption: "Eagle and skull chest piece", src: "photos/orig-ig-193916.jpg" },
     { id: "orig-ig-193920", artistId: "brian", style: "Black & grey", caption: "Black panther torso piece", src: "photos/orig-ig-193920.jpg" },
-    { id: "orig-ig-193934", artistId: "brian", style: "Color", caption: "Demon leg sleeve", src: "photos/orig-ig-193934.jpg" },
-    { id: "orig-ig-193930", artistId: "brian", style: "Color", caption: "Demon leg sleeve, front view", src: "photos/orig-ig-193930.jpg" },
+    { id: "orig-ig-193934", artistId: "brian", style: "Color", caption: "Demon leg sleeve", src: "photos/orig-ig-193934.jpg", set: "set-brian-demon-leg" },
+    { id: "orig-ig-193930", artistId: "brian", style: "Color", caption: "Demon leg sleeve, front view", src: "photos/orig-ig-193930.jpg", set: "set-brian-demon-leg" },
     { id: "orig-ig-193939", artistId: "chas", style: "Color", caption: "Panther and flowers sleeve", src: "photos/orig-ig-193939.jpg" },
     { id: "orig-ig-193926", artistId: "james", style: "Black & grey", caption: "Reaper skull with red accents", src: "photos/orig-ig-193926.jpg" },
     { id: "orig-ig-193943", artistId: "james", style: "Black & grey", caption: "Ornamental full sleeve", src: "photos/orig-ig-193943.jpg" },
@@ -834,52 +860,53 @@
     { id: "orig-ig-194005", artistId: "chas", style: "Color", caption: "Dragon sleeve, black and red", src: "photos/orig-ig-194005.jpg" },
     { id: "orig-ig-194010", artistId: "thad", style: "Black & grey", caption: "Black panther leg piece", src: "photos/orig-ig-194010.jpg" },
     { id: "orig-ig-194017", artistId: "greg", style: "Paintings", caption: "Dagger, swallows and roses shirt art", src: "photos/orig-ig-194017.jpg" },
-    { id: "orig-ig-194032", artistId: "james", style: "Color", caption: "Dragon sleeve", src: "photos/orig-ig-194032.jpg" },
-    { id: "orig-ig-194037", artistId: "james", style: "Color", caption: "Dragon sleeve, detail", src: "photos/orig-ig-194037.jpg" },
-    { id: "orig-ig-194044", artistId: "james", style: "Color", caption: "Dragon sleeve, back view", src: "photos/orig-ig-194044.jpg" },
-    { id: "orig-ig-194025", artistId: "james", style: "Color", caption: "Dragon sleeve (another view)", src: "photos/orig-ig-194025.jpg" },
-    { id: "orig-ig-194028", artistId: "james", style: "Color", caption: "Dragon sleeve, detail (another view)", src: "photos/orig-ig-194028.jpg" },
+    { id: "orig-ig-194039", artistId: "james", style: "Color", caption: "Dragon sleeve", src: "photos/orig-ig-194039.jpg", set: "set-james-dragon-sleeve" },
+    { id: "orig-ig-194025", artistId: "james", style: "Color", caption: "Dragon sleeve (another view)", src: "photos/orig-ig-194025.jpg", set: "set-james-dragon-sleeve" },
+    { id: "orig-ig-194028", artistId: "james", style: "Color", caption: "Dragon sleeve, detail (another view)", src: "photos/orig-ig-194028.jpg", set: "set-james-dragon-sleeve" },
+    { id: "orig-ig-194032", artistId: "james", style: "Color", caption: "Dragon sleeve", src: "photos/orig-ig-194032.jpg", set: "set-james-dragon-sleeve" },
+    { id: "orig-ig-194037", artistId: "james", style: "Color", caption: "Dragon sleeve, detail", src: "photos/orig-ig-194037.jpg", set: "set-james-dragon-sleeve" },
+    { id: "orig-ig-194041", artistId: "james", style: "Color", caption: "Dragon sleeve, close-up", src: "photos/orig-ig-194041.jpg", set: "set-james-dragon-sleeve" },
+    { id: "orig-ig-194044", artistId: "james", style: "Color", caption: "Dragon sleeve, back view", src: "photos/orig-ig-194044.jpg", set: "set-james-dragon-sleeve" },
+    { id: "orig-ig-194047", artistId: "james", style: "Color", caption: "Dragon sleeve, wrist detail", src: "photos/orig-ig-194047.jpg", set: "set-james-dragon-sleeve" },
+    { id: "orig-ig-194049", artistId: "james", style: "Color", caption: "Dragon sleeve, back view (another view)", src: "photos/orig-ig-194049.jpg", set: "set-james-dragon-sleeve" },
     { id: "orig-ig-194034", artistId: "james", style: "Color", caption: "Dragon sleeve, shoulder view", src: "photos/orig-ig-194034.jpg" },
     { id: "orig-ig-194035", artistId: "james", style: "Color", caption: "Dragon sleeve, outer arm", src: "photos/orig-ig-194035.jpg" },
-    { id: "orig-ig-194039", artistId: "james", style: "Color", caption: "Dragon sleeve, full view", src: "photos/orig-ig-194039.jpg" },
-    { id: "orig-ig-194041", artistId: "james", style: "Color", caption: "Dragon sleeve, close-up", src: "photos/orig-ig-194041.jpg" },
-    { id: "orig-ig-194047", artistId: "james", style: "Color", caption: "Dragon sleeve, wrist detail", src: "photos/orig-ig-194047.jpg" },
-    { id: "orig-ig-194049", artistId: "james", style: "Color", caption: "Dragon sleeve, back view (another view)", src: "photos/orig-ig-194049.jpg" },
-    { id: "orig-ig-194103", artistId: "brian", style: "Color", caption: "Dragon and flowers sleeve", src: "photos/orig-ig-194103.jpg" },
-    { id: "orig-ig-194107", artistId: "brian", style: "Color", caption: "Dragon and flowers sleeve, detail", src: "photos/orig-ig-194107.jpg" },
-    { id: "orig-ig-194109", artistId: "brian", style: "Color", caption: "Dragon and flowers sleeve, full view", src: "photos/orig-ig-194109.jpg" },
+    { id: "orig-ig-194109", artistId: "brian", style: "Color", caption: "Dragon and flowers sleeve", src: "photos/orig-ig-194109.jpg", set: "set-brian-dragon-flowers" },
+    { id: "orig-ig-194103", artistId: "brian", style: "Color", caption: "Dragon and flowers sleeve", src: "photos/orig-ig-194103.jpg", set: "set-brian-dragon-flowers" },
+    { id: "orig-ig-194056", artistId: "brian", style: "Color", caption: "Dragon and flowers sleeve (another view)", src: "photos/orig-ig-194056.jpg", set: "set-brian-dragon-flowers" },
+    { id: "orig-ig-194059", artistId: "brian", style: "Color", caption: "Dragon and flowers sleeve, full view (another view)", src: "photos/orig-ig-194059.jpg", set: "set-brian-dragon-flowers" },
+    { id: "orig-ig-194107", artistId: "brian", style: "Color", caption: "Dragon and flowers sleeve, detail", src: "photos/orig-ig-194107.jpg", set: "set-brian-dragon-flowers" },
     { id: "orig-ig-194054", artistId: "brian", style: "Color", caption: "Dragon head, sleeve detail", src: "photos/orig-ig-194054.jpg" },
-    { id: "orig-ig-194056", artistId: "brian", style: "Color", caption: "Dragon and flowers sleeve (another view)", src: "photos/orig-ig-194056.jpg" },
-    { id: "orig-ig-194059", artistId: "brian", style: "Color", caption: "Dragon and flowers sleeve, full view (another view)", src: "photos/orig-ig-194059.jpg" },
-    { id: "orig-ig-194113", artistId: "chas", style: "Black & grey", caption: "Skeleton and scorpion", src: "photos/orig-ig-194113.jpg" },
-    { id: "orig-ig-194116", artistId: "chas", style: "Black & grey", caption: "Skeleton and scorpion, detail", src: "photos/orig-ig-194116.jpg" },
-    { id: "orig-ig-194118", artistId: "chas", style: "Black & grey", caption: "Skeleton and scorpion triptych", src: "photos/orig-ig-194118.jpg" },
-    { id: "orig-ig-194120", artistId: "chas", style: "Black & grey", caption: "Skeleton and scorpion, side view", src: "photos/orig-ig-194120.jpg" },
-    { id: "orig-ig-194134", artistId: "james", style: "Color", caption: "Dragon back piece, Japanese style", src: "photos/orig-ig-194134.jpg" },
-    { id: "orig-ig-194140", artistId: "james", style: "Color", caption: "Dragon full backpiece", src: "photos/orig-ig-194140.jpg" },
+    { id: "orig-ig-194113", artistId: "chas", style: "Black & grey", caption: "Skeleton and scorpion", src: "photos/orig-ig-194113.jpg", set: "set-chas-skel-scorp" },
+    { id: "orig-ig-194116", artistId: "chas", style: "Black & grey", caption: "Skeleton and scorpion, detail", src: "photos/orig-ig-194116.jpg", set: "set-chas-skel-scorp" },
+    { id: "orig-ig-194118", artistId: "chas", style: "Black & grey", caption: "Skeleton and scorpion triptych", src: "photos/orig-ig-194118.jpg", set: "set-chas-skel-scorp" },
+    { id: "orig-ig-194120", artistId: "chas", style: "Black & grey", caption: "Skeleton and scorpion, side view", src: "photos/orig-ig-194120.jpg", set: "set-chas-skel-scorp" },
+    { id: "orig-ig-194140", artistId: "james", style: "Color", caption: "Dragon backpiece", src: "photos/orig-ig-194140.jpg", set: "set-james-dragon-back" },
+    { id: "orig-ig-194134", artistId: "james", style: "Color", caption: "Dragon back piece, Japanese style", src: "photos/orig-ig-194134.jpg", set: "set-james-dragon-back" },
+    { id: "orig-ig-194138", artistId: "brian", style: "Color", caption: "Dragon back piece with cherry blossoms", src: "photos/orig-ig-194138.jpg", set: "set-james-dragon-back" },
     { id: "orig-ig-194144", artistId: "chas", style: "Color", caption: "Praying hands with rose and Family banner, rib piece", src: "photos/orig-ig-194144.jpg" },
     { id: "orig-ig-194150", artistId: "james", style: "Black & grey", caption: "Lady head with pearls", src: "photos/orig-ig-194150.jpg" },
     { id: "orig-ig-194153", artistId: "james", style: "Color", caption: "Lady head with flower and skull", src: "photos/orig-ig-194153.jpg" },
-    { id: "orig-os-5261263", artistId: "shop", style: "Paintings", caption: "Skeleton motorcycle", src: "photos/orig-os-5261263.jpg" },
-    { id: "orig-os-5261262", artistId: "shop", style: "Paintings", caption: "Skull panel", src: "photos/orig-os-5261262.jpg" },
-    { id: "orig-os-5261261", artistId: "shop", style: "Paintings", caption: "Tiger and lady", src: "photos/orig-os-5261261.jpg" },
-    { id: "orig-os-5261260", artistId: "shop", style: "Black & grey", caption: "Anchor and chainmail", src: "photos/orig-os-5261260.jpg" },
-    { id: "orig-os-5261259", artistId: "shop", style: "Black & grey", caption: "Skull back piece", src: "photos/orig-os-5261259.jpg" },
-    { id: "orig-os-5261258", artistId: "shop", style: "Color", caption: "Tiger back piece", src: "photos/orig-os-5261258.jpg" },
-    { id: "orig-os-5261257", artistId: "shop", style: "Color", caption: "Marlin", src: "photos/orig-os-5261257.jpg" },
-    { id: "orig-os-5261256", artistId: "shop", style: "Black & grey", caption: "Plague doctor back piece, black & grey", src: "photos/orig-os-5261256.jpg" },
-    { id: "orig-os-5261255", artistId: "shop", style: "Paintings", caption: "Skeleton and snake", src: "photos/orig-os-5261255.jpg" },
-    { id: "orig-os-5261254", artistId: "shop", style: "Black & grey", caption: "Sacred heart, forearm", src: "photos/orig-os-5261254.jpg" },
-    { id: "orig-os-5261253", artistId: "shop", style: "Black & grey", caption: "Three horse heads, black & grey", src: "photos/orig-os-5261253.jpg" },
-    { id: "orig-os-5261252", artistId: "shop", style: "Color", caption: "Cross with eye", src: "photos/orig-os-5261252.jpg" },
-    { id: "orig-os-5261251", artistId: "shop", style: "Color", caption: "Dragon head", src: "photos/orig-os-5261251.jpg" },
-    { id: "orig-os-5261250", artistId: "shop", style: "Color", caption: "Creation of adam hands", src: "photos/orig-os-5261250.jpg" },
-    { id: "orig-os-5261249", artistId: "shop", style: "Black & grey", caption: "Lady head with rose, black & grey", src: "photos/orig-os-5261249.jpg" },
-    { id: "orig-os-5261248", artistId: "shop", style: "Color", caption: "Ship back piece", src: "photos/orig-os-5261248.jpg" },
-    { id: "orig-os-5261247", artistId: "shop", style: "Color", caption: "Pinup with snake", src: "photos/orig-os-5261247.jpg" },
-    { id: "orig-os-5261246", artistId: "shop", style: "Color", caption: "Back piece with skull and roses", src: "photos/orig-os-5261246.jpg" },
-    { id: "orig-os-5261245", artistId: "shop", style: "Paintings", caption: "Dragon panel", src: "photos/orig-os-5261245.jpg" },
-    { id: "orig-os-5261244", artistId: "shop", style: "Paintings", caption: "Dagger flash sheet", src: "photos/orig-os-5261244.jpg" },
+    { id: "orig-os-5261263", style: "Paintings", caption: "Skeleton motorcycle", src: "photos/orig-os-5261263.jpg" },
+    { id: "orig-os-5261262", style: "Paintings", caption: "Skull panel", src: "photos/orig-os-5261262.jpg" },
+    { id: "orig-os-5261261", style: "Paintings", caption: "Tiger and lady", src: "photos/orig-os-5261261.jpg" },
+    { id: "orig-os-5261260", style: "Black & grey", caption: "Anchor and chainmail", src: "photos/orig-os-5261260.jpg" },
+    { id: "orig-os-5261259", style: "Black & grey", caption: "Skull back piece", src: "photos/orig-os-5261259.jpg" },
+    { id: "orig-os-5261258", style: "Color", caption: "Tiger back piece", src: "photos/orig-os-5261258.jpg" },
+    { id: "orig-os-5261257", style: "Color", caption: "Marlin", src: "photos/orig-os-5261257.jpg" },
+    { id: "orig-os-5261256", style: "Black & grey", caption: "Plague doctor back piece, black & grey", src: "photos/orig-os-5261256.jpg" },
+    { id: "orig-os-5261255", style: "Paintings", caption: "Skeleton and snake", src: "photos/orig-os-5261255.jpg" },
+    { id: "orig-os-5261254", style: "Black & grey", caption: "Sacred heart, forearm", src: "photos/orig-os-5261254.jpg" },
+    { id: "orig-os-5261253", style: "Black & grey", caption: "Three horse heads, black & grey", src: "photos/orig-os-5261253.jpg" },
+    { id: "orig-os-5261252", style: "Color", caption: "Cross with eye", src: "photos/orig-os-5261252.jpg" },
+    { id: "orig-os-5261251", style: "Color", caption: "Dragon head", src: "photos/orig-os-5261251.jpg" },
+    { id: "orig-os-5261250", style: "Color", caption: "Creation of adam hands", src: "photos/orig-os-5261250.jpg" },
+    { id: "orig-os-5261249", style: "Black & grey", caption: "Lady head with rose, black & grey", src: "photos/orig-os-5261249.jpg" },
+    { id: "orig-os-5261248", style: "Color", caption: "Ship back piece", src: "photos/orig-os-5261248.jpg" },
+    { id: "orig-os-5261247", style: "Color", caption: "Pinup with snake", src: "photos/orig-os-5261247.jpg" },
+    { id: "orig-os-5261246", style: "Color", caption: "Back piece with skull and roses", src: "photos/orig-os-5261246.jpg" },
+    { id: "orig-os-5261245", style: "Paintings", caption: "Dragon panel", src: "photos/orig-os-5261245.jpg" },
+    { id: "orig-os-5261244", style: "Paintings", caption: "Dagger flash sheet", src: "photos/orig-os-5261244.jpg" },
     { id: "orig-os-5261243", artistId: "brian", style: "Paintings", caption: "Horse flash painting", src: "photos/orig-os-5261243.jpg" },
     { id: "orig-os-4503448", artistId: "thad", style: "Lettering", caption: "Script with bow", src: "photos/orig-os-4503448.jpg" },
     { id: "orig-os-4503447", artistId: "thad", style: "Color", caption: "Revolver with lettering", src: "photos/orig-os-4503447.jpg" },
@@ -892,23 +919,21 @@
     { id: "orig-os-4503440", artistId: "thad", style: "Black & grey", caption: "Forearm piece", src: "photos/orig-os-4503440.jpg" },
     { id: "orig-os-4503439", artistId: "thad", style: "Black & grey", caption: "Tree", src: "photos/orig-os-4503439.jpg" },
     { id: "orig-os-4503438", artistId: "thad", style: "Black & grey", caption: "Pinup playing card", src: "photos/orig-os-4503438.jpg" },
-    { id: "orig-os-4503434", artistId: "shop", style: "Color", caption: "Koi shoulder", src: "photos/orig-os-4503434.jpg" },
-    { id: "orig-os-4503433", artistId: "shop", style: "Traditional", caption: "Rattlesnake", src: "photos/orig-os-4503433.jpg" },
-    { id: "orig-os-4503432", artistId: "shop", style: "Black & grey", caption: "Mandala thigh", src: "photos/orig-os-4503432.jpg" },
-    { id: "orig-os-4503431", artistId: "shop", style: "Lettering", caption: "Horseshoe with script", src: "photos/orig-os-4503431.jpg" },
-    { id: "orig-os-4503430", artistId: "shop", style: "Traditional", caption: "Traditional back piece with lettering", src: "photos/orig-os-4503430.jpg" },
-    ,
-    { id: "orig-os-4503420", artistId: "brian", style: "Color", caption: "Tiger half sleeve", src: "photos/orig-os-4503420.jpg" },
-    { id: "orig-os-4503419", artistId: "brian", style: "Color", caption: "Tiger shoulder", src: "photos/orig-os-4503419.jpg" },
+    { id: "orig-os-4503434", style: "Color", caption: "Koi shoulder", src: "photos/orig-os-4503434.jpg" },
+    { id: "orig-os-4503433", style: "Traditional", caption: "Rattlesnake", src: "photos/orig-os-4503433.jpg" },
+    { id: "orig-os-4503432", style: "Black & grey", caption: "Mandala thigh", src: "photos/orig-os-4503432.jpg" },
+    { id: "orig-os-4503431", style: "Lettering", caption: "Horseshoe with script", src: "photos/orig-os-4503431.jpg" },
+    { id: "orig-os-4503430", style: "Traditional", caption: "Traditional back piece with lettering", src: "photos/orig-os-4503430.jpg" },
+    { id: "orig-os-4503419", artistId: "brian", style: "Color", caption: "Tiger shoulder piece", src: "photos/orig-os-4503419.jpg", set: "set-brian-tiger" },
+    { id: "orig-os-4503420", artistId: "brian", style: "Color", caption: "Tiger half sleeve", src: "photos/orig-os-4503420.jpg", set: "set-brian-tiger" },
     { id: "orig-os-4503418", artistId: "brian", style: "Color", caption: "Sugar skull forearm", src: "photos/orig-os-4503418.jpg" },
     { id: "orig-os-4503417", artistId: "brian", style: "Black & grey", caption: "Mandala", src: "photos/orig-os-4503417.jpg" },
     { id: "orig-os-4503416", artistId: "brian", style: "Traditional", caption: "Traditional thigh piece", src: "photos/orig-os-4503416.jpg" },
     { id: "orig-os-4503399", artistId: "brian", style: "Black & grey", caption: "Black and grey back piece", src: "photos/orig-os-4503399.jpg" },
     { id: "orig-os-4503398", artistId: "brian", style: "Traditional", caption: "Rose on hand", src: "photos/orig-os-4503398.jpg" },
     { id: "orig-os-4503397", artistId: "brian", style: "Color", caption: "Dragon back piece", src: "photos/orig-os-4503397.jpg" },
-    { id: "orig-ig-193838", artistId: "shop", style: "Black & grey", caption: "Eagle head tattoo on back of head", src: "photos/orig-ig-193838.jpg" },
+    { id: "orig-ig-193838", style: "Black & grey", caption: "Eagle head tattoo on back of head", src: "photos/orig-ig-193838.jpg" },
     { id: "orig-ig-193923", artistId: "brian", style: "Color", caption: "Panther head piece", src: "photos/orig-ig-193923.jpg" },
-    { id: "orig-ig-194138", artistId: "brian", style: "Color", caption: "Dragon back piece with cherry blossoms", src: "photos/orig-ig-194138.jpg" },
     { id: "r2-greg-greg-01", artistId: "greg", style: "Paintings", caption: "Religious flash painting (Jesus/Mary torso piece), framed", src: "photos/r2-greg-greg-01.jpg" },
     { id: "r2-greg-greg-02", artistId: "greg", style: "Paintings", caption: "Religious flash painting, second piece", src: "photos/r2-greg-greg-02.jpg" },
     { id: "r2-greg-greg-03", artistId: "greg", style: "Traditional", caption: "Shop exterior: 'World Famous San Clemente Tattoo' sign", src: "photos/r2-greg-greg-03.jpg" },
@@ -968,8 +993,8 @@
     { id: "r4-chas-chas-11", artistId: "chas", style: "Traditional", caption: "Rose tattoo", src: "photos/r4-chas-chas-11.jpg" },
     { id: "r4-chas-chas-12", artistId: "chas", style: "Traditional", caption: "Skull headdress chest tattoo", src: "photos/r4-chas-chas-12.jpg" },
     { id: "r4-chas-chas-13", artistId: "chas", style: "Traditional", caption: "Snoopy soldier tattoo", src: "photos/r4-chas-chas-13.jpg" },
-    { id: "r4-chas-chas-14", artistId: "chas", style: "Black & grey", caption: "Eagle, black & grey", src: "photos/r4-chas-chas-14.jpg" },
-    { id: "r4-chas-chas-15", artistId: "chas", style: "Traditional", caption: "Eagle tattoo close-up", src: "photos/r4-chas-chas-15.jpg" },
+    { id: "r4-chas-chas-14", artistId: "chas", style: "Black & grey", caption: "Eagle, black & grey", src: "photos/r4-chas-chas-14.jpg", set: "set-chas-eagle" },
+    { id: "r4-chas-chas-15", artistId: "chas", style: "Traditional", caption: "Eagle tattoo close-up", src: "photos/r4-chas-chas-15.jpg", set: "set-chas-eagle" },
     { id: "r4-chas-chas-16", artistId: "chas", style: "Traditional", caption: "Eagle and flag sleeve panels, three views", src: "photos/r4-chas-chas-16.jpg" },
     { id: "r4-chas-chas-17", artistId: "chas", style: "Traditional", caption: "Forehead/temple tattoo", src: "photos/r4-chas-chas-17.jpg" },
     { id: "r4-chas-chas-18", artistId: "chas", style: "Traditional", caption: "Hand with dagger tattoo", src: "photos/r4-chas-chas-18.jpg" },
@@ -989,13 +1014,14 @@
     { id: "r4-thad-thad-09", artistId: "thad", style: "Traditional", caption: "Ghostface knife tattoo", src: "photos/r4-thad-thad-09.jpg" },
     { id: "r4-thad-thad-10", artistId: "thad", style: "Traditional", caption: "Bulldog soldier tattoo", src: "photos/r4-thad-thad-10.jpg" },
     { id: "r4-thad-thad-11", artistId: "thad", style: "Traditional", caption: "Lady head tattoo", src: "photos/r4-thad-thad-11.jpg" },
-    { id: "r4-thad-thad-12", artistId: "thad", style: "Traditional", caption: "Money rose sleeve", src: "photos/r4-thad-thad-12.jpg" },
+    { id: "r4-thad-thad-12", artistId: "thad", style: "Traditional", caption: "Playing cards, dice and rose sleeve", src: "photos/r4-thad-thad-12.jpg" },
     { id: "r4-thad-thad-13", artistId: "thad", style: "Traditional", caption: "Money rose close-up", src: "photos/r4-thad-thad-13.jpg" },
     { id: "r4-thad-thad-14", artistId: "thad", style: "Traditional", caption: "Arm tattoo", src: "photos/r4-thad-thad-14.jpg" },
     { id: "r4-thad-thad-15", artistId: "thad", style: "Traditional", caption: "Wolf with hearts tattoo", src: "photos/r4-thad-thad-15.jpg" },
   ];
 
-  const artistName = id => (SHOP.artists.find(a => a.id === id) || { name: "Shop" }).name;
+  const artistName = id => id ? (SHOP.artists.find(a => a.id === id) || {}).name || "" : "";
+  const creditLine = item => item.artistId ? ` · ${artistName(item.artistId)}` : "";
 
   function motifSVG(motif) {
     const frame = `<rect x="8" y="8" width="184" height="220" fill="#f3e7c0" stroke="#14110C" stroke-width="4"/>
@@ -1063,18 +1089,32 @@
       (styleFilter === "All" || item.style === styleFilter) &&
       (artistFilter === "All" || item.artistId === artistFilter)
     );
+    // Group consecutive set members into one card per tattoo.
+    const cards = [];
+    for (const item of visible) {
+      const last = cards[cards.length - 1];
+      if (item.set && last && last.set === item.set) last.photos.push(item);
+      else cards.push({ set: item.set || null, photos: [item], cover: item });
+    }
     const grid = document.getElementById("gallery-grid");
     const empty = document.getElementById("gallery-empty");
     const draw = () => {
-      grid.innerHTML = visible.map((item, i) => `
-        <button class="card" type="button" data-id="${item.id}" data-i="${i}" id="piece-${item.id}">
-          ${item.src ? `<img src="${item.src}" alt="${item.caption}" loading="lazy">` : motifSVG(item.motif)}
+      grid.innerHTML = cards.map((card, i) => {
+        const n = card.photos.length;
+        return `
+        <button class="card" type="button" data-card="${i}" id="piece-${card.cover.id}">
+          ${card.cover.src ? `<img src="${card.cover.src}" alt="${card.cover.caption}" loading="lazy">` : motifSVG(card.cover.motif)}
+          ${n > 1 ? `<span class="set-badge" aria-label="${n} photos"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M4 16V6a2 2 0 0 1 2-2h10"/></svg>${n}</span>` : ""}
           <span class="cap">
-            <span>${item.style} · ${artistName(item.artistId)}</span>
+            <span>${card.cover.style}${creditLine(card.cover)}</span>
           </span>
-        </button>`).join("");
-      empty.classList.toggle("hidden", visible.length > 0);
-      grid.querySelectorAll(".card").forEach(btn => btn.addEventListener("click", () => openLB(+btn.dataset.i)));
+        </button>`;
+      }).join("");
+      empty.classList.toggle("hidden", cards.length > 0);
+      grid.querySelectorAll(".card").forEach(btn => btn.addEventListener("click", () => {
+        const card = cards[+btn.dataset.card];
+        openLB(visible.indexOf(card.cover));
+      }));
     };
     if (document.startViewTransition) document.startViewTransition(draw);
     else draw();
@@ -1096,9 +1136,16 @@
     lbIndex = i;
     const item = visible[i];
     if (!item) return;
+    // Position within a multi-photo set, e.g. "2 / 3".
+    let setPos = "";
+    if (item.set) {
+      const members = visible.filter(v => v.set === item.set);
+      const pos = members.indexOf(item) + 1;
+      if (members.length > 1) setPos = ` <span class="lb-setpos">${pos} / ${members.length}</span>`;
+    }
     document.getElementById("lb-art").innerHTML = item.src ? `<img src="${item.src}" alt="${item.caption}">` : motifSVG(item.motif);
     document.getElementById("lb-meta").innerHTML =
-      `<strong>${item.style}</strong> by ${artistName(item.artistId)} · ${item.caption}<br>
+      `<strong>${item.style}</strong>${item.artistId ? ` by ${artistName(item.artistId)}` : ""} · ${item.caption}${setPos}<br>
        <a href="https://www.instagram.com/san_clemente_tattoo/">Originals live on @san_clemente_tattoo</a>`;
     history.replaceState(null, "", "#piece-" + item.id);
     document.getElementById("lightbox").showModal();
