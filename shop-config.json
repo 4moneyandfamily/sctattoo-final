@@ -1,0 +1,261 @@
+{
+ "$comment": "Single source of truth for San Clemente Tattoo. Edit this file to change hours, artists, contact, or gallery. Flags marked CONFIRM must be verified with Brother Greg before launch. Do not invent prices, deposits, bios, awards, or testimonials.",
+ "shop": {
+  "name": "San Clemente Tattoo",
+  "legalName": "San Clemente Tattoo",
+  "tagline": "Traditional street shop. Downtown San Clemente since 2011.",
+  "established": 2011,
+  "owner": "Brother Greg Rancourt",
+  "ownerHandle": "brothergreg",
+  "description": "San Clemente Tattoo is a traditional tattoo street shop in downtown San Clemente, California. Walk-ins first come, first served, seven days. Appointments held with a deposit. No apprentices. No piercing.",
+  "voice": "Straight, local, no rock-star talk. We are not a TV show."
+ },
+ "contact": {
+  "phone": "949-498-8487",
+  "phoneHref": "tel:+19494988487",
+  "emailCurrent": "brogreg777@yahoo.com",
+  "emailLaunch": "info@sanclementetattoo.com",
+  "emailUse": "brogreg777@yahoo.com",
+  "emailNote": "CONFIRM: swap emailUse to info@sanclementetattoo.com before launch and stand up the mailbox.",
+  "address": {
+   "street": "117 Avenida Granada",
+   "city": "San Clemente",
+   "region": "CA",
+   "postal": "92672",
+   "country": "US",
+   "full": "117 Avenida Granada, San Clemente, CA 92672",
+   "landmark": "Half a block from Del Mar and El Camino Real.",
+   "typoFix": "Never publish Avenida Granda. The old contact page misspelled Granada."
+  },
+  "geo": {
+   "lat": 33.4274,
+   "lng": -117.6126,
+   "note": "CONFIRM pin against Google Business Profile before embedding."
+  },
+  "mapsUrl": "https://www.google.com/maps/dir/?api=1&destination=117+Avenida+Granada,+San+Clemente,+CA+92672",
+  "mapsSearch": "https://www.google.com/maps/search/?api=1&query=117+Avenida+Granada+San+Clemente+CA+92672",
+  "facebook": "https://www.facebook.com/sanclementetattoo",
+  "instagram": "https://www.instagram.com/san_clemente_tattoo/",
+  "instagramHandle": "san_clemente_tattoo"
+ },
+ "hours": {
+  "timezone": "America/Los_Angeles",
+  "display": "Noon to 8 pm, seven days",
+  "source": "Yelp, Google-style listings, SalonDiscover: 12:00\u20138:00 daily. Old site copy: noon to 7\u20138pm. MapQuest lists 12\u20137.",
+  "status": "CONFIRM",
+  "weekly": [
+   {
+    "day": "Sunday",
+    "open": "12:00",
+    "close": "20:00"
+   },
+   {
+    "day": "Monday",
+    "open": "12:00",
+    "close": "20:00"
+   },
+   {
+    "day": "Tuesday",
+    "open": "12:00",
+    "close": "20:00"
+   },
+   {
+    "day": "Wednesday",
+    "open": "12:00",
+    "close": "20:00"
+   },
+   {
+    "day": "Thursday",
+    "open": "12:00",
+    "close": "20:00"
+   },
+   {
+    "day": "Friday",
+    "open": "12:00",
+    "close": "20:00"
+   },
+   {
+    "day": "Saturday",
+    "open": "12:00",
+    "close": "20:00"
+   }
+  ],
+  "walkIns": "First come, first served, seven days. Appointments may be needed on a custom piece.",
+  "holidayNote": "CONFIRM holiday closures and early-outs. Do not guess."
+ },
+ "booking": {
+  "walkIns": true,
+  "appointments": true,
+  "depositRequired": true,
+  "depositAmount": null,
+  "depositAmountStatus": "CONFIRM",
+  "depositMethod": null,
+  "depositMethodStatus": "CONFIRM",
+  "depositCopy": "Appointments are held with a deposit. Amount and how to pay: CONFIRM with the shop when you call or after we answer this form.",
+  "ageRule": "California law: you must be 18. Photo ID at the chair. No parental exception.",
+  "formEndpoint": "FORM_ENDPOINT_CONFIRM",
+  "formNote": "Wire to Netlify Forms on launch, or Formspree/Getform. Until then the form validates client-side and shows a mailto fallback."
+ },
+ "policies": {
+  "piercing": false,
+  "apprentices": false,
+  "minAge": 18,
+  "parentalException": false,
+  "coverUps": true,
+  "pricingPublic": null,
+  "pricingStatus": "CONFIRM \u2014 do not publish a shop minimum or hourly until Greg signs off."
+ },
+ "press": [
+  {
+   "title": "Brother Greg Rancourt of San Clemente Tattoo on Painting and his Advice to Young Tattooers",
+   "outlet": "OC Weekly",
+   "year": 2015,
+   "url": "https://www.ocweekly.com/brother-greg-rancourt-of-san-clemente-tattoo-on-painting-and-his-advice-to-young-tattooers-6485186/"
+  },
+  {
+   "title": "Brother Greg",
+   "outlet": "Sullen Clothing artist feature",
+   "year": 2024,
+   "url": "https://www.sullenclothing.com/blogs/artists/brother-greg"
+  }
+ ],
+ "artists": [
+  {
+   "id": "greg",
+   "name": "Brother Greg",
+   "fullName": "Greg Rancourt",
+   "handle": "san_clemente_tattoo",
+   "instagram": "https://www.instagram.com/san_clemente_tattoo/",
+   "role": "Owner",
+   "styles": [
+    "Traditional"
+   ],
+   "active": true,
+   "note": "Personal handle unverified; link points to the shop account. Bio: owner of San Clemente Tattoo, established 2011. Do not expand without Greg."
+  },
+  {
+   "id": "james",
+   "name": "James Whelan",
+   "fullName": "James Whelan",
+   "handle": "_jameswhelan",
+   "instagram": "https://www.instagram.com/_jameswhelan/",
+   "role": "Artist",
+   "styles": [
+    "Traditional",
+    "Color",
+    "Japanese"
+   ],
+   "active": true,
+   "note": "Work credit only. Do not claim current roster status unless Greg confirms."
+  },
+  {
+   "id": "brian",
+   "name": "Brian Taylor",
+   "fullName": "Brian Taylor",
+   "handle": "into_the_grave",
+   "instagram": "https://www.instagram.com/into_the_grave/",
+   "role": "Artist",
+   "styles": [
+    "Traditional",
+    "Black & grey",
+    "Cover-ups"
+   ],
+   "active": true,
+   "note": "Work credit only. Do not claim current roster status unless Greg confirms."
+  },
+  {
+   "id": "chas",
+   "name": "Chas Byassee",
+   "fullName": "Chas Byassee",
+   "handle": "cebyassee",
+   "instagram": "https://www.instagram.com/cebyassee/",
+   "role": "Artist",
+   "styles": [
+    "Traditional",
+    "Lettering"
+   ],
+   "active": true,
+   "note": "Work credit only. Do not claim current roster status unless Greg confirms."
+  },
+  {
+   "id": "thad",
+   "name": "Thad",
+   "handle": "thadart",
+   "instagram": "https://www.instagram.com/thadart/",
+   "role": "Artist",
+   "styles": [
+    "Traditional",
+    "Color",
+    "Cover-ups"
+   ],
+   "active": true,
+   "note": "Surname unverified; use Thad only. Work credit only."
+  }
+ ],
+ "styles": [
+  "Traditional",
+  "Black & grey",
+  "Color",
+  "Lettering",
+  "Cover-ups",
+  "Paintings"
+ ],
+ "gallery": {
+  "sourcePriority": [
+   "Live Instagram Graph API via Instagram Login on a Creator or Business account. Long-lived token refreshed before ~60-day expiry.",
+   "Full-resolution originals from Instagram Download Your Information export.",
+   "Screenshots only as a last fallback."
+  ],
+  "personalAccounts": "Pull from an artist's personal account only with that artist's written OK.",
+  "autoTag": "Tag artist from @handles or names in the caption. Manual override in each item.",
+  "v1Note": "Real photo archive wired 2026-09-11: 195 photos across three packs, attributed by posting handle. ig-194140 corrected to James Whelan (same dragon backpiece as ig-194134; original post by @_jameswhelan). John Ondo photos kept unattributed.",
+  "items": []
+ },
+ "aftercare": {
+  "title": "Aftercare for a beach town",
+  "leads": [
+   "Keep it clean, keep it out of the Pacific, the pool, and the sun until it is healed.",
+   "Salt water, chlorine, and a San Clemente afternoon will wreck a fresh tattoo. Wait until your artist says it is ready."
+  ],
+  "steps": [
+   "Leave the bandage on for the time your artist told you. If they did not say, ask before you leave the chair.",
+   "Wash with mild unscented soap and lukewarm water. Pat dry. Do not scrub.",
+   "A thin layer of the ointment or lotion your artist recommended. Not a coat of grease.",
+   "No ocean, no pool, no hot tub, no soaking in the tub until healed.",
+   "No direct sun. No tanning. Cover it or stay in the shade. Fresh ink and Avenida sun do not mix.",
+   "No picking. No scratching. Let the skin do the work.",
+   "If it looks wrong \u2014 spreading redness, heat, pus, fever \u2014 call the shop and see a doctor."
+  ],
+  "status": "CONFIRM wording with Greg. This is general beach-town aftercare, not a medical protocol and not a substitute for what the artist tells you at the chair."
+ },
+ "faq": [
+  {
+   "q": "Do you take walk-ins?",
+   "a": "Yes. First come, first served, seven days. If the shop is slammed or the piece is a custom, we will book you instead."
+  },
+  {
+   "q": "How do I book an appointment?",
+   "a": "Call the shop or send a booking request. Appointments are held with a deposit. Amount and payment method: CONFIRM."
+  },
+  {
+   "q": "How much does a tattoo cost?",
+   "a": "Depends on size, placement, cover-up work, and the artist. We do not publish a number here. Call or walk in and we will talk about the piece. CONFIRM if Greg wants a shop minimum listed."
+  },
+  {
+   "q": "Can I get tattooed if I am under 18 with a parent?",
+   "a": "No. California has no parental exception for tattooing. You must be 18 and bring photo ID."
+  },
+  {
+   "q": "Do you do cover-ups?",
+   "a": "Yes. Bring clear photos of the old work in the booking form or walk in and show us."
+  },
+  {
+   "q": "Do you pierce?",
+   "a": "No. Tattooing only."
+  },
+  {
+   "q": "Where do I park?",
+   "a": "Street parking and a private lot are listed on the shop's Yelp page. CONFIRM current lot access with Greg."
+  }
+ ]
+}

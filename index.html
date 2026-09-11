@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>San Clemente Tattoo — Traditional street shop, downtown San Clemente</title>
+  <meta name="description" content="Traditional tattoo street shop at 117 Avenida Granada, downtown San Clemente. Walk-ins first come, first served, seven days. Call (949) 498-8487.">
+  <link rel="canonical" href="https://sanclementetattoo.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="San Clemente Tattoo">
+  <meta property="og:description" content="Traditional street shop. Downtown San Clemente since 2011. Walk-ins every day.">
+  <meta property="og:url" content="https://sanclementetattoo.com/">
+  <meta property="og:image" content="https://sanclementetattoo.com/og.png">
+  <meta name="theme-color" content="#14110C">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Newsreader:ital,opsz,wght@0,6..72,420;0,6..72,600;1,6..72,420&family=Yellowtail&family=Archivo:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #EDE1BE;
+      --paper-2: #E4D4A6;
+      --ink: #14110C;
+      --ink-soft: #3A3328;
+      --red: #B01522;
+      --red-deep: #7A0E18;
+      --gold: #C6A02A;
+      --gold-dim: #8A7018;
+      --green: #2A4A32;
+      --navy: #1A2744;
+      --wood: #4A321C;
+      --cream: #F7F1DC;
+      --line: #14110C;
+      --focus: #C6A02A;
+      --ok: #2A4A32;
+      --closed: #7A0E18;
+      --max: 72rem;
+      --s: 0.85rem;
+      --m: 1.05rem;
+      --l: 1.35rem;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html:focus-within { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Newsreader", "Times New Roman", serif;
+      font-size: 1.125rem;
+      line-height: 1.55;
+      color: var(--ink);
+      background: var(--paper);
+      background-image:
+        radial-gradient(ellipse at 20% 0%, rgba(198,160,42,.12), transparent 50%),
+        repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(20,17,12,.03) 28px);
+    }
+    img { max-width: 100%; display: block; }
+    a { color: var(--red-deep); }
+    a:hover { color: var(--red); }
+    :focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 3px;
+    }
+    .skip {
+      position: absolute;
+      left: .75rem;
+      top: -4rem;
+      background: var(--ink);
+      color: var(--cream);
+      padding: .6rem 1rem;
+      z-index: 80;
+    }
+    .skip:focus { top: .75rem; }
+    .wrap { width: min(var(--max), calc(100% - 2rem)); margin-inline: auto; }
+    section { scroll-margin-top: 4.75rem; }
+    body { padding-bottom: 4.5rem; }
+    .eyebrow {
+      font-family: "Archivo", system-ui, sans-serif;
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    /* Sticky utility bar */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .75rem;
+      padding: .55rem 1rem;
+      background: var(--ink);
+      color: var(--cream);
+      border-bottom: 4px solid var(--red);
+    }
+    .topbar a { color: var(--cream); text-decoration: none; }
+    .brand {
+      font-family: "Bungee", Impact, sans-serif;
+      font-size: clamp(.8rem, 2.4vw, 1.05rem);
+      letter-spacing: .02em;
+      line-height: 1;
+    }
+    .brand small {
+      display: block;
+      font-family: "Archivo", sans-serif;
+      font-size: .62rem;
+      font-weight: 400;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      opacity: .75;
+      margin-top: .2rem;
+    }
+    .quick {
+      display: none;
+      gap: .4rem;
+      flex-wrap: nowrap;
+      justify-content: flex-end;
+    }
+    @media (min-width: 860px) {
+      .quick { display: flex; }
+      body { padding-bottom: 0; }
+    }
+    .quick a, .btn {
+      font-family: "Archivo", system-ui, sans-serif;
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 2px solid var(--cream);
+      background: transparent;
+      color: var(--cream);
+      padding: .55rem .7rem;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .quick a.primary, .btn.primary {
+      background: var(--red);
+      border-color: var(--red);
+      color: #fff;
+    }
+    .quick a:hover, .btn:hover { background: var(--cream); color: var(--ink); }
+    .quick a.primary:hover, .btn.primary:hover { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      padding: 2.2rem 0 2.6rem;
+      border-bottom: 3px solid var(--ink);
+      overflow: hidden;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.6rem;
+      align-items: center;
+    }
+    @media (min-width: 860px) {
+      .hero-grid { grid-template-columns: 1.15fr .85fr; gap: 2.5rem; }
+    }
+    .sign {
+      width: 100%;
+      filter: drop-shadow(0 10px 0 rgba(20,17,12,.18));
+    }
+    .status-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem .9rem;
+      align-items: center;
+      margin: .9rem 0 1rem;
+    }
+    .pill {
+      font-family: "Archivo", sans-serif;
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: .35rem .65rem;
+      border: 2px solid var(--ink);
+      background: var(--gold);
+    }
+    .pill.open { background: #cfe0c8; }
+    .pill.shut { background: #f0c4c4; }
+    .lede {
+      font-size: 1.2rem;
+      max-width: 38ch;
+      margin: 0 0 1rem;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .btn.ink {
+      background: var(--ink);
+      color: var(--cream);
+      border-color: var(--ink);
+    }
+    .btn.ink:hover { background: var(--red); border-color: var(--red); color: #fff; }
+
+    /* Sections */
+    section { padding: 2.6rem 0; border-bottom: 2px solid var(--ink); }
+    h2 {
+      font-family: "Bungee", Impact, sans-serif;
+      font-size: clamp(1.4rem, 4vw, 2.1rem);
+      line-height: 1.05;
+      margin: 0 0 .4rem;
+      font-weight: 400;
+    }
+    .script {
+      font-family: "Yellowtail", cursive;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      color: var(--red-deep);
+      line-height: 1;
+      margin: 0 0 1rem;
+      font-weight: 400;
+    }
+    p { margin: 0 0 .85rem; }
+    .muted { color: var(--ink-soft); }
+
+    /* Filters + gallery */
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      margin: 0 0 1.1rem;
+    }
+    .filters button {
+      font-family: "Archivo", sans-serif;
+      font-size: .75rem;
+      font-weight: 600;
+      background: transparent;
+      border: 2px solid var(--ink);
+      color: var(--ink);
+      padding: .4rem .65rem;
+      min-height: 40px;
+      cursor: pointer;
+    }
+    .filters button[aria-pressed="true"] {
+      background: var(--ink);
+      color: var(--cream);
+    }
+    .masonry {
+      columns: 2;
+      column-gap: .7rem;
+    }
+    @media (min-width: 700px) { .masonry { columns: 3; } }
+    @media (min-width: 1100px) { .masonry { columns: 4; } }
+    .card {
+      break-inside: avoid;
+      margin: 0 0 .7rem;
+      background: var(--cream);
+      border: 3px solid var(--ink);
+      cursor: pointer;
+      padding: .35rem .35rem .55rem;
+      width: 100%;
+      text-align: left;
+      color: inherit;
+      font: inherit;
+      display: block;
+    }
+    .card svg { width: 100%; height: auto; display: block; background: #f3e7c0; }
+    .card img { width: 100%; height: auto; display: block; background: #f3e7c0; }
+    #lb-art img { max-width: 100%; max-height: 72vh; display: block; margin: 0 auto; }
+    .card figcaption {
+      font-family: "Archivo", sans-serif;
+      font-size: .72rem;
+      margin-top: .4rem;
+      display: flex;
+      justify-content: space-between;
+      gap: .4rem;
+    }
+    .sample-flag {
+      font-family: "Archivo", sans-serif;
+      font-size: .62rem;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      background: var(--gold);
+      border: 2px solid var(--ink);
+      padding: .15rem .35rem;
+      display: inline-block;
+      margin-bottom: .55rem;
+    }
+    .empty { padding: 1.2rem; border: 2px dashed var(--ink); }
+
+    /* Crew */
+    .crew-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: .8rem;
+    }
+    @media (min-width: 640px) { .crew-grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 1000px) { .crew-grid { grid-template-columns: 1fr 1fr 1fr; } }
+    .artist {
+      border: 3px solid var(--ink);
+      background: var(--cream);
+      padding: 1rem 1rem .9rem;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      position: relative;
+    }
+    .artist::before {
+      content: "";
+      position: absolute;
+      top: .45rem; right: .55rem;
+      width: .7rem; height: .7rem;
+      border: 2px solid var(--ink);
+      border-radius: 50%;
+      background: var(--paper);
+    }
+    .artist h3 {
+      font-family: "Bungee", Impact, sans-serif;
+      font-size: 1.05rem;
+      margin: 0 0 .15rem;
+      font-weight: 400;
+    }
+    .artist .handle {
+      font-family: "Archivo", sans-serif;
+      font-size: .78rem;
+      color: var(--red-deep);
+    }
+    .artist p { font-size: 1rem; margin: .45rem 0 .3rem; }
+    .confirm {
+      font-family: "Archivo", sans-serif;
+      font-size: .68rem;
+      font-weight: 800;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+    }
+
+    /* Book form */
+    .book-grid {
+      display: grid;
+      gap: 1.4rem;
+    }
+    @media (min-width: 860px) {
+      .book-grid { grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); align-items: start; }
+    }
+    .steps { display: grid; gap: 1rem; }
+    form { width: 100%; min-width: 0; }
+    fieldset {
+      border: 3px solid var(--ink);
+      background: var(--cream);
+      padding: 1rem;
+      margin: 0;
+      width: 100%;
+      min-width: 0;
+    }
+    legend {
+      font-family: "Bungee", Impact, sans-serif;
+      font-size: .95rem;
+      padding: 0 .35rem;
+    }
+    label {
+      display: block;
+      font-family: "Archivo", sans-serif;
+      font-size: .78rem;
+      font-weight: 600;
+      margin: .55rem 0 .25rem;
+    }
+    input[type="text"], input[type="email"], input[type="tel"], select, textarea {
+      width: 100%;
+      font: inherit;
+      font-size: 1rem;
+      padding: .55rem .6rem;
+      border: 2px solid var(--ink);
+      background: #fffdf6;
+      min-height: 44px;
+    }
+    textarea { min-height: 6rem; resize: vertical; }
+    .check {
+      display: flex;
+      gap: .55rem;
+      align-items: flex-start;
+      font-family: "Archivo", sans-serif;
+      font-size: .9rem;
+      margin-top: .7rem;
+    }
+    .check input { width: 1.15rem; height: 1.15rem; margin-top: .15rem; accent-color: var(--red); }
+    .form-note { font-size: .95rem; color: var(--ink-soft); }
+    .form-ok, .form-err {
+      padding: .8rem 1rem;
+      border: 3px solid var(--ink);
+      margin-top: .8rem;
+    }
+    .form-ok { background: #cfe0c8; }
+    .form-err { background: #f0c4c4; }
+    .hidden { display: none; }
+
+    /* Find */
+    .find-grid {
+      display: grid;
+      gap: 1rem;
+    }
+    @media (min-width: 800px) { .find-grid { grid-template-columns: 1fr 1fr; } }
+    .mapframe {
+      border: 3px solid var(--ink);
+      min-height: 280px;
+      background: var(--paper-2);
+    }
+    .mapframe iframe { width: 100%; height: 320px; border: 0; display: block; }
+    .hours-list { list-style: none; padding: 0; margin: 0 0 1rem; }
+    .hours-list li {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(20,17,12,.2);
+      padding: .25rem 0;
+      font-family: "Archivo", sans-serif;
+      font-size: .92rem;
+    }
+
+    /* Aftercare + FAQ */
+    .split {
+      display: grid;
+      gap: 1.5rem;
+    }
+    @media (min-width: 800px) { .split { grid-template-columns: 1fr 1fr; } }
+    ol.care { padding-left: 1.2rem; }
+    ol.care li { margin: 0 0 .45rem; }
+    details {
+      border-bottom: 1px solid rgba(20,17,12,.25);
+      padding: .55rem 0;
+    }
+    summary {
+      cursor: pointer;
+      font-family: "Archivo", sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    footer {
+      background: var(--ink);
+      color: var(--cream);
+      padding: 2rem 0 6.5rem;
+    }
+    footer a { color: var(--gold); }
+    .foot-grid {
+      display: grid;
+      gap: 1.2rem;
+    }
+    @media (min-width: 800px) { .foot-grid { grid-template-columns: 1.2fr 1fr 1fr; } }
+    .ig-list { list-style: none; padding: 0; margin: 0; }
+    .ig-list li { margin: 0 0 .3rem; }
+    .legal { font-family: "Archivo", sans-serif; font-size: .78rem; opacity: .8; margin-top: 1.4rem; }
+
+    .dock {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 50;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      background: var(--ink);
+      border-top: 4px solid var(--red);
+    }
+    .dock a {
+      color: var(--cream);
+      text-decoration: none;
+      font-family: "Archivo", sans-serif;
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      text-align: center;
+      padding: .8rem .3rem;
+      min-height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-right: 1px solid rgba(247,241,220,.2);
+    }
+    .dock a:last-child { border-right: 0; background: var(--red); }
+    @media (min-width: 860px) { .dock { display: none; } footer { padding-bottom: 2rem; } }
+
+    dialog {
+      border: 4px solid var(--ink);
+      background: var(--cream);
+      padding: 0;
+      max-width: min(42rem, 96vw);
+      width: 96vw;
+    }
+    dialog::backdrop { background: rgba(20,17,12,.72); }
+    .lb-frame { padding: .6rem .6rem 1rem; }
+    .lb-nav {
+      display: flex;
+      justify-content: space-between;
+      gap: .4rem;
+      margin-top: .5rem;
+    }
+    .lb-meta { font-family: "Archivo", sans-serif; font-size: .85rem; margin-top: .4rem; }
+
+    @media (min-width: 860px) {
+      body { padding-bottom: 0; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#gallery">Skip to gallery</a>
+
+  <header class="topbar">
+    <a class="brand" href="#top">San Clemente Tattoo
+      <small>117 Avenida Granada</small>
+    </a>
+    <nav class="quick" aria-label="Do this now">
+      <a href="tel:+19494988487">Call</a>
+      <a href="https://www.google.com/maps/dir/?api=1&destination=117+Avenida+Granada,+San+Clemente,+CA+92672">Directions</a>
+      <a class="primary" href="#book">Book</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <svg class="sign" viewBox="0 0 640 280" role="img" aria-label="Painted wooden shop sign reading San Clemente Tattoo, established 2011, downtown">
+            <defs>
+              <linearGradient id="woodg" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#6B4A28"/>
+                <stop offset="1" stop-color="#3E2A16"/>
+              </linearGradient>
+              <filter id="grain">
+                <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" result="n"/>
+                <feColorMatrix in="n" type="saturate" values="0"/>
+                <feComponentTransfer>
+                  <feFuncA type="table" tableValues="0 0.18"/>
+                </feComponentTransfer>
+              </filter>
+            </defs>
+            <rect x="8" y="10" width="624" height="260" rx="6" fill="#1a120a"/>
+            <rect x="18" y="20" width="604" height="240" fill="url(#woodg)"/>
+            <rect x="18" y="20" width="604" height="240" filter="url(#grain)"/>
+            <rect x="32" y="34" width="576" height="212" fill="none" stroke="#C6A02A" stroke-width="4"/>
+            <rect x="40" y="42" width="560" height="196" fill="none" stroke="#EDE1BE" stroke-width="1.5" opacity=".55"/>
+            <path d="M70 78 H570" stroke="#C6A02A" stroke-width="2"/>
+            <text x="320" y="72" text-anchor="middle" font-family="Yellowtail, cursive" font-size="34" fill="#F7F1DC">Downtown · Since 2011</text>
+            <text x="320" y="132" text-anchor="middle" font-family="Bungee, Impact, sans-serif" font-size="42" fill="#F7F1DC">SAN CLEMENTE</text>
+            <text x="320" y="178" text-anchor="middle" font-family="Bungee, Impact, sans-serif" font-size="48" fill="#E7C75A">TATTOO</text>
+            <path d="M120 198 H520" stroke="#B01522" stroke-width="8"/>
+            <text x="320" y="228" text-anchor="middle" font-family="Archivo, sans-serif" font-size="16" fill="#F7F1DC" letter-spacing="4">WALK-INS EVERY DAY</text>
+          </svg>
+        </div>
+        <div>
+          <p class="eyebrow">Traditional street shop</p>
+          <div class="status-row">
+            <span id="status-pill" class="pill">Checking hours…</span>
+            <span id="status-when" class="muted"></span>
+          </div>
+          <p class="lede">Walk-ins first come, first served. Appointments held with a deposit. No apprentices. No piercing. We are not a TV show.</p>
+          <p class="muted">117 Avenida Granada, San Clemente, CA 92672 · (949) 498-8487</p>
+          <div class="hero-actions">
+            <a class="btn primary" href="tel:+19494988487">Call the shop</a>
+            <a class="btn ink" href="#book">Request a deposit date</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery">
+      <div class="wrap">
+        <h2>The wall</h2>
+        <p class="script">Work from the shop</p>
+        <p class="muted">Real work from the shop archive. Credits are on the pieces shown.</p>
+        <div class="filters" id="style-filters" aria-label="Filter by style"></div>
+        <div class="filters" id="artist-filters" aria-label="Filter by artist"></div>
+        <div id="gallery-grid" class="masonry"></div>
+        <p id="gallery-empty" class="empty hidden">Nothing on the wall for that mix. Clear a filter or pick another artist.</p>
+      </div>
+    </section>
+
+    <section id="crew">
+      <div class="wrap">
+        <h2>The crew</h2>
+        <p class="script">San Clemente, California</p>
+        <p class="muted">Work shown by each artist. For who is on the wall today, call the shop.</p>
+        <div class="crew-grid" id="crew-grid"></div>
+      </div>
+    </section>
+
+    <section id="book">
+      <div class="wrap book-grid">
+        <div>
+          <h2>Walk in or book</h2>
+          <p class="script">Hold a chair</p>
+          <p id="book-status" class="lede"></p>
+          <p>Walk-ins are first come, first served, seven days. If you want a set time, leave a deposit. Ask the shop for the amount and how to pay.</p>
+          <p class="muted">California: you must be 18. Photo ID at the chair. No parental exception.</p>
+        </div>
+        <form id="booking-form" name="booking" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="#">
+          <input type="hidden" name="form-name" value="booking">
+          <p class="hidden" aria-hidden="true"><label>Leave blank <input name="bot-field"></label></p>
+          <div class="steps">
+            <fieldset>
+              <legend>Idea and artist</legend>
+              <label for="idea">What do you want</label>
+              <textarea id="idea" name="idea" required placeholder="A traditional panther on the calf, a name, a cover-up of an old piece…"></textarea>
+              <label for="artist">Artist</label>
+              <select id="artist" name="artist" required></select>
+            </fieldset>
+            <fieldset>
+              <legend>Size and placement</legend>
+              <label for="size">Size</label>
+              <input id="size" name="size" type="text" required placeholder="About 4 inches, half sleeve, across the chest…">
+              <label for="placement">Placement</label>
+              <input id="placement" name="placement" type="text" required placeholder="Outer forearm, thigh, back of calf…">
+              <label class="check"><input type="checkbox" name="coverup" value="yes"> This is a cover-up</label>
+              <label for="ref">Optional reference photo</label>
+              <input id="ref" name="reference" type="file" accept="image/*">
+            </fieldset>
+            <fieldset>
+              <legend>How to reach you</legend>
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" required autocomplete="name">
+              <label for="phone">Phone</label>
+              <input id="phone" name="phone" type="tel" required autocomplete="tel">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" required autocomplete="email">
+              <label class="check"><input type="checkbox" name="age18" value="yes" required> I am 18 or older and I will bring photo ID. I understand California has no parental exception.</label>
+              <button class="btn primary" type="submit" style="margin-top:1rem;width:100%;">Send booking request</button>
+              <p class="form-note">This requests a date. It does not charge a deposit. The shop will answer with the deposit amount and how to pay.</p>
+            </fieldset>
+          </div>
+          <div id="form-result" hidden></div>
+        </form>
+      </div>
+    </section>
+
+    <section id="find">
+      <div class="wrap find-grid">
+        <div>
+          <h2>Find the shop</h2>
+          <p class="script">Half a block off Del Mar</p>
+          <p>
+            San Clemente Tattoo<br>
+            117 Avenida Granada<br>
+            San Clemente, CA 92672
+          </p>
+          <p><a href="tel:+19494988487">(949) 498-8487</a><br>
+            <a href="mailto:brogreg777@yahoo.com">brogreg777@yahoo.com</a>
+            
+          </p>
+          <ul class="hours-list" id="hours-list"></ul>
+          <div class="hero-actions">
+            <a class="btn primary" href="tel:+19494988487">Tap to call</a>
+            <a class="btn ink" href="https://www.google.com/maps/dir/?api=1&destination=117+Avenida+Granada,+San+Clemente,+CA+92672">Directions</a>
+          </div>
+        </div>
+        <div class="mapframe">
+          <iframe title="Map of San Clemente Tattoo at 117 Avenida Granada" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=117%20Avenida%20Granada%2C%20San%20Clemente%2C%20CA%2092672&z=16&output=embed"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section id="aftercare">
+      <div class="wrap split">
+        <div>
+          <h2>Aftercare</h2>
+          <p class="script">This is a beach town</p>
+          <p>Keep it clean. Keep it out of the Pacific, the pool, and the sun until it is healed. Salt water, chlorine, and a San Clemente afternoon will wreck a fresh tattoo.</p>
+          <ol class="care">
+            <li>Leave the bandage on for the time your artist told you.</li>
+            <li>Wash with mild unscented soap and lukewarm water. Pat dry. Do not scrub.</li>
+            <li>A thin layer of whatever ointment they handed you. Not a coat of grease.</li>
+            <li>No ocean, no pool, no hot tub, no soaking until healed.</li>
+            <li>No direct sun. Cover it or stay in the shade.</li>
+            <li>No picking. No scratching.</li>
+            <li>Spreading redness, heat, pus, fever: call the shop and see a doctor.</li>
+          </ol>
+          <p class="muted">General guidance only — follow what your artist tells you at the chair.</p>
+        </div>
+        <div id="faq">
+          <h2>FAQ</h2>
+          <p class="script">Before you sit</p>
+          <div id="faq-list"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap foot-grid">
+      <div>
+        <p class="brand">San Clemente Tattoo</p>
+        <p>117 Avenida Granada, San Clemente, CA 92672<br>
+          <a href="tel:+19494988487">(949) 498-8487</a><br>
+          Owner: Brother Greg Rancourt
+        </p>
+        <p>
+          <a href="https://www.instagram.com/san_clemente_tattoo/">@san_clemente_tattoo</a><br>
+          <a href="https://www.facebook.com/sanclementetattoo">Facebook</a>
+        </p>
+      </div>
+      <div>
+        <p class="eyebrow" style="color:var(--gold)">Press</p>
+        <p><a href="https://www.ocweekly.com/brother-greg-rancourt-of-san-clemente-tattoo-on-painting-and-his-advice-to-young-tattooers-6485186/">OC Weekly, 2015</a><br>
+          <a href="https://www.sullenclothing.com/blogs/artists/brother-greg">Sullen Clothing, 2024</a></p>
+      </div>
+      <div>
+        <p class="eyebrow" style="color:var(--gold)">Artist Instagram</p>
+        <ul class="ig-list" id="footer-ig"></ul>
+      </div>
+    </div>
+    <div class="wrap legal">
+      © Brother Greg / San Clemente Tattoo. Tattooing only. Must be 18 with photo ID. Photos are real shop work; credits on the pieces shown.
+    </div>
+  </footer>
+
+  <nav class="dock" aria-label="Mobile shortcuts">
+    <a href="tel:+19494988487">Call</a>
+    <a href="https://www.google.com/maps/dir/?api=1&destination=117+Avenida+Granada,+San+Clemente,+CA+92672">Go</a>
+    <a href="#book">Book</a>
+  </nav>
+
+  <dialog id="lightbox" aria-label="Tattoo detail">
+    <div class="lb-frame">
+      <div id="lb-art"></div>
+      <div class="lb-meta" id="lb-meta"></div>
+      <div class="lb-nav">
+        <button class="btn ink" type="button" id="lb-prev">Previous</button>
+        <button class="btn" type="button" id="lb-close">Close</button>
+        <button class="btn ink" type="button" id="lb-next">Next</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TattooParlor",
+    "name": "San Clemente Tattoo",
+    "image": "https://sanclementetattoo.com/og.png",
+    "url": "https://sanclementetattoo.com/",
+    "telephone": "+1-949-498-8487",
+    "email": "brogreg777@yahoo.com",
+    "foundingDate": "2011",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "117 Avenida Granada",
+      "addressLocality": "San Clemente",
+      "addressRegion": "CA",
+      "postalCode": "92672",
+      "addressCountry": "US"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 33.4274,
+      "longitude": -117.6126
+    },
+    "openingHoursSpecification": [
+      {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"12:00","closes":"20:00"}
+    ],
+    "sameAs": [
+      "https://www.instagram.com/san_clemente_tattoo/",
+      "https://www.facebook.com/sanclementetattoo"
+    ],
+    "priceRange": "$$"
+  }
+  </script>
+
+  <script>
+  const SHOP = {
+    phoneHref: "tel:+19494988487",
+    emailUse: "brogreg777@yahoo.com",
+    hours: {
+      timezone: "America/Los_Angeles",
+      weekly: [
+        { day: "Sunday", open: "12:00", close: "20:00" },
+        { day: "Monday", open: "12:00", close: "20:00" },
+        { day: "Tuesday", open: "12:00", close: "20:00" },
+        { day: "Wednesday", open: "12:00", close: "20:00" },
+        { day: "Thursday", open: "12:00", close: "20:00" },
+        { day: "Friday", open: "12:00", close: "20:00" },
+        { day: "Saturday", open: "12:00", close: "20:00" }
+      ]
+    },
+    artists: [
+      { id: "greg", name: "Brother Greg", handle: "san_clemente_tattoo", instagram: "https://www.instagram.com/san_clemente_tattoo/", role: "Owner", bio: "Owner of San Clemente Tattoo.", confirm: false },
+      { id: "james", name: "James Whelan", handle: "_jameswhelan", instagram: "https://www.instagram.com/_jameswhelan/", role: "Artist", bio: "Work shown; lineup per Greg.", confirm: false },
+      { id: "brian", name: "Brian Taylor", handle: "into_the_grave", instagram: "https://www.instagram.com/into_the_grave/", role: "Artist", bio: "Work shown; lineup per Greg.", confirm: false },
+      { id: "chas", name: "Chas Byassee", handle: "cebyassee", instagram: "https://www.instagram.com/cebyassee/", role: "Artist", bio: "Work shown; lineup per Greg.", confirm: false },
+      { id: "thad", name: "Thad", handle: "thadart", instagram: "https://www.instagram.com/thadart/", role: "Artist", bio: "Work shown; lineup per Greg.", confirm: false }
+    ],
+    styles: ["Traditional", "Black & grey", "Color", "Lettering", "Cover-ups", "Paintings"],
+    faq: [
+      ["Do you take walk-ins?", "Yes. First come, first served, seven days. If the shop is slammed or the piece is a custom, we will book you instead."],
+      ["How do I book?", "Call or send the request on this page. Appointments are held with a deposit. Ask the shop for the amount and payment method."],
+      ["How much does a tattoo cost?", "Depends on size, placement, cover-up work, and the artist. No number on this page until Greg signs off on a minimum."],
+      ["Under 18 with a parent?", "No. California has no parental exception. You must be 18 and bring photo ID."],
+      ["Cover-ups?", "Yes. Bring clear photos of the old work or walk in and show us."],
+      ["Do you pierce?", "No. Tattooing only."],
+      ["Parking?", "Street parking nearby; ask the shop about lot access."]
+    ]
+  };
+
+    const GALLERY = [
+    { id: "orig-os-5526748", artistId: "shop", style: "Black & grey", caption: "Sacred heart", src: "photos/orig-os-5526748.jpg" },
+    { id: "orig-ig-193725", artistId: "brian", style: "Color", caption: "Chrysanthemum and peony sleeve", src: "photos/orig-ig-193725.jpg" },
+    { id: "orig-ig-193735", artistId: "chas", style: "Paintings", caption: "Severed samurai head painting with sword", src: "photos/orig-ig-193735.jpg" },
+    { id: "orig-ig-193732", artistId: "chas", style: "Color", caption: "Severed head with dagger", src: "photos/orig-ig-193732.jpg" },
+    { id: "orig-ig-193739", artistId: "shop", style: "Paintings", caption: "'Don\\'t Tread On Me' eagle and ship design", src: "photos/orig-ig-193739.jpg" },
+    { id: "orig-ig-193742", artistId: "shop", style: "Paintings", caption: "'F-Around and Find Out' eagle and ship design", src: "photos/orig-ig-193742.jpg" },
+    { id: "orig-ig-193745", artistId: "greg", style: "Paintings", caption: "Cross and serpent watercolor", src: "photos/orig-ig-193745.jpg" },
+    { id: "orig-ig-193751", artistId: "james", style: "Color", caption: "Eagle chest piece", src: "photos/orig-ig-193751.jpg" },
+    { id: "orig-ig-193753", artistId: "james", style: "Traditional", caption: "Eagle", src: "photos/orig-ig-193753.jpg" },
+    { id: "orig-ig-193804", artistId: "brian", style: "Color", caption: "Full back piece, goddess and flowers", src: "photos/orig-ig-193804.jpg" },
+    { id: "orig-ig-193806", artistId: "brian", style: "Color", caption: "Back piece", src: "photos/orig-ig-193806.jpg" },
+    { id: "orig-ig-193809", artistId: "brian", style: "Color", caption: "Full back piece, woman with headdress", src: "photos/orig-ig-193809.jpg" },
+    { id: "orig-ig-193813", artistId: "james", style: "Black & grey", caption: "Lady head portrait", src: "photos/orig-ig-193813.jpg" },
+    { id: "orig-ig-193817", artistId: "thad", style: "Black & grey", caption: "Playing cards, dice and rose sleeve", src: "photos/orig-ig-193817.jpg" },
+    { id: "orig-ig-193822", artistId: "greg", style: "Paintings", caption: "Eagle and cross Memorial Day art", src: "photos/orig-ig-193822.jpg" },
+    { id: "orig-ig-193825", artistId: "brian", style: "Color", caption: "Virgin Mary backpiece", src: "photos/orig-ig-193825.jpg" },
+    { id: "orig-ig-193830", artistId: "brian", style: "Color", caption: "Virgin Mary backpiece, shoulder detail", src: "photos/orig-ig-193830.jpg" },
+    { id: "orig-ig-193851", artistId: "james", style: "Paintings", caption: "Dragon backpiece design, up for grabs", src: "photos/orig-ig-193851.jpg" },
+    { id: "orig-ig-193842", artistId: "james", style: "Paintings", caption: "Dragon backpiece design, up for grabs", src: "photos/orig-ig-193842.jpg" },
+    { id: "orig-ig-193848", artistId: "james", style: "Paintings", caption: "Eagle backpiece design, up for grabs", src: "photos/orig-ig-193848.jpg" },
+    { id: "orig-ig-193909", artistId: "james", style: "Color", caption: "Demon mask", src: "photos/orig-ig-193909.jpg" },
+    { id: "orig-ig-193916", artistId: "brian", style: "Black & grey", caption: "Eagle and skull chest piece", src: "photos/orig-ig-193916.jpg" },
+    { id: "orig-ig-193920", artistId: "brian", style: "Black & grey", caption: "Black panther torso piece", src: "photos/orig-ig-193920.jpg" },
+    { id: "orig-ig-193934", artistId: "brian", style: "Color", caption: "Demon leg sleeve", src: "photos/orig-ig-193934.jpg" },
+    { id: "orig-ig-193930", artistId: "brian", style: "Color", caption: "Demon leg sleeve, front view", src: "photos/orig-ig-193930.jpg" },
+    { id: "orig-ig-193939", artistId: "chas", style: "Color", caption: "Panther and flowers sleeve", src: "photos/orig-ig-193939.jpg" },
+    { id: "orig-ig-193926", artistId: "james", style: "Black & grey", caption: "Reaper skull with red accents", src: "photos/orig-ig-193926.jpg" },
+    { id: "orig-ig-193943", artistId: "james", style: "Black & grey", caption: "Ornamental full sleeve", src: "photos/orig-ig-193943.jpg" },
+    { id: "orig-ig-193947", artistId: "brian", style: "Color", caption: "Dagger, owl and dragon", src: "photos/orig-ig-193947.jpg" },
+    { id: "orig-ig-193951", artistId: "chas", style: "Color", caption: "Skull and dagger, traditional", src: "photos/orig-ig-193951.jpg" },
+    { id: "orig-ig-193954", artistId: "thad", style: "Color", caption: "Bulldog with helmet", src: "photos/orig-ig-193954.jpg" },
+    { id: "orig-ig-193958", artistId: "james", style: "Color", caption: "Severed head, Japanese style", src: "photos/orig-ig-193958.jpg" },
+    { id: "orig-ig-194002", artistId: "brian", style: "Color", caption: "Mahakala demon stomach piece", src: "photos/orig-ig-194002.jpg" },
+    { id: "orig-ig-194005", artistId: "chas", style: "Black & grey", caption: "Dragon sleeve, black and grey with red", src: "photos/orig-ig-194005.jpg" },
+    { id: "orig-ig-194010", artistId: "thad", style: "Black & grey", caption: "Black panther leg piece", src: "photos/orig-ig-194010.jpg" },
+    { id: "orig-ig-194017", artistId: "greg", style: "Paintings", caption: "Dagger, swallows and roses shirt art", src: "photos/orig-ig-194017.jpg" },
+    { id: "orig-ig-194032", artistId: "james", style: "Color", caption: "Dragon sleeve", src: "photos/orig-ig-194032.jpg" },
+    { id: "orig-ig-194037", artistId: "james", style: "Color", caption: "Dragon sleeve, detail", src: "photos/orig-ig-194037.jpg" },
+    { id: "orig-ig-194044", artistId: "james", style: "Color", caption: "Dragon sleeve, back view", src: "photos/orig-ig-194044.jpg" },
+    { id: "orig-ig-194025", artistId: "james", style: "Color", caption: "Dragon sleeve", src: "photos/orig-ig-194025.jpg" },
+    { id: "orig-ig-194028", artistId: "james", style: "Color", caption: "Dragon sleeve, detail", src: "photos/orig-ig-194028.jpg" },
+    { id: "orig-ig-194034", artistId: "james", style: "Color", caption: "Dragon sleeve, shoulder view", src: "photos/orig-ig-194034.jpg" },
+    { id: "orig-ig-194035", artistId: "james", style: "Color", caption: "Dragon sleeve, outer arm", src: "photos/orig-ig-194035.jpg" },
+    { id: "orig-ig-194039", artistId: "james", style: "Color", caption: "Dragon sleeve, full view", src: "photos/orig-ig-194039.jpg" },
+    { id: "orig-ig-194041", artistId: "james", style: "Color", caption: "Dragon sleeve, close-up", src: "photos/orig-ig-194041.jpg" },
+    { id: "orig-ig-194047", artistId: "james", style: "Color", caption: "Dragon sleeve, wrist detail", src: "photos/orig-ig-194047.jpg" },
+    { id: "orig-ig-194049", artistId: "james", style: "Color", caption: "Dragon sleeve, back view", src: "photos/orig-ig-194049.jpg" },
+    { id: "orig-ig-194103", artistId: "brian", style: "Color", caption: "Dragon and flowers sleeve", src: "photos/orig-ig-194103.jpg" },
+    { id: "orig-ig-194107", artistId: "brian", style: "Color", caption: "Dragon and flowers sleeve, detail", src: "photos/orig-ig-194107.jpg" },
+    { id: "orig-ig-194109", artistId: "brian", style: "Color", caption: "Dragon and flowers sleeve, full view", src: "photos/orig-ig-194109.jpg" },
+    { id: "orig-ig-194054", artistId: "brian", style: "Color", caption: "Dragon head, sleeve detail", src: "photos/orig-ig-194054.jpg" },
+    { id: "orig-ig-194056", artistId: "brian", style: "Color", caption: "Dragon and flowers sleeve", src: "photos/orig-ig-194056.jpg" },
+    { id: "orig-ig-194059", artistId: "brian", style: "Color", caption: "Dragon and flowers sleeve, full view", src: "photos/orig-ig-194059.jpg" },
+    { id: "orig-ig-194113", artistId: "chas", style: "Black & grey", caption: "Skeleton and scorpion", src: "photos/orig-ig-194113.jpg" },
+    { id: "orig-ig-194116", artistId: "chas", style: "Black & grey", caption: "Skeleton and scorpion, detail", src: "photos/orig-ig-194116.jpg" },
+    { id: "orig-ig-194118", artistId: "chas", style: "Black & grey", caption: "Skeleton and scorpion triptych", src: "photos/orig-ig-194118.jpg" },
+    { id: "orig-ig-194120", artistId: "chas", style: "Black & grey", caption: "Skeleton and scorpion, side view", src: "photos/orig-ig-194120.jpg" },
+    { id: "orig-ig-194134", artistId: "james", style: "Color", caption: "Dragon back piece, Japanese style", src: "photos/orig-ig-194134.jpg" },
+    { id: "orig-ig-194140", artistId: "james", style: "Color", caption: "Dragon full backpiece", src: "photos/orig-ig-194140.jpg" },
+    { id: "orig-ig-194144", artistId: "chas", style: "Color", caption: "Praying hands with rose and Family banner, rib piece", src: "photos/orig-ig-194144.jpg" },
+    { id: "orig-ig-194150", artistId: "james", style: "Black & grey", caption: "Lady head portrait", src: "photos/orig-ig-194150.jpg" },
+    { id: "orig-ig-194153", artistId: "james", style: "Color", caption: "Lady head with flower and skull", src: "photos/orig-ig-194153.jpg" },
+    { id: "orig-os-5261263", artistId: "shop", style: "Paintings", caption: "Skeleton motorcycle", src: "photos/orig-os-5261263.jpg" },
+    { id: "orig-os-5261262", artistId: "shop", style: "Paintings", caption: "Skull panel", src: "photos/orig-os-5261262.jpg" },
+    { id: "orig-os-5261261", artistId: "shop", style: "Paintings", caption: "Tiger and lady", src: "photos/orig-os-5261261.jpg" },
+    { id: "orig-os-5261260", artistId: "shop", style: "Black & grey", caption: "Anchor and chainmail", src: "photos/orig-os-5261260.jpg" },
+    { id: "orig-os-5261259", artistId: "shop", style: "Black & grey", caption: "Skull back piece", src: "photos/orig-os-5261259.jpg" },
+    { id: "orig-os-5261258", artistId: "shop", style: "Color", caption: "Tiger back piece", src: "photos/orig-os-5261258.jpg" },
+    { id: "orig-os-5261257", artistId: "shop", style: "Color", caption: "Marlin", src: "photos/orig-os-5261257.jpg" },
+    { id: "orig-os-5261256", artistId: "shop", style: "Black & grey", caption: "Back piece", src: "photos/orig-os-5261256.jpg" },
+    { id: "orig-os-5261255", artistId: "shop", style: "Paintings", caption: "Skeleton and snake", src: "photos/orig-os-5261255.jpg" },
+    { id: "orig-os-5261254", artistId: "shop", style: "Black & grey", caption: "Sacred heart", src: "photos/orig-os-5261254.jpg" },
+    { id: "orig-os-5261253", artistId: "shop", style: "Black & grey", caption: "Horses", src: "photos/orig-os-5261253.jpg" },
+    { id: "orig-os-5261252", artistId: "shop", style: "Color", caption: "Cross with eye", src: "photos/orig-os-5261252.jpg" },
+    { id: "orig-os-5261251", artistId: "shop", style: "Color", caption: "Dragon head", src: "photos/orig-os-5261251.jpg" },
+    { id: "orig-os-5261250", artistId: "shop", style: "Color", caption: "Creation of adam hands", src: "photos/orig-os-5261250.jpg" },
+    { id: "orig-os-5261249", artistId: "shop", style: "Black & grey", caption: "Lady head", src: "photos/orig-os-5261249.jpg" },
+    { id: "orig-os-5261248", artistId: "shop", style: "Color", caption: "Ship back piece", src: "photos/orig-os-5261248.jpg" },
+    { id: "orig-os-5261247", artistId: "shop", style: "Color", caption: "Pinup with snake", src: "photos/orig-os-5261247.jpg" },
+    { id: "orig-os-5261246", artistId: "shop", style: "Color", caption: "Back piece with skull and roses", src: "photos/orig-os-5261246.jpg" },
+    { id: "orig-os-5261245", artistId: "shop", style: "Paintings", caption: "Dragon panel", src: "photos/orig-os-5261245.jpg" },
+    { id: "orig-os-5261244", artistId: "shop", style: "Paintings", caption: "Dagger flash sheet", src: "photos/orig-os-5261244.jpg" },
+    { id: "orig-os-5261243", artistId: "brian", style: "Black & grey", caption: "Horses", src: "photos/orig-os-5261243.jpg" },
+    { id: "orig-os-4503448", artistId: "thad", style: "Lettering", caption: "Script with bow", src: "photos/orig-os-4503448.jpg" },
+    { id: "orig-os-4503447", artistId: "thad", style: "Color", caption: "Revolver with lettering", src: "photos/orig-os-4503447.jpg" },
+    { id: "orig-os-4503446", artistId: "thad", style: "Color", caption: "Lady head", src: "photos/orig-os-4503446.jpg" },
+    { id: "orig-os-4503445", artistId: "thad", style: "Lettering", caption: "Skull with lettering", src: "photos/orig-os-4503445.jpg" },
+    { id: "orig-os-4503444", artistId: "thad", style: "Black & grey", caption: "Wings back piece", src: "photos/orig-os-4503444.jpg" },
+    { id: "orig-os-4503443", artistId: "thad", style: "Black & grey", caption: "Elephant mandala", src: "photos/orig-os-4503443.jpg" },
+    { id: "orig-os-4503442", artistId: "thad", style: "Color", caption: "Skull", src: "photos/orig-os-4503442.jpg" },
+    { id: "orig-os-4503441", artistId: "thad", style: "Color", caption: "Grim reaper sleeve", src: "photos/orig-os-4503441.jpg" },
+    { id: "orig-os-4503440", artistId: "thad", style: "Black & grey", caption: "Forearm piece", src: "photos/orig-os-4503440.jpg" },
+    { id: "orig-os-4503439", artistId: "thad", style: "Black & grey", caption: "Tree", src: "photos/orig-os-4503439.jpg" },
+    { id: "orig-os-4503438", artistId: "thad", style: "Black & grey", caption: "Pinup playing card", src: "photos/orig-os-4503438.jpg" },
+    { id: "orig-os-4503434", artistId: "shop", style: "Color", caption: "Koi shoulder", src: "photos/orig-os-4503434.jpg" },
+    { id: "orig-os-4503433", artistId: "shop", style: "Traditional", caption: "Rattlesnake", src: "photos/orig-os-4503433.jpg" },
+    { id: "orig-os-4503432", artistId: "shop", style: "Black & grey", caption: "Mandala thigh", src: "photos/orig-os-4503432.jpg" },
+    { id: "orig-os-4503431", artistId: "shop", style: "Lettering", caption: "Horseshoe with script", src: "photos/orig-os-4503431.jpg" },
+    { id: "orig-os-4503430", artistId: "shop", style: "Traditional", caption: "Traditional back piece with lettering", src: "photos/orig-os-4503430.jpg" },
+    { id: "orig-os-4503429", artistId: "shop", style: "Color", caption: "Koi shoulder", src: "photos/orig-os-4503429.jpg" },
+    { id: "orig-os-4503420", artistId: "brian", style: "Color", caption: "Tiger half sleeve", src: "photos/orig-os-4503420.jpg" },
+    { id: "orig-os-4503419", artistId: "brian", style: "Color", caption: "Tiger shoulder", src: "photos/orig-os-4503419.jpg" },
+    { id: "orig-os-4503418", artistId: "brian", style: "Color", caption: "Sugar skull forearm", src: "photos/orig-os-4503418.jpg" },
+    { id: "orig-os-4503417", artistId: "brian", style: "Black & grey", caption: "Mandala", src: "photos/orig-os-4503417.jpg" },
+    { id: "orig-os-4503416", artistId: "brian", style: "Traditional", caption: "Traditional thigh piece", src: "photos/orig-os-4503416.jpg" },
+    { id: "orig-os-4503399", artistId: "brian", style: "Black & grey", caption: "Black and grey back piece", src: "photos/orig-os-4503399.jpg" },
+    { id: "orig-os-4503398", artistId: "brian", style: "Traditional", caption: "Rose on hand", src: "photos/orig-os-4503398.jpg" },
+    { id: "orig-os-4503397", artistId: "brian", style: "Color", caption: "Dragon back piece", src: "photos/orig-os-4503397.jpg" },
+    { id: "orig-ig-193838", artistId: "shop", style: "Black & grey", caption: "Eagle head tattoo on back of head", src: "photos/orig-ig-193838.jpg" },
+    { id: "orig-ig-193923", artistId: "brian", style: "Color", caption: "Panther head piece", src: "photos/orig-ig-193923.jpg" },
+    { id: "orig-ig-194138", artistId: "brian", style: "Color", caption: "Dragon back piece with cherry blossoms", src: "photos/orig-ig-194138.jpg" },
+    { id: "r2-greg-greg-01", artistId: "greg", style: "Paintings", caption: "Religious flash painting (Jesus/Mary torso piece), framed", src: "photos/r2-greg-greg-01.jpg" },
+    { id: "r2-greg-greg-02", artistId: "greg", style: "Paintings", caption: "Religious flash painting, second piece", src: "photos/r2-greg-greg-02.jpg" },
+    { id: "r2-greg-greg-03", artistId: "greg", style: "Traditional", caption: "Shop exterior: 'World Famous San Clemente Tattoo' sign", src: "photos/r2-greg-greg-03.jpg" },
+    { id: "r2-greg-greg-04", artistId: "greg", style: "Traditional", caption: "Shop interior: framed tattoo sign, bench, neon OPEN", src: "photos/r2-greg-greg-04.jpg" },
+    { id: "r2-greg-greg-05", artistId: "greg", style: "Traditional", caption: "Iconic red shop door with OPEN sign", src: "photos/r2-greg-greg-05.jpg" },
+    { id: "r2-greg-greg-06", artistId: "greg", style: "Traditional", caption: "Shop interior workstation", src: "photos/r2-greg-greg-06.jpg" },
+    { id: "r2-greg-greg-07", artistId: "greg", style: "Cover-ups", caption: "Shop interior: client on chair, flash-covered walls", src: "photos/r2-greg-greg-07.jpg" },
+    { id: "r2-greg-greg-08", artistId: "greg", style: "Paintings", caption: "Goblet/skull chalice flash painting", src: "photos/r2-greg-greg-08.jpg" },
+    { id: "r2-greg-greg-09", artistId: "greg", style: "Paintings", caption: "'Blessed' skull and mermaid flash painting", src: "photos/r2-greg-greg-09.jpg" },
+    { id: "r2-james-james-01", artistId: "james", style: "Paintings", caption: "Eagle and dragon flash sheets", src: "photos/r2-james-james-01.jpg" },
+    { id: "r2-james-james-02", artistId: "james", style: "Paintings", caption: "Tiger and dragon flash sheets", src: "photos/r2-james-james-02.jpg" },
+    { id: "r2-james-james-03", artistId: "james", style: "Traditional", caption: "Oni mask thigh tattoo", src: "photos/r2-james-james-03.jpg" },
+    { id: "r2-james-james-04", artistId: "james", style: "Color", caption: "Colorful demon thigh tattoo", src: "photos/r2-james-james-04.jpg" },
+    { id: "r2-james-james-05", artistId: "james", style: "Traditional", caption: "Horse/kirin rib tattoo", src: "photos/r2-james-james-05.jpg" },
+    { id: "r2-james-james-06", artistId: "james", style: "Paintings", caption: "Shark flash painting", src: "photos/r2-james-james-06.jpg" },
+    { id: "r2-james-james-07", artistId: "james", style: "Paintings", caption: "Dragon pencil drawing", src: "photos/r2-james-james-07.jpg" },
+    { id: "r2-james-james-08", artistId: "james", style: "Traditional", caption: "Panther head shoulder tattoo", src: "photos/r2-james-james-08.jpg" },
+    { id: "r2-james-james-09", artistId: "james", style: "Traditional", caption: "Oni/demon face thigh tattoo", src: "photos/r2-james-james-09.jpg" },
+    { id: "r2-james-james-10", artistId: "james", style: "Traditional", caption: "James tattooing a client in the shop", src: "photos/r2-james-james-10.jpg" },
+    { id: "r2-james-james-11", artistId: "james", style: "Paintings", caption: "Snake and dagger flash painting", src: "photos/r2-james-james-11.jpg" },
+    { id: "r2-james-james-12", artistId: "james", style: "Traditional", caption: "Koi full-back bodysuit", src: "photos/r2-james-james-12.jpg" },
+    { id: "r2-james-james-13", artistId: "james", style: "Traditional", caption: "Foo dog thigh tattoo", src: "photos/r2-james-james-13.jpg" },
+    { id: "r2-james-james-14", artistId: "james", style: "Traditional", caption: "Chrysanthemum blackwork thigh tattoo", src: "photos/r2-james-james-14.jpg" },
+    { id: "r2-james-james-15", artistId: "james", style: "Traditional", caption: "Tiger head thigh tattoo", src: "photos/r2-james-james-15.jpg" },
+    { id: "r2-brian-brian-01", artistId: "brian", style: "Traditional", caption: "Goddess full-back bodysuit", src: "photos/r2-brian-brian-01.jpg" },
+    { id: "r2-brian-brian-02", artistId: "brian", style: "Traditional", caption: "Eagle forearm tattoo", src: "photos/r2-brian-brian-02.jpg" },
+    { id: "r2-brian-brian-03", artistId: "brian", style: "Traditional", caption: "Eagle and skull full-back piece", src: "photos/r2-brian-brian-03.jpg" },
+    { id: "r2-brian-brian-04", artistId: "brian", style: "Paintings", caption: "Eagle flash close-up", src: "photos/r2-brian-brian-04.jpg" },
+    { id: "r2-brian-brian-05", artistId: "brian", style: "Traditional", caption: "Leopard leg tattoo", src: "photos/r2-brian-brian-05.jpg" },
+    { id: "r2-brian-brian-06", artistId: "brian", style: "Traditional", caption: "Mahakala stomach piece", src: "photos/r2-brian-brian-06.jpg" },
+    { id: "r2-brian-brian-07", artistId: "brian", style: "Traditional", caption: "Tiger head thigh tattoo", src: "photos/r2-brian-brian-07.jpg" },
+    { id: "r2-brian-brian-08", artistId: "brian", style: "Traditional", caption: "Koi/dragon arm tattoo", src: "photos/r2-brian-brian-08.jpg" },
+    { id: "r2-brian-brian-09", artistId: "brian", style: "Traditional", caption: "Demon sleeve tattoo", src: "photos/r2-brian-brian-09.jpg" },
+    { id: "r2-brian-brian-10", artistId: "brian", style: "Traditional", caption: "Lady head thigh tattoo", src: "photos/r2-brian-brian-10.jpg" },
+    { id: "r2-brian-brian-11", artistId: "brian", style: "Traditional", caption: "Mermaid and ship thigh tattoo", src: "photos/r2-brian-brian-11.jpg" },
+    { id: "r2-brian-brian-12", artistId: "brian", style: "Traditional", caption: "Lady head calf tattoo", src: "photos/r2-brian-brian-12.jpg" },
+    { id: "r2-brian-brian-13", artistId: "brian", style: "Paintings", caption: "Tiger flash painting", src: "photos/r2-brian-brian-13.jpg" },
+    { id: "r2-brian-brian-14", artistId: "brian", style: "Traditional", caption: "Scorpion hand tattoo", src: "photos/r2-brian-brian-14.jpg" },
+    { id: "r2-brian-brian-15", artistId: "brian", style: "Traditional", caption: "Dragon sleeve torso tattoo", src: "photos/r2-brian-brian-15.jpg" },
+    { id: "r2-brian-brian-16", artistId: "brian", style: "Traditional", caption: "Oni sleeve tattoo", src: "photos/r2-brian-brian-16.jpg" },
+    { id: "r2-brian-brian-17", artistId: "brian", style: "Traditional", caption: "Ship and anchor blackwork thigh tattoo", src: "photos/r2-brian-brian-17.jpg" },
+    { id: "r2-brian-brian-18", artistId: "brian", style: "Traditional", caption: "Lady face calf tattoo", src: "photos/r2-brian-brian-18.jpg" },
+    { id: "r2-brian-brian-19", artistId: "brian", style: "Traditional", caption: "Peony sleeve tattoo", src: "photos/r2-brian-brian-19.jpg" },
+    { id: "r2-brian-brian-20", artistId: "brian", style: "Traditional", caption: "Virgin Mary full-back piece", src: "photos/r2-brian-brian-20.jpg" },
+    { id: "r2-brian-brian-21", artistId: "brian", style: "Traditional", caption: "Oni face thigh tattoo", src: "photos/r2-brian-brian-21.jpg" },
+    { id: "r2-brian-brian-22", artistId: "brian", style: "Traditional", caption: "Demon face calf tattoo", src: "photos/r2-brian-brian-22.jpg" },
+    { id: "r4-chas-chas-01", artistId: "chas", style: "Traditional", caption: "Flame foot tattoo", src: "photos/r4-chas-chas-01.jpg" },
+    { id: "r4-chas-chas-02", artistId: "chas", style: "Traditional", caption: "Sleeve panels, four views", src: "photos/r4-chas-chas-02.jpg" },
+    { id: "r4-chas-chas-03", artistId: "chas", style: "Traditional", caption: "Sleeve panels, three views", src: "photos/r4-chas-chas-03.jpg" },
+    { id: "r4-chas-chas-04", artistId: "chas", style: "Traditional", caption: "Sleeve panels, three views", src: "photos/r4-chas-chas-04.jpg" },
+    { id: "r4-chas-chas-05", artistId: "chas", style: "Traditional", caption: "Sugar skull chest piece", src: "photos/r4-chas-chas-05.jpg" },
+    { id: "r4-chas-chas-06", artistId: "chas", style: "Traditional", caption: "Sneaker tattoo", src: "photos/r4-chas-chas-06.jpg" },
+    { id: "r4-chas-chas-07", artistId: "chas", style: "Traditional", caption: "Pine tree and apple tattoo", src: "photos/r4-chas-chas-07.jpg" },
+    { id: "r4-chas-chas-08", artistId: "chas", style: "Traditional", caption: "Rose hand tattoo", src: "photos/r4-chas-chas-08.jpg" },
+    { id: "r4-chas-chas-09", artistId: "chas", style: "Traditional", caption: "Hummingbird tattoo", src: "photos/r4-chas-chas-09.jpg" },
+    { id: "r4-chas-chas-10", artistId: "chas", style: "Traditional", caption: "Reaper thigh tattoo", src: "photos/r4-chas-chas-10.jpg" },
+    { id: "r4-chas-chas-11", artistId: "chas", style: "Traditional", caption: "Rose tattoo", src: "photos/r4-chas-chas-11.jpg" },
+    { id: "r4-chas-chas-12", artistId: "chas", style: "Traditional", caption: "Skull headdress chest tattoo", src: "photos/r4-chas-chas-12.jpg" },
+    { id: "r4-chas-chas-13", artistId: "chas", style: "Traditional", caption: "Snoopy soldier tattoo", src: "photos/r4-chas-chas-13.jpg" },
+    { id: "r4-chas-chas-14", artistId: "chas", style: "Traditional", caption: "Eagle chest piece", src: "photos/r4-chas-chas-14.jpg" },
+    { id: "r4-chas-chas-15", artistId: "chas", style: "Traditional", caption: "Eagle tattoo close-up", src: "photos/r4-chas-chas-15.jpg" },
+    { id: "r4-chas-chas-16", artistId: "chas", style: "Traditional", caption: "Eagle and flag sleeve panels, three views", src: "photos/r4-chas-chas-16.jpg" },
+    { id: "r4-chas-chas-17", artistId: "chas", style: "Traditional", caption: "Forehead/temple tattoo", src: "photos/r4-chas-chas-17.jpg" },
+    { id: "r4-chas-chas-18", artistId: "chas", style: "Traditional", caption: "Hand with dagger tattoo", src: "photos/r4-chas-chas-18.jpg" },
+    { id: "r4-chas-chas-19", artistId: "chas", style: "Traditional", caption: "Watermelon slice tattoo", src: "photos/r4-chas-chas-19.jpg" },
+    { id: "r4-chas-chas-20", artistId: "chas", style: "Paintings", caption: "Ship linework flash", src: "photos/r4-chas-chas-20.jpg" },
+    { id: "r4-chas-chas-21", artistId: "chas", style: "Traditional", caption: "Skull with dagger tattoo", src: "photos/r4-chas-chas-21.jpg" },
+    { id: "r4-chas-chas-22", artistId: "chas", style: "Traditional", caption: "Panther head tattoo", src: "photos/r4-chas-chas-22.jpg" },
+    { id: "r4-chas-chas-23", artistId: "chas", style: "Traditional", caption: "Panther legs tattoo", src: "photos/r4-chas-chas-23.jpg" },
+    { id: "r4-thad-thad-01", artistId: "thad", style: "Traditional", caption: "Clown face tattoo", src: "photos/r4-thad-thad-01.jpg" },
+    { id: "r4-thad-thad-02", artistId: "thad", style: "Traditional", caption: "Blackwork sleeve", src: "photos/r4-thad-thad-02.jpg" },
+    { id: "r4-thad-thad-03", artistId: "thad", style: "Traditional", caption: "Eagle back tattoo", src: "photos/r4-thad-thad-03.jpg" },
+    { id: "r4-thad-thad-04", artistId: "thad", style: "Traditional", caption: "Skeleton garden rib piece", src: "photos/r4-thad-thad-04.jpg" },
+    { id: "r4-thad-thad-05", artistId: "thad", style: "Traditional", caption: "Tiger and cherry blossoms rib piece", src: "photos/r4-thad-thad-05.jpg" },
+    { id: "r4-thad-thad-06", artistId: "thad", style: "Traditional", caption: "Skull cowboy thigh tattoo", src: "photos/r4-thad-thad-06.jpg" },
+    { id: "r4-thad-thad-07", artistId: "thad", style: "Traditional", caption: "Rooster head tattoo", src: "photos/r4-thad-thad-07.jpg" },
+    { id: "r4-thad-thad-08", artistId: "thad", style: "Traditional", caption: "Panther head shoulder tattoo", src: "photos/r4-thad-thad-08.jpg" },
+    { id: "r4-thad-thad-09", artistId: "thad", style: "Traditional", caption: "Ghostface knife tattoo", src: "photos/r4-thad-thad-09.jpg" },
+    { id: "r4-thad-thad-10", artistId: "thad", style: "Traditional", caption: "Bulldog soldier tattoo", src: "photos/r4-thad-thad-10.jpg" },
+    { id: "r4-thad-thad-11", artistId: "thad", style: "Traditional", caption: "Lady head tattoo", src: "photos/r4-thad-thad-11.jpg" },
+    { id: "r4-thad-thad-12", artistId: "thad", style: "Traditional", caption: "Money rose sleeve", src: "photos/r4-thad-thad-12.jpg" },
+    { id: "r4-thad-thad-13", artistId: "thad", style: "Traditional", caption: "Money rose close-up", src: "photos/r4-thad-thad-13.jpg" },
+    { id: "r4-thad-thad-14", artistId: "thad", style: "Traditional", caption: "Arm tattoo", src: "photos/r4-thad-thad-14.jpg" },
+    { id: "r4-thad-thad-15", artistId: "thad", style: "Traditional", caption: "Wolf with hearts tattoo", src: "photos/r4-thad-thad-15.jpg" },
+  ];
+
+  const artistName = id => (SHOP.artists.find(a => a.id === id) || { name: "Shop" }).name;
+
+  function motifSVG(motif) {
+    const frame = `<rect x="8" y="8" width="184" height="220" fill="#f3e7c0" stroke="#14110C" stroke-width="4"/>
+      <rect x="16" y="16" width="168" height="204" fill="none" stroke="#14110C" stroke-width="1"/>`;
+    const motifs = {
+      eagle: `<path d="M100 70 l18 14 -6 22 -12-8 -12 8 -6-22 z" fill="#14110C"/><path d="M70 108 Q100 88 130 108 L122 150 Q100 170 78 150 Z" fill="#B01522" stroke="#14110C" stroke-width="3"/><path d="M58 118 L28 108 l14 22" fill="none" stroke="#14110C" stroke-width="4"/><path d="M142 118 L172 108 l-14 22" fill="none" stroke="#14110C" stroke-width="4"/>`,
+      rose: `<circle cx="100" cy="108" r="28" fill="#B01522" stroke="#14110C" stroke-width="3"/><circle cx="100" cy="108" r="14" fill="#7A0E18" stroke="#14110C" stroke-width="2"/><path d="M100 136 C90 168 70 176 62 188" fill="none" stroke="#2A4A32" stroke-width="5"/><path d="M88 156 l18-8 4 16" fill="#2A4A32" stroke="#14110C" stroke-width="2"/>`,
+      swallow: `<path d="M46 118 L100 78 L154 118 L128 118 L100 168 L72 118 Z" fill="#1A2744" stroke="#14110C" stroke-width="3"/><circle cx="100" cy="100" r="6" fill="#EDE1BE"/>`,
+      dagger: `<rect x="94" y="48" width="12" height="110" fill="#C6A02A" stroke="#14110C" stroke-width="3"/><path d="M88 48 H112 L100 36 Z" fill="#14110C"/><rect x="78" y="150" width="44" height="14" fill="#B01522" stroke="#14110C" stroke-width="3"/>`,
+      panther: `<ellipse cx="100" cy="120" rx="40" ry="28" fill="#14110C"/><circle cx="132" cy="96" r="18" fill="#14110C"/><circle cx="140" cy="90" r="3" fill="#C6A02A"/><path d="M60 128 Q40 150 58 168" fill="none" stroke="#14110C" stroke-width="6"/>`,
+      snake: `<path d="M60 60 Q140 80 70 120 Q160 150 90 190" fill="none" stroke="#2A4A32" stroke-width="10"/><path d="M60 60 Q140 80 70 120 Q160 150 90 190" fill="none" stroke="#C6A02A" stroke-width="3"/><circle cx="56" cy="58" r="8" fill="#2A4A32" stroke="#14110C" stroke-width="2"/>`,
+      ship: `<path d="M40 150 H160 L140 180 H60 Z" fill="#1A2744" stroke="#14110C" stroke-width="3"/><path d="M100 150 V70" stroke="#14110C" stroke-width="4"/><path d="M100 78 L148 140 H100 Z" fill="#B01522" stroke="#14110C" stroke-width="3"/>`,
+      banner: `<path d="M36 110 H164 L154 140 H46 Z" fill="#B01522" stroke="#14110C" stroke-width="3"/><text x="100" y="132" text-anchor="middle" font-family="Bungee" font-size="14" fill="#F7F1DC">COVER</text>`,
+      letter: `<text x="100" y="120" text-anchor="middle" font-family="Yellowtail" font-size="42" fill="#B01522">SC</text><text x="100" y="158" text-anchor="middle" font-family="Bungee" font-size="16" fill="#14110C">TATTOO</text>`,
+      anchor: `<path d="M100 50 V150" stroke="#14110C" stroke-width="8"/><circle cx="100" cy="50" r="12" fill="none" stroke="#14110C" stroke-width="6"/><path d="M60 140 Q100 180 140 140" fill="none" stroke="#14110C" stroke-width="8"/><path d="M78 78 H122" stroke="#B01522" stroke-width="8"/>`,
+      skull: `<ellipse cx="100" cy="110" rx="36" ry="40" fill="#EDE1BE" stroke="#14110C" stroke-width="3"/><circle cx="86" cy="108" r="8" fill="#14110C"/><circle cx="114" cy="108" r="8" fill="#14110C"/><path d="M90 140 H110" stroke="#14110C" stroke-width="3"/>`,
+      heart: `<path d="M100 168 C40 120 58 68 100 96 C142 68 160 120 100 168Z" fill="#B01522" stroke="#14110C" stroke-width="3"/>`,
+      lighthouse: `<path d="M88 180 L96 70 H104 L112 180 Z" fill="#EDE1BE" stroke="#14110C" stroke-width="3"/><rect x="86" y="88" width="28" height="10" fill="#B01522"/><path d="M80 70 H120 L100 48 Z" fill="#1A2744" stroke="#14110C" stroke-width="3"/>`,
+      web: `<circle cx="100" cy="118" r="50" fill="none" stroke="#14110C" stroke-width="2"/><circle cx="100" cy="118" r="28" fill="none" stroke="#14110C" stroke-width="2"/><path d="M100 68 V168 M50 118 H150 M64 82 L136 154 M136 82 L64 154" stroke="#14110C" stroke-width="2"/>`,
+      daggerrose: `<rect x="96" y="44" width="8" height="120" fill="#C6A02A" stroke="#14110C" stroke-width="2"/><circle cx="100" cy="120" r="22" fill="#B01522" stroke="#14110C" stroke-width="3"/>`,
+      star: `<path d="M100 58 L112 96 H152 L120 118 L132 158 L100 136 L68 158 L80 118 L48 96 H88 Z" fill="#1A2744" stroke="#14110C" stroke-width="3"/>`
+    };
+    return `<svg viewBox="0 0 200 236" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">${frame}${motifs[motif] || motifs.star}</svg>`;
+  }
+
+  /* Hours */
+  function parseHM(hm) {
+    const [h, m] = hm.split(":").map(Number);
+    return h * 60 + m;
+  }
+  function shopStatus() {
+    const now = new Date();
+    const fmt = new Intl.DateTimeFormat("en-US", { timeZone: SHOP.hours.timezone, weekday: "long", hour: "2-digit", minute: "2-digit", hourCycle: "h23" });
+    const parts = Object.fromEntries(fmt.formatToParts(now).map(p => [p.type, p.value]));
+    const day = parts.weekday;
+    const minutes = (+parts.hour) * 60 + (+parts.minute);
+    const row = SHOP.hours.weekly.find(d => d.day === day);
+    const open = row && minutes >= parseHM(row.open) && minutes < parseHM(row.close);
+    return { open, day, row, displayClock: new Intl.DateTimeFormat("en-US", { timeZone: SHOP.hours.timezone, hour: "numeric", minute: "2-digit" }).format(now) };
+  }
+  function paintStatus() {
+    const s = shopStatus();
+    const pill = document.getElementById("status-pill");
+    const when = document.getElementById("status-when");
+    const book = document.getElementById("book-status");
+    pill.textContent = s.open ? "Open now" : "Closed";
+    pill.classList.toggle("open", s.open);
+    pill.classList.toggle("shut", !s.open);
+    when.textContent = s.open
+      ? `Until ${s.row.close === "20:00" ? "8 pm" : s.row.close} Pacific`
+      : `Opens ${s.day === "Saturday" ? "tomorrow" : "at noon"} Pacific · ${s.displayClock}`;
+    if (!s.open && s.row) {
+      when.textContent = `Noon to 8 pm Pacific · now ${s.displayClock}`;
+    }
+    book.textContent = s.open
+      ? "The shop is open. Walk in, or send a request if you want a held time."
+      : "The shop is closed. Send a request and we will answer when we open, or call during hours.";
+  }
+
+  /* Gallery */
+  let styleFilter = "All";
+  let artistFilter = "All";
+  let visible = [];
+  let lbIndex = 0;
+
+  function applyFilters() {
+    visible = GALLERY.filter(item =>
+      (styleFilter === "All" || item.style === styleFilter) &&
+      (artistFilter === "All" || item.artistId === artistFilter)
+    );
+    const grid = document.getElementById("gallery-grid");
+    const empty = document.getElementById("gallery-empty");
+    const draw = () => {
+      grid.innerHTML = visible.map((item, i) => `
+        <button class="card" type="button" data-id="${item.id}" data-i="${i}" id="piece-${item.id}">
+          ${item.src ? `<img src="${item.src}" alt="${item.caption}" loading="lazy">` : motifSVG(item.motif)}
+          <figcaption>
+            <span>${item.style} · ${artistName(item.artistId)}</span>
+          </figcaption>
+        </button>`).join("");
+      empty.classList.toggle("hidden", visible.length > 0);
+      grid.querySelectorAll(".card").forEach(btn => btn.addEventListener("click", () => openLB(+btn.dataset.i)));
+    };
+    if (document.startViewTransition) document.startViewTransition(draw);
+    else draw();
+  }
+
+  function chipBar(el, items, current, set) {
+    el.innerHTML = items.map(v => `<button type="button" aria-pressed="${v === current}">${v}</button>`).join("");
+    [...el.children].forEach((btn, i) => btn.addEventListener("click", () => { set(items[i]); paintChips(); applyFilters(); }));
+  }
+  function paintChips() {
+    chipBar(document.getElementById("style-filters"), ["All", ...SHOP.styles], styleFilter, v => styleFilter = v);
+    const artistCurrent = artistFilter === "All" ? "All" : artistName(artistFilter);
+    chipBar(document.getElementById("artist-filters"), ["All", ...SHOP.artists.map(a => a.name)], artistCurrent, v => {
+      artistFilter = v === "All" ? "All" : (SHOP.artists.find(a => a.name === v) || {}).id;
+    });
+  }
+
+  function openLB(i) {
+    lbIndex = i;
+    const item = visible[i];
+    if (!item) return;
+    document.getElementById("lb-art").innerHTML = item.src ? `<img src="${item.src}" alt="${item.caption}">` : motifSVG(item.motif);
+    document.getElementById("lb-meta").innerHTML =
+      `<strong>${item.style}</strong> by ${artistName(item.artistId)} · ${item.caption}<br>
+       <a href="https://www.instagram.com/san_clemente_tattoo/">Originals live on @san_clemente_tattoo</a>`;
+    history.replaceState(null, "", "#piece-" + item.id);
+    document.getElementById("lightbox").showModal();
+  }
+  function stepLB(dir) {
+    if (!visible.length) return;
+    openLB((lbIndex + dir + visible.length) % visible.length);
+  }
+
+  /* Crew + footer + form + faq + hours list */
+  function paintStatic() {
+    document.getElementById("crew-grid").innerHTML = SHOP.artists.map(a => `
+      <a class="artist" href="#gallery" data-artist="${a.id}">
+        <h3>${a.name}</h3>
+        <div class="handle">@${a.handle}${a.role === "Owner" ? " · Owner" : ""}</div>
+        <p>${a.bio}</p>
+        ${a.confirm ? '<div class="confirm">Still on the wall? CONFIRM</div>' : ""}
+      </a>`).join("");
+    document.getElementById("crew-grid").querySelectorAll(".artist").forEach(card => {
+      card.addEventListener("click", e => {
+        e.preventDefault();
+        artistFilter = card.dataset.artist;
+        styleFilter = "All";
+        paintChips();
+        applyFilters();
+        document.getElementById("gallery").scrollIntoView();
+      });
+    });
+    document.getElementById("footer-ig").innerHTML =
+      `<li><a href="https://www.instagram.com/san_clemente_tattoo/">@san_clemente_tattoo</a></li>` +
+      SHOP.artists.map(a => `<li><a href="${a.instagram}">@${a.handle}</a> · ${a.name}</li>`).join("");
+    document.getElementById("artist").innerHTML =
+      `<option value="">No preference</option>` +
+      SHOP.artists.map(a => `<option value="${a.name}">${a.name}</option>`).join("");
+    document.getElementById("faq-list").innerHTML = SHOP.faq.map(([q,a]) =>
+      `<details><summary>${q}</summary><p>${a}</p></details>`).join("");
+    document.getElementById("hours-list").innerHTML = SHOP.hours.weekly.map(d =>
+      `<li><span>${d.day}</span><span>Noon – 8 pm</span></li>`).join("");
+  }
+
+  document.getElementById("booking-form").addEventListener("submit", e => {
+    e.preventDefault();
+    const fd = new FormData(e.target);
+    if (fd.get("bot-field")) return;
+    const body = [
+      `Idea: ${fd.get("idea")}`,
+      `Artist: ${fd.get("artist") || "No preference"}`,
+      `Size: ${fd.get("size")}`,
+      `Placement: ${fd.get("placement")}`,
+      `Cover-up: ${fd.get("coverup") ? "Yes" : "No"}`,
+      `Name: ${fd.get("name")}`,
+      `Phone: ${fd.get("phone")}`,
+      `Email: ${fd.get("email")}`,
+      `18+ confirmed: ${fd.get("age18") ? "Yes" : "No"}`
+    ].join("\n");
+    const box = document.getElementById("form-result");
+    box.hidden = false;
+    box.className = "form-ok";
+    box.innerHTML = `Request ready. On Netlify this lands in Forms. Until the host is wired, it opens an email to the shop.`;
+    const mail = `mailto:${SHOP.emailUse}?subject=${encodeURIComponent("Booking request — " + fd.get("name"))}&body=${encodeURIComponent(body)}`;
+    window.location.href = mail;
+  });
+
+  const lb = document.getElementById("lightbox");
+  document.getElementById("lb-close").addEventListener("click", () => lb.close());
+  document.getElementById("lb-prev").addEventListener("click", () => stepLB(-1));
+  document.getElementById("lb-next").addEventListener("click", () => stepLB(1));
+  document.addEventListener("keydown", e => {
+    if (!lb.open) return;
+    if (e.key === "ArrowLeft") stepLB(-1);
+    if (e.key === "ArrowRight") stepLB(1);
+    if (e.key === "Escape") lb.close();
+  });
+  let touchX = null;
+  lb.addEventListener("touchstart", e => { touchX = e.changedTouches[0].screenX; }, { passive: true });
+  lb.addEventListener("touchend", e => {
+    if (touchX == null) return;
+    const dx = e.changedTouches[0].screenX - touchX;
+    if (Math.abs(dx) > 40) stepLB(dx < 0 ? 1 : -1);
+    touchX = null;
+  });
+  lb.addEventListener("close", () => {
+    if (location.hash.startsWith("#piece-")) history.replaceState(null, "", location.pathname + location.search);
+  });
+
+  paintStatus();
+  paintStatic();
+  paintChips();
+  applyFilters();
+  setInterval(paintStatus, 60000);
+
+  if (location.hash.startsWith("#piece-")) {
+    const id = location.hash.slice(7);
+    const i = GALLERY.findIndex(g => g.id === id);
+    if (i >= 0) {
+      visible = GALLERY.slice();
+      openLB(i);
+    }
+  }
+  </script>
+</body>
+</html>
