@@ -1046,10 +1046,7 @@
     pill.classList.toggle("shut", !s.open);
     when.textContent = s.open
       ? `Until ${s.row.close === "20:00" ? "8 pm" : s.row.close} Pacific`
-      : `Opens ${s.day === "Saturday" ? "tomorrow" : "at noon"} Pacific · ${s.displayClock}`;
-    if (!s.open && s.row) {
-      when.textContent = `Noon to 8 pm Pacific · now ${s.displayClock}`;
-    }
+      : `Noon to 8 pm Pacific · now ${s.displayClock} Pacific`;
     book.textContent = s.open
       ? "The shop is open. Walk in, or send a request if you want a held time."
       : "The shop is closed. Send a request and we will answer when we open, or call during hours.";
