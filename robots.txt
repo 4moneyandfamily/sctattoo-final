@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
+# Archival masters are not meant for search results; the served photos live
+# in /assets/g/ and are indexable.
+Disallow: /photos/_originals/
+
 Sitemap: https://sanclementetattoo.com/sitemap.xml

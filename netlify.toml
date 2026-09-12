@@ -1,6 +1,10 @@
 [build]
   publish = "."
 
+# ---------------------------------------------------------------------------
+# Redirects from the old multi-page site so existing links and search results
+# keep landing somewhere useful.
+# ---------------------------------------------------------------------------
 [[redirects]]
   from = "/home.html"
   to = "/"
@@ -16,9 +20,71 @@
   to = "/#crew"
   status = 301
 
+# ---------------------------------------------------------------------------
+# Security headers.
+#
+# The CSP is strict on purpose: no inline scripts and no inline styles, which
+# is only possible because every style lives in assets/css and every behaviour
+# in assets/js. If you ever add a style="..." attribute or an inline <script>,
+# it will be blocked — move it into a file instead of loosening this.
+#
+# The one third-party frame is the OpenStreetMap embed in "Find the shop".
+# Fonts are self-hosted, so no font or style origins are needed beyond 'self'.
+# ---------------------------------------------------------------------------
 [[headers]]
   for = "/*"
   [headers.values]
+    Content-Security-Policy = "default-src 'self'; base-uri 'none'; object-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'self'; form-action 'self'; frame-src https://www.openstreetmap.org; frame-ancestors 'none'; upgrade-insecure-requests"
+    X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
-    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+    Cross-Origin-Opener-Policy = "same-origin"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+
+# Photos and fonts are content-stable: cache them hard.
+[[headers]]
+  for = "/assets/g/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/photos/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# The page itself and the data file must not go stale.
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/data/site.js"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# ---------------------------------------------------------------------------
+# Draft deployments must never outrank sanclementetattoo.com.
+#
+# These two contexts cover PR previews and branch deploys. A Netlify site whose
+# *production* context is a *.netlify.app address (sc-tattoo.netlify.app) is not
+# covered by a context rule, so assets/js/app.js also injects
+# <meta name="robots" content="noindex, nofollow"> on any host that is not the
+# canonical domain. Belt and braces, because only one of the two can be
+# expressed here.
+# ---------------------------------------------------------------------------
+[[context.deploy-preview.headers]]
+  for = "/*"
+  [context.deploy-preview.headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+[[context.branch-deploy.headers]]
+  for = "/*"
+  [context.branch-deploy.headers.values]
+    X-Robots-Tag = "noindex, nofollow"

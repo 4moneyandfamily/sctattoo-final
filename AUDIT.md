@@ -1,7 +1,7 @@
 # One-page audit: sanclementetattoo.com and local competition
 
 **Shop:** San Clemente Tattoo · 117 Avenida Granada, San Clemente, CA 92672 · (949) 498-8487  
-**Owner:** Brother Greg Rancourt · Est. 2011 · Instagram @san_clemente_tattoo  
+**Owner:** Brother Greg · Est. 2011 · Instagram @san_clemente_tattoo  
 **Audit date:** 10 September 2026  
 **Scope:** Current live site, public listings, and downtown / South OC competitors that steal the same Google and Instagram traffic.
 
@@ -42,7 +42,7 @@ The live domain is an **OtherPeoplesPixels** artist-portfolio template (`home.ht
 **Trust and freshness**
 
 - Portfolio images on the OPP galleries date to the late 2010s (brief: newest around 2019). Instagram is the live portfolio; the website is a graveyard.
-- Crew on Links: B.G. @brothergreg, Brian Taylor @intothegave, Chas @cebyassee, Thad @thadart, John Ondo @horishit, James @jameswhelan. The portfolio nav only surfaces Thad, John, Brian, and “Art.” Greg, Chas, and James are easy to miss.
+- Crew on Links: B.G. @brothergreg, Brian Taylor @intothegave, Chas @cebyassee, Thad @thadart, John Ondo @horishit, James @jameswhelan. The portfolio nav only surfaces Thad, John, Brian, and “Art.” Brother Greg, Chas, and James are easy to miss.
 - No aftercare. In a beach town that is a liability and a missed “I just got tattooed, what now?” search.
 - No FAQ. California’s 18+ rule with **no parental exception** is not stated. First-timers and parents will bounce to a shop that says it.
 
@@ -78,7 +78,7 @@ Public listings are healthier than the website.
 - Instagram @san_clemente_tattoo is the living gallery. Individual artist accounts are already listed on Links.
 - Reviews name Thad / Thaddeus, Brian Taylor, John / “Big John,” Chas by name. Loyalty is to the artists, which is why artist-filtered galleries matter.
 
-Do **not** scrape those reviews onto the new site as testimonials. The brief forbids invented testimonials; third-party quotes still need Greg’s OK.
+Do **not** scrape those reviews onto the new site as testimonials. The brief forbids invented testimonials; third-party quotes still need Brother Greg’s OK.
 
 ---
 
@@ -126,3 +126,237 @@ They do **not** share a look. Copying Bang Bang’s black luxury or Kings Avenue
 8. **Painted shop sign in the hero.** Everything else stays quiet so the work can talk.
 
 Hours, deposit amount, deposit method, individual bios, who is still on the wall, and the launch email are **CONFIRM** in `shop-config.json`. Nothing in this build invents them.
+
+---
+
+# Part 2 — gallery and image audit (12 September 2026)
+
+Added during the completion pass. Part 1 above is the original competitive
+audit of the old OtherPeoplesPixels site and still stands.
+
+## Method
+
+Every one of the 194 files in `photos/` was put through three passes:
+
+1. **Byte-identical:** SHA-256 over the whole file.
+2. **Perceptually similar:** aHash, dHash and a 32×32 DCT pHash, compared
+   pairwise across all 18,721 pairs. Candidates at Hamming ≤ 10 (pHash) and
+   ≤ 18 (dHash) were carried forward, plus a looser sweep at ≤ 16 / ≤ 22 to
+   catch alternate angles the tight threshold missed.
+3. **Registration residual:** for each candidate pair, a scale-and-offset
+   search (crop fractions 1.00 → 0.58, 6×6 offsets) on contrast-normalised
+   greyscale, to separate "the same frame cropped differently" from "two
+   different photographs of the same tattoo". Residual < 0.30 was treated as
+   one frame; ≥ 0.42 as genuinely different shots.
+
+Then **every file was reviewed by eye** on contact sheets, because hashing
+cannot tell a detail crop of one tattoo from a different tattoo in the same
+style, and cannot tell whether a body is the right way up. Nothing was deleted
+on a similarity score alone.
+
+## EXIF, GPS and orientation
+
+All 194 files arrived carrying **zero EXIF** — no orientation tag, no GPS, no
+camera or maker fields. Verified by dumping every IFD including the GPS and
+Exif sub-IFDs. Two consequences:
+
+- There was no GPS or personal metadata to strip. There is none now either;
+  `npm run lint` fails if any ever appears, and `tools/add-photos.mjs` strips
+  it from anything new.
+- Rotation problems are therefore **baked into the pixels**, not fixable by
+  flipping a metadata flag, and not detectable except by looking.
+
+**14 photos were rotated 90° clockwise.** Thirteen of them are the entire
+landscape subset of the `orig-os-45034xx` pack, which was shot in portrait and
+stored rotated. The evidence is unambiguous in most cases because there is
+text in the frame:
+
+| File | What settles it |
+|---|---|
+| `orig-os-4503445` | lettering reads "DEATH IS NOT COOL" only after rotating |
+| `orig-os-4503438` | the playing card's "J" and spade pip are upright only after rotating |
+| `orig-os-4503447` | the script along the revolver is readable only after rotating |
+| `orig-os-4503419`, `-4503420` | stomach lettering readable, body upright |
+| `orig-os-4503444` | back piece: spine vertical, head up, floor at the bottom |
+| `orig-os-4503440` | ink bottles stand on the tile floor, shoe sits on the floor |
+| `orig-os-4503418` | knee, shin and shoe make a coherent seated pose |
+| `orig-os-4503441`, `-4503442`, `-4503446` | shoulder, tank-top strap and shop interior all upright |
+| `orig-os-4503398` | hand upright, fingers at the top |
+| `orig-ig-193923` | panther's eyes level, fangs down |
+| `orig-os-4503417` | radially symmetric mandala, so the design gives no cue; rotated with the rest of its pack so the body reads upright |
+
+Pre-rotation copies are in `photos/_originals/`.
+
+**Three suspects were checked and deliberately left alone**, because guessing
+would have been worse than leaving them:
+
+- `orig-ig-193753` — an eagle on a forearm held diagonally. As stored it reads
+  as a natural diving-eagle composition. No text, floor or horizon settles it.
+- `orig-ig-194116` — checked on suspicion; as stored it is correct and matches
+  `ig-194113` / `ig-194120` of the same tattoo.
+- `orig-ig-193943` — checked on suspicion; correct as stored.
+
+## Duplicates removed: 8
+
+| Removed | Kept | Why |
+|---|---|---|
+| `orig-ig-194047` | `orig-ig-194044` | byte-identical, same SHA-256; both were separate cards in the same set |
+| `orig-ig-193842` | `r2-james-james-01` | same photo of the same flash sheets; kept the larger copy (591 KB vs 495 KB). Was already an orphan |
+| `orig-ig-194059` | `orig-ig-194107` | same frame; kept the wider crop that shows the sleeve to the wrist |
+| `orig-ig-193817` | `r4-thad-thad-12` | same photo; kept wider and larger (287 KB vs 210 KB). Was already an orphan |
+| `orig-ig-193934` | `r2-brian-brian-22` | same photo; kept wider and larger. The survivor inherited the set membership |
+| `orig-ig-194005` | `r4-chas-chas-02` | same four-panel composite; kept wider and larger |
+| `orig-ig-193939` | `r4-chas-chas-23` | same three-panel composite; kept wider and larger |
+| `orig-ig-193951` | `r4-chas-chas-21` | same photo; kept wider and larger |
+
+Where two copies showed the same frame at different crops, the **wider** one
+was kept, so no artwork is cut off. Where framing matched, the larger file won.
+186 photos remain, and every one is referenced by the gallery — `npm run lint`
+warns about orphans.
+
+`orig-ig-194002` / `r2-brian-brian-06` looked like a duplicate to every hash
+but registered at 0.43: two genuinely different photographs of the same
+Mahakala stomach piece. They were **grouped, not deduplicated.**
+
+## Grouping: 153 cards from 181 photos
+
+12 cards now hold more than one photo. The reviewed groups:
+
+| Card | Photos | Evidence |
+|---|---|---|
+| Goddess full-back bodysuit | 4 | same nude subject, same bodysuit; identical rosette placement on each buttock. **This is the case called out in the brief.** |
+| Dragon sleeve | 10 | Instagram carousel counters read 1/10 through 10/10 — one post, one sleeve. Two of these (`194034`, `194035`, slides 4 and 5) had been sitting as separate cards |
+| Dragon and flowers sleeve | 4 | same subject, same khaki trousers, same green-and-cream dragon |
+| Skeleton and scorpion | 4 | pre-existing set, confirmed |
+| Virgin Mary full back piece | 3 | same back piece, matching waistband; `r2-brian-brian-21` was a separate card captioned "Oni face thigh tattoo" |
+| Dragon back piece, Japanese style | 3 | carousel slides 1/3, 2/3, 3/3 of one post |
+| Bulldog soldier | 2 | identical helmet, TNT cigar, spiked collar, gem pendant — and the same skin irritation mark above it |
+| Mahakala stomach piece | 2 | see above |
+| Demon head on the thigh | 2 | pre-existing set, confirmed |
+| Tiger shoulder piece | 2 | pre-existing set, confirmed |
+| Koi/dragon torso piece | 2 | same orange piece, two views |
+| Eagle, black & grey | 2 | pre-existing set, confirmed |
+
+## Accuracy problems found and fixed
+
+**Captions did not match photos.** Feeding these to alt text means a screen
+reader describes the wrong tattoo. Fourteen were rewritten from what is
+actually in the frame. The worst cluster was `r2-brian-brian-16` through `-22`,
+where captions had drifted out of step with the files — `-20` was captioned
+"Virgin Mary full-back piece" over a photo of an orange flower sleeve, while
+`-21`, the actual Virgin Mary back piece, was captioned "Oni face thigh
+tattoo". A second, smaller drift ran through `r4-chas-chas-17/18/19`.
+
+**Two artist credits were invented.** `orig-ig-193739` and `orig-ig-193742`
+were credited to Brother Greg in the gallery while the source manifest recorded
+`artist: null` for both. Both are now uncredited. Nothing on this site claims a
+credit that the source data did not carry.
+
+**One tattoo had two artists.** `orig-ig-194138` was credited to Brian while
+`orig-ig-194134` and `orig-ig-194140` — the same back piece, same Instagram
+post — were credited to James. Harmonised to James, per the correction already
+documented in the old `shop-config.json`.
+
+**Shop photos were masquerading as tattoo styles.** Five interior and exterior
+photos were tagged with tattoo styles and mixed into the gallery; one shop
+interior was filed under "Cover-ups", which meant filtering for cover-up work
+returned a photo of a bench. They now live in `SITE.shopPhotos` and appear as a
+small strip in "Find the shop". "Cover-ups" was dropped from the style filters
+because no photo in the archive is tagged as cover-up work — a filter chip with
+nothing behind it is a dead end. Cover-ups are still described in the copy and
+the FAQ, because the shop does them.
+
+## Not fixed, and why
+
+Much of the `r2`/`r4` archive is **Instagram screenshots rather than original
+files**: rounded-corner masks, black letterbox bars, carousel counters, mute
+icons and profile avatars baked into the pixels. `orig-ig-194025` carries a
+third-party "PICFRAME" watermark. `orig-ig-194049` is a screenshot of a phone
+screen displaying the photo, complete with the phone's own UI along the bottom.
+
+None of this can be removed without cropping into the tattoos, so it was left
+alone and the photographs were preserved. The fix is to re-export the originals
+from Instagram's "Download Your Information" archive, or reshoot. Logged in
+OPEN-QUESTIONS.md.
+
+## Measured performance
+
+Chromium, throttled to 1.6 Mbps / 150 ms RTT with 4× CPU slowdown. These are
+asserted as hard ceilings in `tests/perf.spec.js`, so a regression fails the
+suite rather than shipping.
+
+| | Desktop 1280 | Tablet 820 | Phone 390 (DPR 3) |
+|---|---|---|---|
+| Page weight, first render | 634 KB | 634 KB | 745 KB |
+| Requests | 22 | 22 | 18 |
+| LCP | 1176 ms | 1240 ms | 1020 ms |
+| CLS | 0.0005 | 0.0006 | 0.0009 |
+| Whole gallery expanded | 3.96 MB | 3.96 MB | 6.40 MB |
+
+App JS 26.3 KB raw / 8.8 KB gzipped. Data file 36.9 KB / 6.3 KB gzipped. CSS
+20.1 KB / 5.1 KB gzipped. No framework, no third-party script, no analytics.
+
+A 540 px derivative was added after the first measurement: at DPR 3 a 173 px
+thumbnail was pulling the 720 px file, which put the fully expanded gallery at
+9.36 MB on a phone. With the extra step and `sizes` corrected to the measured
+layout width, that is 6.40 MB.
+
+## Needs a real device
+
+Everything below was verified in Chromium at 390 / 820 / 1280 px, portrait and
+landscape. **It is browser emulation, not a physical device.** These need a
+real tap test:
+
+- **Finger-on-glass swipe in the viewer.** The rail is a native
+  scroll-snap container, and paging was proven with a compositor-driven
+  gesture through CDP — but headless Chromium does not deliver synthesised
+  *touch* gestures to a scroller, so the touch path itself is untested. Check
+  on iOS Safari and Android Chrome that a swipe pages one photo at a time, that
+  a diagonal swipe does not fight the page, and that a flick does not overshoot.
+- **iOS Safari `<dialog>`.** Focus trapping, backdrop tap-to-close and the
+  scroll lock behave differently there, and iOS is the one engine that cannot
+  be installed in this sandbox.
+- **Android hardware back button and the iOS back swipe** closing the viewer.
+  The history behaviour is tested, the gesture is not.
+- **`tel:` and `mailto:` handoff** — that tapping the number actually opens the
+  dialler with `+1 949 498 8487`, and the email link opens a mail app.
+- **Dynamic viewport units.** The viewer is sized in `dvh`, which exists
+  precisely because mobile browser chrome moves. Confirm nothing is clipped
+  when the URL bar collapses.
+- **Pinch zoom** on a photo in the viewer (`touch-action: pan-x pinch-zoom`).
+
+## Not verifiable from this environment
+
+- **WebKit and Firefox.** The Playwright browser CDN is blocked by egress
+  policy here, so both downloads fail. The suite is Chromium-only. Drop the
+  `projects` override in `playwright.config.js` and it runs on all three.
+- **Outbound link status codes.** `tools/check-links.mjs` finds 14 outbound
+  URLs and every one returns an identical 403 while the calibration host
+  succeeds — the signature of a host allowlist on the way out, not dead links.
+  The tool detects and reports this rather than crying wolf. Re-run it from a
+  machine with open network access. What *is* verified
+  (`tests/contact.spec.js`) is that every link is well formed, https, and
+  agrees with the business facts: all four `tel:` links dial the number printed
+  on the page, the `mailto:` matches `SITE.shop.email`, all three directions
+  links carry "117 Avenida Granada" and "92672", and every artist's Instagram
+  URL matches the handle shown next to it.
+- **The live Netlify Forms endpoint.** Deliberately not exercised: no test
+  inquiry was sent to the shop. The wiring attributes Netlify needs are
+  asserted, the multipart POST shape is asserted against an intercepted
+  request, and a broken-wiring audit runs on every page load.
+- **Rendered social cards on Facebook, X and iMessage.** `assets/og.jpg` was
+  generated, inspected by eye and asserted to decode at 1200×630, and the tags
+  are validated against the canonical domain. The scrapers themselves cannot
+  be reached from here.
+
+## Decisions taken after the first review
+
+- **Owner's public name is "Brother Greg", not "Greg".** Changed in the data
+  file, the footer, the crew card, the artist filter chip and the JSON-LD
+  `founder`. It carries no surname, so the rule in Part 2 still holds and the
+  lint check still enforces it.
+- **The nude back-piece set is not gated.** The shop asked for it shown like
+  any other card, so `sensitive: true` is off and no card on the site sits
+  behind a cover. The mechanism stays in the code and stays tested, because
+  README documents it as the way to gate a future photo. Written consent to
+  publish the set is still an open question — see OPEN-QUESTIONS.md.

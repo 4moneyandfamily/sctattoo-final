@@ -1,0 +1,24 @@
+{
+  "name": "sanclementetattoo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "San Clemente Tattoo — static site. No build step to deploy; the tools below only regenerate image derivatives and the social card.",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "npx --yes serve -l 8080 .",
+    "test": "playwright test",
+    "test:desktop": "playwright test --project=desktop",
+    "lint": "node tools/lint.mjs",
+    "images": "node tools/build-images.mjs",
+    "images:force": "node tools/build-images.mjs --force",
+    "og": "node tools/build-og.mjs",
+    "fonts": "node tools/fetch-fonts.mjs",
+    "links": "node tools/check-links.mjs",
+    "check": "npm run lint && npm run test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "sharp": "^0.35.4"
+  },
+  "comment": "dependencies is intentionally absent: nothing is shipped to the browser. sharp and Playwright are build/test tools only."
+}
