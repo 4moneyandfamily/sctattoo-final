@@ -171,6 +171,10 @@ test('every multi-photo card leads with the cover the shop chose', async ({ page
     'set-goddess-bodysuit': 'r2-brian-brian-01.jpg',
     'set-bulldog': 'r4-thad-thad-10.jpg',
     'set-brian-dragon-flowers': 'orig-ig-194109.jpg',
+    // merged pairs: the finished tattoo leads, the design or detail sits behind it
+    'set-thad-cards-sleeve': 'r4-thad-thad-12.jpg',
+    'set-chas-severed-head': 'orig-ig-193732.jpg',
+    'set-james-eagle': 'orig-ig-193751.jpg',
   };
   const S = await site(page);
   for (const [id, cover] of Object.entries(expected)) {
@@ -193,5 +197,38 @@ test('the front page shows work from every artist who has tattoo photos', async 
   const credited = new Set(first24.map(p => p.artistId).filter(Boolean));
   for (const id of ['brian', 'james', 'chas', 'thad', 'greg']) {
     expect(credited.has(id), `${id} has nothing on the front page`).toBe(true);
+  }
+});
+
+test('a tattoo and the painting it came from share one card, tattoo first', async ({ page }) => {
+  const S = await site(page);
+  const p = S.projects.find(x => x.id === 'set-chas-severed-head');
+  expect(p.photos.map(x => x.f)).toEqual(['orig-ig-193732.jpg', 'orig-ig-193735.jpg']);
+  // the finished tattoo is the cover, not the design
+  expect(p.style).toBe('Color');
+  expect(p.photos[1].cap).toMatch(/painted design/);
+  // and the two no longer occupy two slots on the wall
+  const ids = (await order(page)).map(x => x.id);
+  expect(ids).not.toContain('p-orig-ig-193735');
+  expect(ids).not.toContain('p-orig-ig-193732');
+});
+
+test('the merged pairs each open as a two-photo swipeable card', async ({ page }) => {
+  for (const [id, artist] of [['set-thad-cards-sleeve', 'Thadius Gardner'],
+                              ['set-chas-severed-head', 'Chas Byassee'],
+                              ['set-james-eagle', 'James Whelan']]) {
+    await page.goto('/#work/' + id);
+    await expect(page.locator('#viewer')).toHaveJSProperty('open', true);
+    await expect(page.locator('#v-rail .v-slide')).toHaveCount(2);
+    await expect(page.locator('#v-counter')).toHaveText('1 / 2');
+    await expect(page.locator('#v-by')).toContainText(artist);
+    // swipe forward and back with the buttons
+    await page.locator('#v-next').click();
+    await expect(page.locator('#v-counter')).toHaveText('2 / 2');
+    await page.locator('#v-prev').click();
+    await expect(page.locator('#v-counter')).toHaveText('1 / 2');
+    await page.keyboard.press('Escape');
+    // the card carries a 2-photo badge on the grid
+    await expect(page.locator(`#card-${id} .count`)).toHaveText('2');
   }
 });

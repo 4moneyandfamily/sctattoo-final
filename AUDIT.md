@@ -411,3 +411,35 @@ Ranking a tattoo's artistic merit is not something to assert from a script, so
 none of this claims to. What was ranked is photograph quality and how
 completely each frame shows the work — and the shop can reorder `featured` in
 one edit if it disagrees.
+
+## Three more pairs merged (12 September 2026)
+
+The shop spotted three pairs still sitting as separate cards. All three turned
+out to be slides of a single Instagram post — the carousel badges baked into
+the screenshots read 1/2 and 2/2 in every case, which is what confirmed them.
+Perceptual hashing had not flagged any of them, because a detail crop and a
+painted design are genuinely different images; only looking catches these.
+
+| Now one card | Photos | What they are |
+|---|---|---|
+| Playing cards, dice and rose sleeve | `r4-thad-thad-12` + `r4-thad-thad-13` | full sleeve and a close-up of the money rose inside it — same arm, same wrap, same tape |
+| Severed samurai head with dagger | `orig-ig-193732` + `orig-ig-193735` | the finished tattoo and the painted design it came from |
+| Eagle | `orig-ig-193751` + `orig-ig-193753` | full view and a close-up of the same eagle |
+
+In each case the **finished tattoo leads** and the design or detail sits behind
+it, so a card never opens on a painting. 150 projects now, 15 of them holding
+more than one photo.
+
+The style shown on the merged card follows its cover, so the samurai head is
+filed under Color rather than Paintings — the card is a tattoo that happens to
+include its design, not a painting.
+
+### Still open: how much painted flash belongs on the wall
+
+Not changed, at the shop's request. For the record: painted flash is normal on
+a traditional street shop's feed, and posting a design next to the healed
+tattoo is a common format — which is exactly what the samurai head pair is, and
+why merging it works better than hiding it. Whether the remaining standalone
+painting cards should also sink toward the bottom is a call for the shop. No
+survey of other shops' sites was done; outbound network access is blocked in
+this environment, so that would be a guess dressed up as research.

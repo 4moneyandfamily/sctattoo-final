@@ -135,13 +135,19 @@ window.SITE = {
   projects: [
     { id: "p-orig-os-5526748", style: "Black & grey", artistId: null, title: "Sacred heart, chest", photos: [{ f: "orig-os-5526748.jpg", w: 378, h: 480, cap: "Sacred heart, chest" }] },
     { id: "p-orig-ig-193725", style: "Color", artistId: "brian", title: "Chrysanthemum and peony sleeve", photos: [{ f: "orig-ig-193725.jpg", w: 1080, h: 1429, cap: "Chrysanthemum and peony sleeve" }] },
-    { id: "p-orig-ig-193735", style: "Paintings", artistId: "chas", title: "Severed samurai head painting with sword", photos: [{ f: "orig-ig-193735.jpg", w: 1080, h: 1430, cap: "Severed samurai head painting with sword" }] },
-    { id: "p-orig-ig-193732", style: "Color", artistId: "chas", title: "Severed head with dagger", photos: [{ f: "orig-ig-193732.jpg", w: 1080, h: 1429, cap: "Severed head with dagger" }] },
+    { id: "set-chas-severed-head", style: "Color", artistId: "chas", title: "Severed samurai head with dagger",
+      photos: [
+        { f: "orig-ig-193732.jpg", w: 1080, h: 1429, cap: "Severed samurai head with dagger, tattooed" },
+        { f: "orig-ig-193735.jpg", w: 1080, h: 1430, cap: "Severed samurai head with dagger, the painted design it came from" },
+      ] },
     { id: "p-orig-ig-193739", style: "Paintings", artistId: null, title: "Don’t Tread On Me eagle and ship design", photos: [{ f: "orig-ig-193739.jpg", w: 1080, h: 1345, cap: "Don’t Tread On Me eagle and ship design" }] },
     { id: "p-orig-ig-193742", style: "Paintings", artistId: null, title: "F-Around and Find Out eagle and ship design", photos: [{ f: "orig-ig-193742.jpg", w: 1080, h: 1345, cap: "F-Around and Find Out eagle and ship design" }] },
     { id: "p-orig-ig-193745", style: "Paintings", artistId: "greg", title: "Cross and serpent flash painting", photos: [{ f: "orig-ig-193745.jpg", w: 1080, h: 1266, cap: "Cross and serpent flash painting" }] },
-    { id: "p-orig-ig-193751", style: "Color", artistId: "james", title: "Eagle, color", photos: [{ f: "orig-ig-193751.jpg", w: 1080, h: 1348, cap: "Eagle, color" }] },
-    { id: "p-orig-ig-193753", style: "Traditional", artistId: "james", title: "Eagle", photos: [{ f: "orig-ig-193753.jpg", w: 1080, h: 799, cap: "Eagle" }] },
+    { id: "set-james-eagle", style: "Color", artistId: "james", title: "Eagle",
+      photos: [
+        { f: "orig-ig-193751.jpg", w: 1080, h: 1348, cap: "Eagle, full view" },
+        { f: "orig-ig-193753.jpg", w: 1080, h: 799, cap: "Eagle, close-up" },
+      ] },
     { id: "set-goddess-bodysuit", style: "Traditional", artistId: "brian", title: "Goddess full-back bodysuit",
       photos: [
         { f: "r2-brian-brian-01.jpg", w: 1080, h: 1348, cap: "Goddess full-back bodysuit" },
@@ -346,8 +352,11 @@ window.SITE = {
     { id: "p-r4-thad-thad-08", style: "Traditional", artistId: "thad", title: "Panther head and dagger, color", photos: [{ f: "r4-thad-thad-08.jpg", w: 1080, h: 1236, cap: "Panther head and dagger, color" }] },
     { id: "p-r4-thad-thad-09", style: "Traditional", artistId: "thad", title: "Ghostface knife tattoo", photos: [{ f: "r4-thad-thad-09.jpg", w: 1080, h: 1438, cap: "Ghostface knife tattoo" }] },
     { id: "p-r4-thad-thad-11", style: "Traditional", artistId: "thad", title: "Lady head tattoo", photos: [{ f: "r4-thad-thad-11.jpg", w: 1080, h: 1076, cap: "Lady head tattoo" }] },
-    { id: "p-r4-thad-thad-12", style: "Traditional", artistId: "thad", title: "Playing cards, dice and rose sleeve", photos: [{ f: "r4-thad-thad-12.jpg", w: 1080, h: 1400, cap: "Playing cards, dice and rose sleeve" }] },
-    { id: "p-r4-thad-thad-13", style: "Traditional", artistId: "thad", title: "Money rose close-up", photos: [{ f: "r4-thad-thad-13.jpg", w: 1080, h: 1400, cap: "Money rose close-up" }] },
+    { id: "set-thad-cards-sleeve", style: "Traditional", artistId: "thad", title: "Playing cards, dice and rose sleeve",
+      photos: [
+        { f: "r4-thad-thad-12.jpg", w: 1080, h: 1400, cap: "Playing cards, dice and rose sleeve" },
+        { f: "r4-thad-thad-13.jpg", w: 1080, h: 1400, cap: "Money rose, detail of the same sleeve" },
+      ] },
     { id: "p-r4-thad-thad-14", style: "Traditional", artistId: "thad", title: "Arm tattoo", photos: [{ f: "r4-thad-thad-14.jpg", w: 1080, h: 1348, cap: "Arm tattoo" }] },
     { id: "p-r4-thad-thad-15", style: "Traditional", artistId: "thad", title: "Wolf with hearts tattoo", photos: [{ f: "r4-thad-thad-15.jpg", w: 1080, h: 1086, cap: "Wolf with hearts tattoo" }] },
   ]
