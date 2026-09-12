@@ -72,6 +72,63 @@ window.SITE = {
     { f: "r2-greg-greg-07.jpg", w: 940, h: 1517, cap: "Shop interior: client on chair, flash-covered walls" },
   ],
 
+  /* ---- Front page running order ------------------------------------------
+     The wall is prime real estate, so it is curated rather than left in
+     archive order.
+
+     `featured` pins these projects, in exactly this order, to the top of the
+     wall. 24 entries fills the first page (12 rows on a phone, 8 on a tablet,
+     6 on a desktop). Lead with the pieces that show the shop at its best:
+     full backs, full sleeves, clean well-lit photographs of finished work.
+
+     `buried` pushes these to the very end. Used for the stencil-style design
+     plates and unrendered paper designs — real work, but graphic design rather
+     than tattooing, so they do not belong on the front page.
+
+     Everything not named in either list keeps its archive order in between.
+     An id that appears in neither list is fine; an id in both is a mistake and
+     `npm run lint` will fail on it. */
+  featured: [
+    // full backs and bodysuits first
+    "p-r2-james-james-12",        // Koi full-back bodysuit
+    "set-mary-back",              // Virgin Mary full back piece
+    "set-james-dragon-back",      // Dragon back piece, Japanese style
+    "p-r2-brian-brian-03",        // Eagle and skull full-back piece
+    // full sleeves
+    "p-orig-ig-193725",           // Chrysanthemum and peony sleeve
+    "set-james-dragon-sleeve",    // Dragon sleeve, 10 photos
+    "set-brian-dragon-flowers",   // Dragon and flowers sleeve
+    "p-orig-ig-193943",           // Ornamental full sleeve
+    // more large work
+    "p-orig-os-4503397",          // Dragon back piece
+    "p-orig-os-5261258",          // Tiger back piece
+    "p-orig-os-4503433",          // Rattlesnake
+    "set-mahakala",               // Mahakala stomach piece
+    "p-r2-brian-brian-15",        // Dragon sleeve torso tattoo
+    "p-r2-brian-brian-20",        // Orange flower half sleeve
+    // bold single pieces, spread across the crew
+    "p-r2-brian-brian-07",        // Tiger head, black & grey
+    "p-r4-chas-chas-22",          // Panther head tattoo
+    "p-r2-james-james-03",        // Oni mask thigh tattoo
+    "p-r4-thad-thad-08",          // Panther head and dagger
+    "set-brian-tiger",            // Tiger shoulder piece
+    "p-orig-ig-193916",           // Eagle and skull chest piece
+    "p-orig-ig-193838",           // Eagle on the back of the head
+    "set-goddess-bodysuit",       // Goddess full-back bodysuit
+    "p-r4-chas-chas-11",          // Rose tattoo
+    "p-r2-greg-greg-02",          // Religious flash painting — the owner's own work
+  ],
+
+  buried: [
+    "p-orig-ig-193739",           // Don't Tread On Me design plate
+    "p-orig-ig-193742",           // F-Around and Find Out design plate
+    "p-orig-os-5261255",          // Skeleton and snake, line-art plate
+    "p-orig-ig-193851",           // Dragon backpiece design on paper
+    "p-orig-ig-193848",           // Eagle backpiece design on paper
+    "p-r2-james-james-07",        // Dragon pencil drawing
+    "p-r4-chas-chas-20",          // Ship linework flash
+  ],
+
   /* One entry per tattoo (or painting). Multiple photos of the same piece go
      in the same entry's photos[] — the first photo is the card cover.
      sensitive: true puts the card behind a tap-to-view cover. */
@@ -96,8 +153,8 @@ window.SITE = {
     { id: "p-orig-ig-193822", style: "Paintings", artistId: "greg", title: "Eagle and cross Memorial Day art", photos: [{ f: "orig-ig-193822.jpg", w: 1080, h: 1349, cap: "Eagle and cross Memorial Day art" }] },
     { id: "set-mary-back", style: "Traditional", artistId: "brian", title: "Virgin Mary full back piece",
       photos: [
-        { f: "r2-brian-brian-21.jpg", w: 1080, h: 1348, cap: "Virgin Mary full back piece" },
         { f: "orig-ig-193825.jpg", w: 1080, h: 1343, cap: "Virgin Mary backpiece" },
+        { f: "r2-brian-brian-21.jpg", w: 1080, h: 1348, cap: "Virgin Mary full back piece" },
         { f: "orig-ig-193830.jpg", w: 1080, h: 1343, cap: "Virgin Mary backpiece, shoulder detail" },
       ] },
     { id: "p-orig-ig-193851", style: "Paintings", artistId: "james", title: "Dragon backpiece design, up for grabs", photos: [{ f: "orig-ig-193851.jpg", w: 1080, h: 1347, cap: "Dragon backpiece design, up for grabs" }] },
@@ -107,8 +164,8 @@ window.SITE = {
     { id: "p-orig-ig-193920", style: "Black & grey", artistId: "brian", title: "Black panther torso piece", photos: [{ f: "orig-ig-193920.jpg", w: 1080, h: 1179, cap: "Black panther torso piece" }] },
     { id: "set-brian-demon-leg", style: "Traditional", artistId: "brian", title: "Demon head on the thigh",
       photos: [
-        { f: "r2-brian-brian-22.jpg", w: 1080, h: 1348, cap: "Demon head on the thigh" },
         { f: "orig-ig-193930.jpg", w: 1080, h: 1249, cap: "Demon leg sleeve, front view" },
+        { f: "r2-brian-brian-22.jpg", w: 1080, h: 1348, cap: "Demon head on the thigh" },
       ] },
     { id: "p-orig-ig-193926", style: "Black & grey", artistId: "james", title: "Reaper skull with red accents", photos: [{ f: "orig-ig-193926.jpg", w: 1080, h: 1190, cap: "Reaper skull with red accents" }] },
     { id: "p-orig-ig-193943", style: "Black & grey", artistId: "james", title: "Ornamental full sleeve", photos: [{ f: "orig-ig-193943.jpg", w: 1080, h: 1079, cap: "Ornamental full sleeve" }] },
@@ -121,19 +178,19 @@ window.SITE = {
     { id: "p-orig-ig-193958", style: "Color", artistId: "james", title: "Severed head, Japanese style", photos: [{ f: "orig-ig-193958.jpg", w: 1080, h: 1285, cap: "Severed head, Japanese style" }] },
     { id: "set-mahakala", style: "Traditional", artistId: "brian", title: "Mahakala stomach piece",
       photos: [
-        { f: "r2-brian-brian-06.jpg", w: 1080, h: 1368, cap: "Mahakala stomach piece" },
         { f: "orig-ig-194002.jpg", w: 1080, h: 1289, cap: "Mahakala demon stomach piece" },
+        { f: "r2-brian-brian-06.jpg", w: 1080, h: 1368, cap: "Mahakala stomach piece" },
       ] },
     { id: "p-orig-ig-194010", style: "Black & grey", artistId: "thad", title: "Black panther leg piece", photos: [{ f: "orig-ig-194010.jpg", w: 1080, h: 1265, cap: "Black panther leg piece" }] },
     { id: "p-orig-ig-194017", style: "Paintings", artistId: "greg", title: "Dagger, swallows and roses shirt art", photos: [{ f: "orig-ig-194017.jpg", w: 1080, h: 1337, cap: "Dagger, swallows and roses shirt art" }] },
     { id: "set-james-dragon-sleeve", style: "Color", artistId: "james", title: "Dragon sleeve",
       photos: [
+        { f: "orig-ig-194041.jpg", w: 1080, h: 1335, cap: "Dragon sleeve, close-up" },
         { f: "orig-ig-194039.jpg", w: 1080, h: 1345, cap: "Dragon sleeve" },
         { f: "orig-ig-194025.jpg", w: 1080, h: 1301, cap: "Dragon sleeve (another view)" },
         { f: "orig-ig-194028.jpg", w: 1080, h: 1345, cap: "Dragon sleeve, detail (another view)" },
         { f: "orig-ig-194032.jpg", w: 1080, h: 1345, cap: "Dragon sleeve" },
         { f: "orig-ig-194037.jpg", w: 1080, h: 1345, cap: "Dragon sleeve, detail" },
-        { f: "orig-ig-194041.jpg", w: 1080, h: 1335, cap: "Dragon sleeve, close-up" },
         { f: "orig-ig-194044.jpg", w: 1080, h: 1337, cap: "Dragon sleeve, full arm" },
         { f: "orig-ig-194049.jpg", w: 1080, h: 1454, cap: "Dragon sleeve, back view (another view)" },
         { f: "orig-ig-194034.jpg", w: 1080, h: 1345, cap: "Dragon sleeve, shoulder view" },
@@ -149,16 +206,16 @@ window.SITE = {
     { id: "p-orig-ig-194054", style: "Color", artistId: "brian", title: "Dragon head, sleeve detail", photos: [{ f: "orig-ig-194054.jpg", w: 1080, h: 1345, cap: "Dragon head, sleeve detail" }] },
     { id: "set-chas-skel-scorp", style: "Black & grey", artistId: "chas", title: "Skeleton and scorpion",
       photos: [
+        { f: "orig-ig-194120.jpg", w: 1080, h: 1345, cap: "Skeleton and scorpion, side view" },
         { f: "orig-ig-194113.jpg", w: 1080, h: 1345, cap: "Skeleton and scorpion" },
         { f: "orig-ig-194116.jpg", w: 1080, h: 1345, cap: "Skeleton and scorpion, detail" },
         { f: "orig-ig-194118.jpg", w: 1080, h: 1345, cap: "Skeleton and scorpion triptych" },
-        { f: "orig-ig-194120.jpg", w: 1080, h: 1345, cap: "Skeleton and scorpion, side view" },
       ] },
     { id: "set-james-dragon-back", style: "Color", artistId: "james", title: "Dragon back piece, Japanese style",
       photos: [
+        { f: "orig-ig-194138.jpg", w: 1080, h: 1278, cap: "Dragon back piece with cherry blossoms" },
         { f: "orig-ig-194134.jpg", w: 1080, h: 1346, cap: "Dragon back piece, Japanese style" },
         { f: "orig-ig-194140.jpg", w: 1080, h: 1345, cap: "Dragon backpiece" },
-        { f: "orig-ig-194138.jpg", w: 1080, h: 1278, cap: "Dragon back piece with cherry blossoms" },
       ] },
     { id: "p-orig-ig-194144", style: "Color", artistId: "chas", title: "Praying hands with rose and Family banner, rib piece", photos: [{ f: "orig-ig-194144.jpg", w: 1080, h: 1080, cap: "Praying hands with rose and Family banner, rib piece" }] },
     { id: "p-orig-ig-194150", style: "Black & grey", artistId: "james", title: "Lady head with pearls", photos: [{ f: "orig-ig-194150.jpg", w: 1080, h: 1345, cap: "Lady head with pearls" }] },
@@ -202,8 +259,8 @@ window.SITE = {
     { id: "p-orig-os-4503430", style: "Traditional", artistId: null, title: "Traditional back piece with lettering", photos: [{ f: "orig-os-4503430.jpg", w: 270, h: 480, cap: "Traditional back piece with lettering" }] },
     { id: "set-brian-tiger", style: "Color", artistId: "brian", title: "Tiger shoulder piece",
       photos: [
-        { f: "orig-os-4503419.jpg", w: 480, h: 640, cap: "Tiger shoulder piece" },
         { f: "orig-os-4503420.jpg", w: 480, h: 640, cap: "Tiger half sleeve" },
+        { f: "orig-os-4503419.jpg", w: 480, h: 640, cap: "Tiger shoulder piece" },
       ] },
     { id: "p-orig-os-4503418", style: "Color", artistId: "brian", title: "Sugar skull and mandala on the lower leg", photos: [{ f: "orig-os-4503418.jpg", w: 480, h: 640, cap: "Sugar skull and mandala on the lower leg" }] },
     { id: "p-orig-os-4503417", style: "Black & grey", artistId: "brian", title: "Mandala", photos: [{ f: "orig-os-4503417.jpg", w: 480, h: 640, cap: "Mandala" }] },
@@ -239,8 +296,8 @@ window.SITE = {
     { id: "p-r2-brian-brian-07", style: "Black & grey", artistId: "brian", title: "Tiger head, black & grey", photos: [{ f: "r2-brian-brian-07.jpg", w: 1080, h: 1438, cap: "Tiger head, black & grey" }] },
     { id: "set-orange-dragon", style: "Traditional", artistId: "brian", title: "Koi/dragon arm tattoo",
       photos: [
-        { f: "r2-brian-brian-08.jpg", w: 1080, h: 1438, cap: "Koi/dragon arm tattoo" },
         { f: "r2-brian-brian-09.jpg", w: 1080, h: 1438, cap: "Orange dragon torso piece" },
+        { f: "r2-brian-brian-08.jpg", w: 1080, h: 1438, cap: "Koi/dragon arm tattoo" },
       ] },
     { id: "p-r2-brian-brian-10", style: "Traditional", artistId: "brian", title: "Lady head thigh tattoo", photos: [{ f: "r2-brian-brian-10.jpg", w: 1080, h: 1266, cap: "Lady head thigh tattoo" }] },
     { id: "p-r2-brian-brian-11", style: "Traditional", artistId: "brian", title: "Mermaid and ship thigh tattoo", photos: [{ f: "r2-brian-brian-11.jpg", w: 1080, h: 1408, cap: "Mermaid and ship thigh tattoo" }] },
@@ -268,8 +325,8 @@ window.SITE = {
     { id: "p-r4-chas-chas-13", style: "Traditional", artistId: "chas", title: "Snoopy soldier tattoo", photos: [{ f: "r4-chas-chas-13.jpg", w: 1080, h: 1078, cap: "Snoopy soldier tattoo" }] },
     { id: "set-chas-eagle", style: "Black & grey", artistId: "chas", title: "Eagle, black & grey",
       photos: [
-        { f: "r4-chas-chas-14.jpg", w: 1080, h: 1078, cap: "Eagle, black & grey" },
         { f: "r4-chas-chas-15.jpg", w: 1080, h: 1078, cap: "Eagle tattoo close-up" },
+        { f: "r4-chas-chas-14.jpg", w: 1080, h: 1078, cap: "Eagle, black & grey" },
       ] },
     { id: "p-r4-chas-chas-16", style: "Traditional", artistId: "chas", title: "Eagle and flag sleeve panels", photos: [{ f: "r4-chas-chas-16.jpg", w: 1080, h: 1078, cap: "Eagle and flag sleeve panels, three views" }] },
     { id: "p-r4-chas-chas-17", style: "Traditional", artistId: "chas", title: "Dagger through a heart with a swallow, thigh", photos: [{ f: "r4-chas-chas-17.jpg", w: 1080, h: 1078, cap: "Dagger through a heart with a swallow, thigh" }] },

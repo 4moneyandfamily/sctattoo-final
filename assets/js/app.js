@@ -34,6 +34,28 @@
     return;
   }
 
+  /* The wall is curated, not archive-ordered: SITE.featured pins the front
+     page, SITE.buried sinks the design plates, everything else keeps its
+     archive position in between. Computed once — nothing else in here needs to
+     know the rule. */
+  function galleryOrder() {
+    var byId = Object.create(null);
+    SITE.projects.forEach(function (p) { byId[p.id] = p; });
+    var pinned = Object.create(null), sunk = Object.create(null);
+    var head = [], tail = [];
+    (SITE.featured || []).forEach(function (id) {
+      if (byId[id] && !pinned[id]) { pinned[id] = 1; head.push(byId[id]); }
+    });
+    (SITE.buried || []).forEach(function (id) {
+      if (byId[id] && !pinned[id] && !sunk[id]) { sunk[id] = 1; tail.push(byId[id]); }
+    });
+    var middle = SITE.projects.filter(function (p) { return !pinned[p.id] && !sunk[p.id]; });
+    return head.concat(middle, tail);
+  }
+
+  var ORDER = galleryOrder();
+  window.galleryOrder = galleryOrder;   // read by the test suite
+
   var WIDTHS = [360, 540, 720, 1080];
   var esc = function (s) {
     return String(s == null ? '' : s)
@@ -120,7 +142,7 @@
   var revealed = Object.create(null);   // project id -> sensitive cover lifted
 
   function computeMatches() {
-    matches = SITE.projects.filter(function (p) {
+    matches = ORDER.filter(function (p) {
       return (styleFilter === 'All' || p.style === styleFilter)
         && (artistFilter === 'All' || p.artistId === artistFilter);
     });
@@ -605,7 +627,7 @@
     if (!hit) return;
     if (hit.p.sensitive) revealed[hit.p.id] = true;
     styleFilter = 'All'; artistFilter = 'All';
-    var at = SITE.projects.indexOf(hit.p);
+    var at = ORDER.indexOf(hit.p);
     shown = Math.max(PAGE, Math.ceil((at + 1) / PAGE) * PAGE);
     paintChips(); paintGrid();
     openViewer(hit.p, hit.at, $('card-' + hit.p.id));

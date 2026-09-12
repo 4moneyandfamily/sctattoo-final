@@ -6,6 +6,15 @@ async function site(page) {
   return page.evaluate(() => window.SITE);
 }
 
+// The wall is curated, so anything order-sensitive must ask for the display
+// order rather than assuming data/site.js order.
+async function order(page) {
+  return page.evaluate(() => window.galleryOrder().map(p => ({
+    id: p.id, style: p.style, artistId: p.artistId, title: p.title,
+    sensitive: p.sensitive, photos: p.photos,
+  })));
+}
+
 test.beforeEach(async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('.card').first()).toBeVisible();
@@ -46,8 +55,7 @@ test('every photo carries real dimensions and a caption', async ({ page }) => {
 });
 
 test('multi-photo projects show a count badge matching their photo count', async ({ page }) => {
-  const S = await site(page);
-  const first24 = S.projects.slice(0, 24);
+  const first24 = (await order(page)).slice(0, 24);
   const expected = first24.filter(p => p.photos.length > 1 && !p.sensitive);
   await expect(page.locator('.count')).toHaveCount(expected.length);
   for (const p of expected) {
@@ -120,4 +128,70 @@ test('a crew card filters the gallery to that artist', async ({ page }) => {
   await page.locator('.artist', { hasText: 'Thadius Gardner' }).click();
   const n = S.projects.filter(p => p.artistId === 'thad').length;
   await expect(page.locator('#tally')).toContainText(`of ${n}`);
+});
+
+test('the front page leads with the curated picks, in order', async ({ page }) => {
+  const S = await site(page);
+  const shown = await page.$$eval('.card', els => els.map(e => e.id.replace(/^card-/, '')));
+  expect(shown).toHaveLength(24);
+  expect(shown).toEqual(S.featured);
+});
+
+test('the design plates are off the front page and sunk to the very end', async ({ page }) => {
+  const S = await site(page);
+  const ids = (await order(page)).map(p => p.id);
+  const shown = await page.$$eval('.card', els => els.map(e => e.id.replace(/^card-/, '')));
+  for (const id of S.buried) {
+    expect(shown, `${id} is still on the front page`).not.toContain(id);
+  }
+  // and they occupy the last positions, in the order the list gives
+  expect(ids.slice(-S.buried.length)).toEqual(S.buried);
+});
+
+test('nothing is dropped or duplicated by the curation', async ({ page }) => {
+  const S = await site(page);
+  const ids = (await order(page)).map(p => p.id);
+  expect(ids).toHaveLength(S.projects.length);
+  expect(new Set(ids).size).toBe(S.projects.length);
+  expect([...ids].sort()).toEqual(S.projects.map(p => p.id).sort());
+});
+
+test('every multi-photo card leads with the cover the shop chose', async ({ page }) => {
+  // guards the hand-picked covers against a future edit reordering photos[]
+  const expected = {
+    'set-mary-back': 'orig-ig-193825.jpg',
+    'set-brian-demon-leg': 'orig-ig-193930.jpg',
+    'set-mahakala': 'orig-ig-194002.jpg',
+    'set-james-dragon-sleeve': 'orig-ig-194041.jpg',
+    'set-chas-skel-scorp': 'orig-ig-194120.jpg',
+    'set-james-dragon-back': 'orig-ig-194138.jpg',
+    'set-brian-tiger': 'orig-os-4503420.jpg',
+    'set-orange-dragon': 'r2-brian-brian-09.jpg',
+    'set-chas-eagle': 'r4-chas-chas-15.jpg',
+    'set-goddess-bodysuit': 'r2-brian-brian-01.jpg',
+    'set-bulldog': 'r4-thad-thad-10.jpg',
+    'set-brian-dragon-flowers': 'orig-ig-194109.jpg',
+  };
+  const S = await site(page);
+  for (const [id, cover] of Object.entries(expected)) {
+    const p = S.projects.find(x => x.id === id);
+    expect(p, id).toBeTruthy();
+    expect(p.photos[0].f, `${id} cover`).toBe(cover);
+  }
+});
+
+test('the front page is mostly finished tattoos, not flash', async ({ page }) => {
+  const first24 = (await order(page)).slice(0, 24);
+  const paintings = first24.filter(p => p.style === 'Paintings');
+  // one of the owner's paintings is deliberately included; more than that and
+  // the wall stops being a portfolio of tattoo work
+  expect(paintings.length, paintings.map(p => p.title).join(', ')).toBeLessThanOrEqual(1);
+});
+
+test('the front page shows work from every artist who has tattoo photos', async ({ page }) => {
+  const first24 = (await order(page)).slice(0, 24);
+  const credited = new Set(first24.map(p => p.artistId).filter(Boolean));
+  for (const id of ['brian', 'james', 'chas', 'thad', 'greg']) {
+    expect(credited.has(id), `${id} has nothing on the front page`).toBe(true);
+  }
 });

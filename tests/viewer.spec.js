@@ -72,8 +72,9 @@ test('the page cannot scroll behind the viewer, and the position is kept', async
 });
 
 test('a single-photo project hides the paging controls entirely', async ({ page }) => {
+  // must be one of the 24 cards actually rendered, so read the display order
   const solo = await page.evaluate(() =>
-    window.SITE.projects.find(p => p.photos.length === 1 && !p.sensitive).id);
+    window.galleryOrder().slice(0, 24).find(p => p.photos.length === 1 && !p.sensitive).id);
   await page.locator(`#card-${solo}`).click();
   await expect(page.locator('#viewer')).toHaveClass(/v-single/);
   await expect(page.locator('#v-counter')).toBeHidden();

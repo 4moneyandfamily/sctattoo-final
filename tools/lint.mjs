@@ -108,6 +108,29 @@ if (SITE) {
     }
   }
   if (SITE.hours.weekly.length !== 7) err('hours.weekly must have 7 days');
+
+  // --- 7b. the curated running order -------------------------------------
+  const seenOrder = new Set();
+  for (const [list, name] of [[SITE.featured, 'featured'], [SITE.buried, 'buried']]) {
+    if (list === undefined) { warn(`SITE.${name} is missing; the wall falls back to archive order`); continue; }
+    if (!Array.isArray(list)) { err(`SITE.${name} must be an array`); continue; }
+    for (const id of list) {
+      if (!ids.has(id)) err(`SITE.${name}: "${id}" is not a project id`);
+      if (seenOrder.has(id)) err(`"${id}" is in both featured and buried`);
+      seenOrder.add(id);
+    }
+    const dupes = list.filter((v, i) => list.indexOf(v) !== i);
+    if (dupes.length) err(`SITE.${name} lists ${[...new Set(dupes)].join(', ')} more than once`);
+  }
+  // 24 is one full page; more than that and the tail never gets seen as featured
+  if (Array.isArray(SITE.featured) && SITE.featured.length > 24) {
+    warn(`SITE.featured has ${SITE.featured.length} entries but only 24 fit the first page`);
+  }
+  // a featured project with a weak cover defeats the point
+  for (const id of SITE.featured || []) {
+    const p = SITE.projects.find(x => x.id === id);
+    if (p && !p.photos.length) err(`featured "${id}" has no photos`);
+  }
 }
 
 // --- 8. markup invariants the CSP and CLS budgets depend on ----------------

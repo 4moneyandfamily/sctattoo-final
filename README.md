@@ -116,6 +116,32 @@ broken images or a 4 MB photo on someone's phone plan.
   `assets/css/app.css` and behaviour in `assets/js/app.js`. `npm run lint`
   catches this before deploy.
 
+### Changing what leads the front page
+
+The wall is curated, not archive-ordered. Two lists near the bottom of
+`data/site.js` control it:
+
+- **`featured`** pins projects, in exactly that order, to the top of the wall.
+  24 entries fills the first page — 12 rows on a phone, 8 on a tablet, 6 on a
+  desktop. This is the prime real estate: lead with full backs, full sleeves
+  and clean, well-lit photographs of finished work.
+- **`buried`** sinks projects to the very end. Used for the stencil-style
+  design plates and unrendered paper designs — real work, but graphic design
+  rather than tattooing, so they do not belong up front.
+
+Anything in neither list keeps its archive position in between. To promote a
+piece, add its `id` to `featured` where you want it and drop one off the
+bottom. `npm run lint` fails if an id does not exist, is listed twice, or
+appears in both lists, and warns if `featured` grows past 24.
+
+**Picking the cover for a multi-photo card.** The first entry in a project's
+`photos[]` is the cover. Choose the photograph that shows the *whole piece*
+most clearly — a full-sleeve shot beats a detail crop, a straight-on back shot
+beats a three-quarter angle, and anything without Instagram chrome (carousel
+counter, mute icon, avatar) beats the same shot with it. Move that entry to
+the top of the array. `tests/gallery.spec.js` pins the current choices, so if
+you change one on purpose, update the expectation there too.
+
 ### Removing a photo or a tattoo
 
 Delete the entry from `data/site.js`, then delete `photos/<file>.jpg` and its

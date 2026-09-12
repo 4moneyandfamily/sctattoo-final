@@ -360,3 +360,54 @@ real tap test:
   behind a cover. The mechanism stays in the code and stays tested, because
   README documents it as the way to gate a future photo. Written consent to
   publish the set is still an open question — see OPEN-QUESTIONS.md.
+
+## Front-page curation (12 September 2026)
+
+The wall was running in archive order, which put seven flash plates and paper
+designs in the first 24 cards — including the two stencil-style "Don't Tread On
+Me" / "F-Around and Find Out" plates landing on row three of a phone. Prime
+real estate was showing a mix of the shop's best and its weakest photography,
+in no particular order.
+
+All 153 covers were reviewed on contact sheets and ranked on what can actually
+be judged from a photograph: is the whole piece in frame, is it in focus, is
+the lighting clean, is the background free of clutter, is there Instagram
+chrome or a screenshot artifact baked in, and is it finished tattoo work
+rather than a design on paper.
+
+**`SITE.featured`** now pins 24 projects to the front page in a deliberate
+order: four full backs and bodysuits, then four full sleeves, then the
+remaining large work, then bold single pieces spread across the crew. Every
+credited artist appears, and a test enforces that. One of Brother Greg's own
+flash paintings sits in the last slot — his only work in the archive is
+painted flash, so without it the owner would be absent from his own front page.
+
+**`SITE.buried`** sinks seven items to the very end: the two design plates, a
+line-art skeleton plate, two backpiece designs still on paper, a pencil
+drawing, and a linework flash sheet. They stay in the gallery and still come up
+under the Paintings filter — they just no longer occupy the opening rows.
+
+**Nine of the twelve multi-photo cards got a new cover**, picked for the shot
+that shows the piece best rather than by the previous heuristic (largest frame
+that was not obviously a detail crop):
+
+| Card | Now leads with | Why |
+|---|---|---|
+| Virgin Mary full back | `orig-ig-193825` | brighter and centred; the old cover was darker and carried a mute icon |
+| Dragon back piece, Japanese | `orig-ig-194138` | straight-on and brightest of the three; whole dragon visible |
+| Dragon sleeve (10 photos) | `orig-ig-194041` | full sleeve shoulder to wrist; the old cover was a forearm detail |
+| Mahakala stomach piece | `orig-ig-194002` | fills the frame, no Instagram chrome |
+| Demon head on the thigh | `orig-ig-193930` | tighter and cleaner; old cover had an avatar overlay |
+| Skeleton and scorpion | `orig-ig-194120` | the only frame where the linework actually reads; the old cover was washed out |
+| Tiger shoulder piece | `orig-os-4503420` | tiger's face clearer |
+| Koi/dragon torso piece | `r2-brian-brian-09` | brighter, design better centred |
+| Eagle, black & grey | `r4-chas-chas-15` | single clean view instead of a two-panel composite with a seam |
+
+Three were already right and were left alone: the goddess bodysuit (the
+straight-on, symmetrical frame is the one that shows the whole suit), the
+bulldog, and the dragon-and-flowers sleeve.
+
+Ranking a tattoo's artistic merit is not something to assert from a script, so
+none of this claims to. What was ranked is photograph quality and how
+completely each frame shows the work — and the shop can reorder `featured` in
+one edit if it disagrees.

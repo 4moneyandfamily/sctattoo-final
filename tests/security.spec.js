@@ -10,8 +10,11 @@ test('a hostile caption is rendered as text, never as markup', async ({ page }) 
   await page.addInitScript((payload) => {
     const patch = () => {
       if (!window.SITE) return false;
-      window.SITE.projects[0].title = payload;
-      window.SITE.projects[0].photos[0].cap = payload;
+      // the wall is curated, so poison whatever is actually the first card
+      const firstId = (window.SITE.featured || [])[0];
+      const target = window.SITE.projects.find(p => p.id === firstId) || window.SITE.projects[0];
+      target.title = payload;
+      target.photos[0].cap = payload;
       window.SITE.artists[0].name = payload;
       window.SITE.artists[0].bio = payload;
       window.SITE.faq[0] = [payload, payload];
