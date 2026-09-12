@@ -129,9 +129,12 @@ The wall is curated, not archive-ordered. Two lists near the bottom of
   24 entries fills the first page — 12 rows on a phone, 8 on a tablet, 6 on a
   desktop. This is the prime real estate: lead with full backs, full sleeves
   and clean, well-lit photographs of finished work.
-- **`buried`** sinks projects to the very end. Used for the stencil-style
-  design plates and unrendered paper designs — real work, but graphic design
-  rather than tattooing, so they do not belong up front.
+- **`buried`** sinks projects to the very end, which also puts them last inside
+  whichever style filter they belong to. Used for work that is real but sits
+  awkwardly in its category: stencil-style design plates, designs still on
+  paper, a pencil drawing, apparel print art, and one sleeve whose palette is
+  disputed. Sinking beats recategorising — nothing is hidden or relabelled,
+  it just stops taking the good slots.
 
 Anything in neither list keeps its archive position in between. To promote a
 piece, add its `id` to `featured` where you want it and drop one off the

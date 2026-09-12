@@ -114,7 +114,7 @@ window.SITE = {
     "p-orig-ig-193725",           // Chrysanthemum and peony sleeve
     "set-james-dragon-sleeve",    // Dragon sleeve, 10 photos
     "set-brian-dragon-flowers",   // Dragon and flowers sleeve
-    "p-orig-ig-193943",           // Ornamental full sleeve
+    "p-orig-os-5261256",          // Plague doctor back piece
     // more large work
     "p-orig-os-4503397",          // Dragon back piece
     "p-orig-os-5261258",          // Tiger back piece
@@ -136,6 +136,11 @@ window.SITE = {
   ],
 
   buried: [
+    "p-orig-ig-193745",          // black-and-white graphic plate, not a painting
+    "p-orig-ig-194017",          // apparel print art, not a painting
+    "p-orig-os-5261262",         // engraved-style graphic panel rather than painted flash
+    "p-r2-greg-greg-09",         // same engraved-style family as the panel above
+    "p-orig-ig-193943",          // the shop does not read this as black and grey
     "p-orig-ig-193739",           // Don't Tread On Me design plate
     "p-orig-ig-193742",           // F-Around and Find Out design plate
     "p-orig-os-5261255",          // Skeleton and snake, line-art plate
@@ -320,7 +325,11 @@ window.SITE = {
         { f: "r2-brian-brian-09.jpg", w: 1080, h: 1438, cap: "Orange dragon torso piece" },
         { f: "r2-brian-brian-08.jpg", w: 1080, h: 1438, cap: "Koi/dragon arm tattoo" },
       ] },
-    { id: "p-r2-brian-brian-10", style: "Traditional", artistId: "brian", title: "Lady head thigh tattoo", photos: [{ f: "r2-brian-brian-10.jpg", w: 1080, h: 1266, cap: "Lady head thigh tattoo" }] },
+    { id: "set-brian-lady-head", style: "Traditional", artistId: "brian", title: "Lady head with green headscarf, thigh",
+      photos: [
+        { f: "r2-brian-brian-10.jpg", w: 1080, h: 1266, cap: "Lady head with green headscarf, full view" },
+        { f: "r2-brian-brian-19.jpg", w: 1080, h: 1438, cap: "Lady head with green headscarf, close-up" },
+      ] },
     { id: "p-r2-brian-brian-11", style: "Traditional", artistId: "brian", title: "Mermaid and ship thigh tattoo", photos: [{ f: "r2-brian-brian-11.jpg", w: 1080, h: 1408, cap: "Mermaid and ship thigh tattoo" }] },
     { id: "p-r2-brian-brian-12", style: "Black & grey", artistId: "brian", title: "Lady head calf tattoo", photos: [{ f: "r2-brian-brian-12.jpg", w: 1080, h: 1438, cap: "Lady head calf tattoo" }] },
     { id: "p-r2-brian-brian-13", style: "Paintings", artistId: "brian", title: "Tiger flash painting", photos: [{ f: "r2-brian-brian-13.jpg", w: 1080, h: 1438, cap: "Tiger flash painting" }] },
@@ -329,7 +338,6 @@ window.SITE = {
     { id: "p-r2-brian-brian-16", style: "Black & grey", artistId: "brian", title: "Black and grey ornamental leg sleeve", photos: [{ f: "r2-brian-brian-16.jpg", w: 1080, h: 1438, cap: "Black and grey ornamental leg sleeve" }] },
     { id: "p-r2-brian-brian-17", style: "Traditional", artistId: "brian", title: "Panther, skull and snake thigh piece", photos: [{ f: "r2-brian-brian-17.jpg", w: 1080, h: 1438, cap: "Panther, skull and snake thigh piece" }] },
     { id: "p-r2-brian-brian-18", style: "Black & grey", artistId: "brian", title: "Black and grey scale and chainmail thigh piece", photos: [{ f: "r2-brian-brian-18.jpg", w: 1080, h: 1378, cap: "Black and grey scale and chainmail thigh piece" }] },
-    { id: "p-r2-brian-brian-19", style: "Traditional", artistId: "brian", title: "Lady head with green headscarf, thigh", photos: [{ f: "r2-brian-brian-19.jpg", w: 1080, h: 1438, cap: "Lady head with green headscarf, thigh" }] },
     { id: "p-r2-brian-brian-20", style: "Traditional", artistId: "brian", title: "Orange flower half sleeve", photos: [{ f: "r2-brian-brian-20.jpg", w: 1080, h: 1438, cap: "Orange flower half sleeve" }] },
     { id: "p-r4-chas-chas-01", style: "Traditional", artistId: "chas", title: "Flame foot tattoo", photos: [{ f: "r4-chas-chas-01.jpg", w: 1080, h: 1078, cap: "Flame foot tattoo" }] },
     { id: "p-r4-chas-chas-02", style: "Traditional", artistId: "chas", title: "Lotus and snake sleeve, four views", photos: [{ f: "r4-chas-chas-02.jpg", w: 1080, h: 1078, cap: "Lotus and snake sleeve, four views" }] },

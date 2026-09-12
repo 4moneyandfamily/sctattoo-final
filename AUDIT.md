@@ -525,3 +525,40 @@ plausibly Traditional for American traditional and Color for Japanese and
 neo-traditional colour work — and that is the shop's call, not something to
 impose by sweeping forty records on taste. The definitions now sit at the top of
 `data/site.js` so whoever decides has somewhere to write it down.
+
+## Third curation pass (12 September 2026)
+
+Three things the shop caught on the deploy preview.
+
+**A fourth pair was one tattoo in two slots.** `r2-brian-brian-10` and
+`r2-brian-brian-19` are the same lady head with a green paisley headscarf —
+same hoop earrings, same beauty mark, same gold stars, same dagger, same
+leather chair. `-10` is the wide view of the whole piece and `-19` a close-up
+of the face. Now one card, `set-brian-lady-head`, wide view leading. 148
+projects, 16 of them multi-photo.
+
+**The Paintings filter held things that are not paintings.** The shop's point
+is fair: a pencil drawing is not a painting, and neither is a vector-looking
+graphic plate or a shirt print. Rather than rename a category the shop is happy
+with, the questionable entries were sunk to the end of the running order, which
+puts them last inside the Paintings filter as well as on the full wall. Four
+more joined the seven already there:
+
+| Sunk | Why |
+|---|---|
+| Cross and serpent flash painting | black-and-white graphic plate, same family as the Don't Tread / F-Around pair |
+| Dagger, swallows and roses shirt art | apparel print art; its own title says "shirt art" |
+| 'Blessed' skull and heart flash panel | engraved-style graphic panel rather than painted flash |
+| 'Blessed' skull and mermaid flash painting | same engraved-style family |
+
+The Paintings filter now runs fourteen genuine painted flash pieces first —
+framed religious plates, flash sheets, the shark, the tiger, the horse — then
+the eleven questionable ones. Nothing was deleted or recategorised.
+
+**Ornamental full sleeve.** The shop does not read this as black and grey. It
+is a genuinely ambiguous photograph: the ink looks black and grey but it is lit
+by a strong orange light, and it was the single highest scorer on the
+saturation measurement for exactly that reason. Rather than argue the call, it
+came off the front page and went to the end of the running order, at the shop's
+request. Its style label is unchanged. `Plague doctor back piece` took its
+place in the featured 24.

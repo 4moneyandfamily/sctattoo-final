@@ -175,6 +175,7 @@ test('every multi-photo card leads with the cover the shop chose', async ({ page
     'set-thad-cards-sleeve': 'r4-thad-thad-12.jpg',
     'set-chas-severed-head': 'orig-ig-193732.jpg',
     'set-james-eagle': 'orig-ig-193751.jpg',
+    'set-brian-lady-head': 'r2-brian-brian-10.jpg',
   };
   const S = await site(page);
   for (const [id, cover] of Object.entries(expected)) {
@@ -288,4 +289,43 @@ test('every style filter still has work behind it', async ({ page }) => {
     await expect(page.locator('#tally')).toContainText(`of ${n}`);
     await expect(page.locator('#grid-empty')).toBeHidden();
   }
+});
+
+test('the two lady head cards are one swipeable card, wide view first', async ({ page }) => {
+  const S = await site(page);
+  const p = S.projects.find(x => x.id === 'set-brian-lady-head');
+  expect(p.photos.map(x => x.f)).toEqual(['r2-brian-brian-10.jpg', 'r2-brian-brian-19.jpg']);
+  const ids = (await order(page)).map(x => x.id);
+  expect(ids).not.toContain('p-r2-brian-brian-10');
+  expect(ids).not.toContain('p-r2-brian-brian-19');
+
+  await page.goto('/#work/set-brian-lady-head');
+  await expect(page.locator('#viewer')).toHaveJSProperty('open', true);
+  await expect(page.locator('#v-rail .v-slide')).toHaveCount(2);
+  await expect(page.locator('#v-counter')).toHaveText('1 / 2');
+  await page.locator('#v-next').click();
+  await expect(page.locator('#v-counter')).toHaveText('2 / 2');
+});
+
+test('work the shop flagged as not-a-painting sits at the end of Paintings', async ({ page }) => {
+  const S = await site(page);
+  const flagged = ['p-orig-ig-193745', 'p-orig-ig-194017', 'p-orig-os-5261262',
+                   'p-r2-greg-greg-09', 'p-orig-ig-193851', 'p-orig-ig-193848',
+                   'p-r2-james-james-07', 'p-r4-chas-chas-20', 'p-orig-ig-193739',
+                   'p-orig-ig-193742', 'p-orig-os-5261255'];
+  for (const id of flagged) expect(S.buried, `${id} not buried`).toContain(id);
+
+  // inside the Paintings filter they must all come after the genuine paintings
+  const paintings = (await order(page)).filter(p => p.style === 'Paintings').map(p => p.id);
+  const firstFlagged = paintings.findIndex(id => flagged.includes(id));
+  const lastClean = paintings.reduce((acc, id, i) => (flagged.includes(id) ? acc : i), -1);
+  expect(firstFlagged).toBeGreaterThan(lastClean);
+});
+
+test('the ornamental sleeve is off the front page and near the end', async ({ page }) => {
+  const S = await site(page);
+  expect(S.featured).not.toContain('p-orig-ig-193943');
+  expect(S.buried).toContain('p-orig-ig-193943');
+  const ids = (await order(page)).map(p => p.id);
+  expect(ids.indexOf('p-orig-ig-193943')).toBeGreaterThan(ids.length - S.buried.length - 1);
 });
