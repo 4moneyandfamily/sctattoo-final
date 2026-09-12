@@ -126,6 +126,27 @@ if (SITE) {
   if (Array.isArray(SITE.featured) && SITE.featured.length > 24) {
     warn(`SITE.featured has ${SITE.featured.length} entries but only 24 fit the first page`);
   }
+  // --- 7c. style must not contradict the words on the card ---------------
+  // The archive shipped with colour pieces under "Black & grey" and pure
+  // blackwork under "Traditional". These are the checks that can be made
+  // mechanically; palette itself still needs an eye on the photo.
+  for (const p of SITE.projects) {
+    const says = /black\s*(&|and)\s*gr[ae]y|blackwork/i.test(p.title);
+    if (says && p.style !== 'Black & grey') {
+      err(`${p.id}: title says black and grey but style is "${p.style}" — "${p.title}"`);
+    }
+    if (p.style === 'Black & grey' && /\bcolor\b|\bcolour\b|red accents/i.test(p.title)) {
+      err(`${p.id}: style is Black & grey but the title advertises colour — "${p.title}"`);
+    }
+    if (p.style === 'Paintings' && /\bon skin\b|\btattooed\b/i.test(p.title + ' ' + p.photos.map(x => x.cap).join(' '))) {
+      err(`${p.id}: filed under Paintings but the wording says it is on skin — "${p.title}"`);
+    }
+    // a generic placeholder title tells a visitor nothing
+    if (/^(arm|forearm|tree|skull|leg|sleeve panels?|traditional [a-z ]+ piece) tattoo$|^(arm|forearm|tree|skull) piece$|^(skull|tree|arm tattoo)$/i.test(p.title.trim())) {
+      warn(`${p.id}: title "${p.title}" is too generic to describe the work`);
+    }
+  }
+
   // a featured project with a weak cover defeats the point
   for (const id of SITE.featured || []) {
     const p = SITE.projects.find(x => x.id === id);

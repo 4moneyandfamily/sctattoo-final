@@ -77,7 +77,11 @@ broken images or a 4 MB photo on someone's phone plan.
 
 4. **Paste that block** into the `projects` array in `data/site.js`, then fill
    in the parts it cannot know:
-   - `style` — must be one of the values in `SITE.styles`
+   - `style` — must be one of the values in `SITE.styles`. The definitions are
+     commented at the top of `data/site.js`; the short version is that
+     **Black & grey means no colour ink at all**, Paintings means not on skin,
+     and Lettering means the piece is mostly text. `npm run lint` fails if a
+     title and a style contradict each other.
    - `artistId` — `greg`, `james`, `brian`, `chas`, `thad`, or `null` if you
      are not certain. **Never guess a credit.**
    - `title` — what the piece is. One short phrase; it is the card label.

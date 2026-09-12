@@ -232,3 +232,60 @@ test('the merged pairs each open as a two-photo swipeable card', async ({ page }
     await expect(page.locator(`#card-${id} .count`)).toHaveText('2');
   }
 });
+
+test('the Black & grey filter contains no colour work', async ({ page }) => {
+  // The archive shipped with colour pieces under Black & grey — the shop
+  // spotted it on the live site. These are the specific offenders.
+  const S = await site(page);
+  const byId = Object.fromEntries(S.projects.map(p => [p.id, p]));
+  for (const id of ['p-orig-ig-193920', 'p-orig-ig-193926', 'p-orig-ig-194010',
+                    'p-orig-os-4503443', 'p-orig-os-4503438']) {
+    expect(byId[id], id).toBeTruthy();
+    expect(byId[id].style, `${id} "${byId[id].title}" is back under Black & grey`)
+      .not.toBe('Black & grey');
+  }
+  // and no title under Black & grey may advertise colour
+  for (const p of S.projects.filter(x => x.style === 'Black & grey')) {
+    expect(p.title, p.id).not.toMatch(/\bcolou?r\b|red accents/i);
+  }
+});
+
+test('pieces whose own title says black and grey are filed that way', async ({ page }) => {
+  const S = await site(page);
+  const wrong = S.projects
+    .filter(p => /black\s*(&|and)\s*gr[ae]y|blackwork/i.test(p.title) && p.style !== 'Black & grey')
+    .map(p => `${p.id} (${p.style}) ${p.title}`);
+  expect(wrong).toEqual([]);
+});
+
+test('nothing on skin is filed under Paintings, and no painting is filed as a tattoo', async ({ page }) => {
+  const S = await site(page);
+  // this one was a tattoo photographed close up, filed as a painting
+  const claws = S.projects.find(p => p.id === 'p-r2-brian-brian-04');
+  expect(claws.title).toMatch(/on skin/i);
+  expect(claws.style).not.toBe('Paintings');
+  for (const p of S.projects.filter(x => x.style === 'Paintings')) {
+    expect(p.title, `${p.id} is filed under Paintings`).not.toMatch(/\bon skin\b|\btattooed\b/i);
+  }
+});
+
+test('the artist-at-work photo sits with the shop photos, not in the work gallery', async ({ page }) => {
+  const S = await site(page);
+  expect(S.projects.find(p => p.id === 'p-r2-james-james-10')).toBeUndefined();
+  const shop = S.shopPhotos.find(x => x.f === 'r2-james-james-10.jpg');
+  expect(shop, 'process photo missing from shopPhotos').toBeTruthy();
+  expect(shop.cap).toMatch(/tattooing a client/i);
+  // it is rendered in the Find the shop strip
+  await expect(page.locator(`#shop-strip img[src*="r2-james-james-10"]`)).toHaveCount(1);
+});
+
+test('every style filter still has work behind it', async ({ page }) => {
+  const S = await site(page);
+  for (const style of S.styles) {
+    const n = S.projects.filter(p => p.style === style).length;
+    expect(n, `style "${style}" has no work`).toBeGreaterThan(0);
+    await page.locator('#style-filters button', { hasText: new RegExp(`^${style.replace(/&/, '&')}$`) }).click();
+    await expect(page.locator('#tally')).toContainText(`of ${n}`);
+    await expect(page.locator('#grid-empty')).toBeHidden();
+  }
+});

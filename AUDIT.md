@@ -443,3 +443,85 @@ why merging it works better than hiding it. Whether the remaining standalone
 painting cards should also sink toward the bottom is a call for the shop. No
 survey of other shops' sites was done; outbound network access is blocked in
 this environment, so that would be a guess dressed up as research.
+
+## Style and description audit (12 September 2026)
+
+The shop spotted colour photographs sitting under the **Black & grey** filter.
+That was real, and it was never checked: the `style` value on every photo came
+from the archive that a previous session assembled, and the earlier image audit
+covered duplicates, rotation, captions, credits and grouping — not style. This
+pass reviewed all 149 covers against their printed style and title.
+
+A saturation measurement was tried first and discarded as the primary method.
+It conflates warm photographic lighting with colour ink — `orig-ig-193943`
+scored highest of every black-and-grey piece purely because of an orange studio
+light, while `orig-os-4503443`, whose Ganesha is drawn entirely in red ink,
+scored near the bottom because that ink is thin linework. Eyes on every photo
+were the only reliable instrument. The numbers were kept only for triage.
+
+### Colour ink that was filed as Black & grey — 5 fixed
+
+| Piece | Was | Now | Colour present |
+|---|---|---|---|
+| Black panther torso piece | Black & grey | Traditional | red mouth and web accents |
+| Reaper skull with red accents | Black & grey | Traditional | large red fields — the title said so |
+| Black panther leg piece | Black & grey | Traditional | red mouth, tongue and claws |
+| Elephant mandala | Black & grey | Color | drawn in red and pink ink throughout |
+| Pinup playing card | Black & grey | Traditional | red diamond and heart pips |
+
+`Panther head piece` also moved, Color to Traditional, so the four bold panthers
+with spot colour now all sit in the same bucket instead of three of them being
+split across two.
+
+### Pure black and grey that was filed as Traditional — 13 fixed
+
+The `r2`/`r4` packs were bulk-tagged Traditional regardless of palette, so a lot
+of black-and-grey work was hidden from the filter a visitor would use to find
+it: Chrysanthemum blackwork thigh, Eagle and skull full back, Lady head calf,
+Black and grey ornamental leg sleeve, Black and grey scale and chainmail thigh,
+Sneaker, Reaper thigh, Skull headdress chest, Panther head, Blackwork sleeve,
+Skull cowboy thigh, Ghostface knife, and the Playing cards and rose sleeve.
+Three of those titles literally contained the words "black and grey" or
+"blackwork" while sitting under Traditional.
+
+Black & grey now holds 36 pieces, all of them genuinely black and grey.
+
+### Wrong in kind — 2 fixed
+
+- **Eagle claws, close up on skin** was filed under **Paintings**. It is a
+  tattoo. Its own title says "on skin". Now Black & grey.
+- **James Whelan tattooing a client in the shop** was a project in the work
+  gallery under a tattoo style. It is a photograph of the artist working, not a
+  piece of work, so it moved to `shopPhotos` alongside the shop interiors —
+  the same call made earlier for the five shop photos. 149 projects now.
+
+### Titles that described nothing — 8 rewritten
+
+"Skull", "Tree", "Arm tattoo", "Forearm piece", "Sleeve panels", "Traditional
+thigh piece", "Skull panel" and "Creation of adam hands" (also a capitalisation
+error) are now specific enough to tell a visitor what they are looking at.
+These feed alt text, so a screen reader was previously announcing "Arm tattoo".
+
+### Two checks so this cannot drift back
+
+`tools/lint.mjs` now fails the build when a title says black and grey while the
+style says otherwise, when a Black & grey title advertises colour, or when
+something filed under Paintings describes itself as being on skin — and warns
+on placeholder titles. Both original defects were re-introduced deliberately to
+confirm the checks fire. Five tests in `tests/gallery.spec.js` pin the same
+invariants plus the specific pieces the shop caught.
+
+### Deliberately not changed: the Traditional / Color line
+
+`Black & grey`, `Paintings` and `Lettering` have crisp definitions and are now
+enforced. **`Traditional` versus `Color` does not, and the archive is not
+consistent about it** — the Koi full-back bodysuit is Traditional while the
+Dragon back piece in the same Japanese idiom is Color; the Chrysanthemum sleeve
+is Color while the Oni mask thigh is Traditional. Roughly forty records sit on
+that fence.
+
+Normalising it means deciding what the two words mean for this shop — most
+plausibly Traditional for American traditional and Color for Japanese and
+neo-traditional colour work — and that is the shop's call, not something to
+impose by sweeping forty records on taste. The definitions now sit at the top of
+`data/site.js` so whoever decides has somewhere to write it down.
