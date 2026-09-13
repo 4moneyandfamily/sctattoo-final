@@ -429,6 +429,10 @@ input:user-invalid, textarea:user-invalid, select:user-invalid { border-color: v
 .result.ok { background: var(--ok-bg); border-color: var(--ok-line); }
 .result.bad { background: var(--err-bg); border-color: var(--err-line); }
 .result.dry { background: var(--surface-2); }
+/* Not delivered yet, but not a dead end either: the visitor has a pre-filled
+   email in front of them and one tap left. Deliberately not .ok — .ok means
+   the shop has it. */
+.result.handoff { background: var(--surface-2); border-color: var(--gold-bright); }
 .result p:last-child { margin-bottom: 0; }
 .hidden { display: none; }
 

@@ -58,7 +58,14 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-# The page itself and the data file must not go stale.
+# The page, the data file, the stylesheet and the script must not go stale.
+#
+# These four filenames never change, so nothing but a cache rule stops an
+# intermediary serving yesterday's site. Netlify's own default is already
+# must-revalidate, but a CDN in front of it is not: put Cloudflare on this
+# domain and it will happily cache .css and .js for hours by default, which
+# shows up as "I pushed it and the site still looks old". Stating it here
+# means the answer travels with the site.
 [[headers]]
   for = "/index.html"
   [headers.values]
@@ -66,6 +73,16 @@
 
 [[headers]]
   for = "/data/site.js"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/assets/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/assets/js/*"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 

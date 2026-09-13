@@ -3,7 +3,12 @@
 The shop's website. One page, no build step, no framework, no runtime
 dependencies. Drop the folder on Netlify and it works.
 
-**Live:** https://sanclementetattoo.com · **Preview:** https://sc-tattoo.netlify.app
+**Live right now:** https://sc-tattoo.netlify.app — this is the address the
+shop hands out and the one `main` deploys to.
+**Eventually:** https://sanclementetattoo.com — still serving the old
+OtherPeoplesPixels site until DNS moves. It is the canonical address in the
+page's metadata, which is why the netlify.app address is deliberately kept out
+of search for now (OPEN-QUESTIONS #11).
 
 ## Layout
 
@@ -19,7 +24,7 @@ dependencies. Drop the folder on Netlify and it works.
 | `assets/g/` | Responsive WebP derivatives. **This** is what visitors load. Generated. |
 | `assets/fonts/` | Self-hosted WOFF2. No third-party font requests. |
 | `tools/` | Build and check scripts. See below. |
-| `tests/` | Playwright suite, 327 tests across phone, tablet and desktop. |
+| `tests/` | Playwright suite, 330 tests across phone, tablet and desktop. |
 | `netlify.toml` | Redirects, cache headers, CSP and the other security headers. |
 | `AUDIT.md` | What this rebuild changed and why, with the image audit results. |
 | `OPEN-QUESTIONS.md` | **Read this.** Things only Brother Greg can answer. |
@@ -80,9 +85,8 @@ broken images or a 4 MB photo on someone's phone plan.
    in the parts it cannot know:
    - `style` — must be one of the values in `SITE.styles`. The definitions are
      commented at the top of `data/site.js`; the short version is that
-     **Black & grey means no colour ink at all**, Paintings means not on skin,
-     and Lettering means the piece is mostly text. `npm run lint` fails if a
-     title and a style contradict each other.
+     **Black & grey means no colour ink at all** and Paintings means not on
+     skin. `npm run lint` fails if a title and a style contradict each other.
    - `artistId` — `greg`, `james`, `brian`, `chas`, `thad`, or `null` if you
      are not certain. **Never guess a credit.**
    - `title` — what the piece is. One short phrase; it is the card label.
@@ -237,6 +241,18 @@ This is the one thing to check after any change to hosting: a form that says
 "nothing was sent" to a real customer is worse than no form at all, and the
 only thing standing between those two states is that host list.
 `tests/forms.spec.js` pins it.
+
+**The form works with no form service switched on.** It POSTs to Netlify
+Forms first, and if that does not land — which is what happens when Forms is
+off for the project — it hands the visitor a `mailto:` with the whole inquiry
+already written out, plus the phone number. They press send in their own mail
+app and it reaches `SITE.shop.email`. No account, no service, no setup. The
+panel says "one more tap", never "sent", and carries its own `.result.handoff`
+class precisely so it can never be mistaken for a delivered request. Switch
+Netlify Forms on later and the POST starts landing on its own with no code
+change; the email path just stops being reached. The one thing a `mailto:`
+cannot carry is the optional reference photo, so the panel asks the visitor to
+attach it.
 
 **Preview deployments are `noindex`.** Netlify deploy-previews and branch
 deploys get `X-Robots-Tag: noindex, nofollow` from `netlify.toml`, and

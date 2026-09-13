@@ -114,8 +114,10 @@ test('a filled honeypot silently drops the submission', async ({ page }) => {
   await expect(page.locator('#form-result')).toBeHidden();
 });
 
-test('a failed send never claims success and offers phone plus email', async ({ page }) => {
-  // force the live path, then make the POST fail
+test('a POST that does not land hands over a pre-filled email, never a dead end', async ({ page }) => {
+  // Forms handling being switched off at the host is the expected state, not an
+  // exception, so the visitor must come out of it with a way to reach the shop
+  // and must never be told the request arrived.
   await page.goto('/?dryrun=0');
   await page.route('**/*', route =>
     route.request().method() === 'POST' ? route.abort('failed') : route.continue());
@@ -128,11 +130,18 @@ test('a failed send never claims success and offers phone plus email', async ({ 
 
   const box = page.locator('#form-result');
   await expect(box).toBeVisible();
-  await expect(box).toHaveClass(/bad/);
-  await expect(box).toContainText('was not delivered');
+  await expect(box).toHaveClass(/handoff/);
+  // never the wording of a delivered request
   await expect(box).not.toContainText('Request sent');
+  await expect(box).not.toHaveClass(/\bok\b/);
+  // a mailto carrying the actual answers, and the phone number as the other way
+  const mailto = await box.locator('a[href^="mailto:"]').getAttribute('href');
+  expect(mailto).toContain('brogreg777%40yahoo.com'.replace('%40', '@'));
+  const decoded = decodeURIComponent(mailto);
+  expect(decoded).toContain('Traditional panther on the calf');
+  expect(decoded).toContain('Test Person');
+  expect(decoded).toContain('Outer calf');
   await expect(box.locator('a[href^="tel:"]')).toHaveCount(1);
-  await expect(box.locator('a[href^="mailto:"]')).toHaveCount(1);
   // the failure is reported, not swallowed
   expect(errors.join(' ')).toContain('inquiry NOT delivered');
   // and the send button is usable again

@@ -527,6 +527,26 @@
     box.focus();
   }
 
+  /* The whole inquiry as a pre-filled email to the shop. This is the path that
+     needs no hosting service switched on and no account anywhere: the visitor's
+     own mail app sends it. Used when the POST does not land. */
+  function mailtoFor(fd) {
+    var body = [
+      'Idea: ' + (fd.get('idea') || ''),
+      'Artist: ' + (fd.get('artist') || 'No preference'),
+      'Size: ' + (fd.get('size') || ''),
+      'Placement: ' + (fd.get('placement') || ''),
+      'Cover-up: ' + (fd.get('coverup') ? 'Yes' : 'No'),
+      'Name: ' + (fd.get('name') || ''),
+      'Phone: ' + (fd.get('phone') || ''),
+      'Email: ' + (fd.get('email') || ''),
+      '18 or older: ' + (fd.get('age18') ? 'Yes' : 'No')
+    ].join('\n');
+    return 'mailto:' + SITE.shop.email +
+      '?subject=' + encodeURIComponent('Booking request from ' + (fd.get('name') || 'the website')) +
+      '&body=' + encodeURIComponent(body);
+  }
+
   if (form) form.addEventListener('submit', function (e) {
     e.preventDefault();
     $('form-error').textContent = '';
@@ -581,21 +601,29 @@
         openedAt = Date.now();
       })
       .catch(function (err) {
+        /* The POST did not land. That is the expected state while the host's
+           form handling is switched off, so this is a handoff and not an
+           apology: the visitor's mail app opens with the whole inquiry already
+           written, and all they do is press send. The console error and the
+           optional beacon still fire, because a quietly broken form is how
+           these things die. */
         reportFailure(err && err.message);
-        var body = [
-          'Idea: ' + (fd.get('idea') || ''), 'Artist: ' + (fd.get('artist') || 'No preference'),
-          'Size: ' + (fd.get('size') || ''), 'Placement: ' + (fd.get('placement') || ''),
-          'Cover-up: ' + (fd.get('coverup') ? 'Yes' : 'No'), 'Name: ' + (fd.get('name') || ''),
-          'Phone: ' + (fd.get('phone') || ''), 'Email: ' + (fd.get('email') || ''),
-          '18 or older: ' + (fd.get('age18') ? 'Yes' : 'No')
-        ].join('\n');
-        var mailto = 'mailto:' + SITE.shop.email +
-          '?subject=' + encodeURIComponent('Booking request — ' + (fd.get('name') || '')) +
-          '&body=' + encodeURIComponent(body);
-        showResult('bad',
-          '<p><strong>That did not go through.</strong> Your request was not delivered, so please use one of these instead:</p>' +
-          '<p><a href="' + esc(SITE.shop.phoneHref) + '">Call ' + esc(SITE.shop.phone) + '</a>' +
-          ' &nbsp;·&nbsp; <a href="' + esc(mailto) + '">Send it as an email</a> (opens with your details filled in).</p>');
+        var mailto = mailtoFor(fd);
+        var ref = fd.get('reference');
+        /* Its own class, not 'ok': 'ok' means the shop has it. Nothing here
+           may ever look like that until a submission actually lands. */
+        showResult('handoff',
+          '<p><strong>One more tap.</strong> Your request is written out in an email, ready to go — ' +
+          '<a href="' + esc(mailto) + '">open it and press send</a>.</p>' +
+          (ref && ref.name
+            ? '<p>Attach your reference photo (' + esc(ref.name) + ') to that email before you send it.</p>'
+            : '') +
+          '<p>Rather not email? Call <a href="' + esc(SITE.shop.phoneHref) + '">' + esc(SITE.shop.phone) + '</a> ' +
+          'and ask for the same thing, ' +
+          esc((sameEveryDay() ? spanLabel(sameEveryDay()) + ' daily' : 'during open hours')) + ' Pacific.</p>');
+        /* Try to open it for them as well. Blocked in some browsers when it is
+           not a direct click, which is why the link above is the real path. */
+        try { window.location.href = mailto; } catch (_) {}
       })
       .then(restore, restore);
   });
