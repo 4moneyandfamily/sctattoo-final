@@ -6,7 +6,7 @@
 <title>San Clemente Tattoo — traditional street shop, downtown San Clemente</title>
 <meta name="description" content="Traditional tattoo street shop at 117 Avenida Granada, downtown San Clemente. Walk-ins first come, first served, 12:00 PM to 7:00 PM daily. Call (949) 498-8487.">
 <link rel="canonical" href="https://sanclementetattoo.com/">
-<meta name="theme-color" content="#0A0A0A">
+<meta name="theme-color" content="#0B0B0C">
 
 <meta property="og:type" content="business.business">
 <meta property="og:site_name" content="San Clemente Tattoo">
@@ -50,29 +50,39 @@
   <section class="hero" aria-labelledby="hero-h">
     <div class="wrap hero-grid">
       <div>
-        <svg class="sign" viewBox="0 0 640 280" width="640" height="280" role="img" aria-label="Painted wooden shop sign reading San Clemente Tattoo, downtown since 2011, walk-ins every day.">
+        <svg class="sign" viewBox="0 0 640 280" width="640" height="280" role="img" aria-label="Gilded shop sign reading San Clemente Tattoo, downtown since 2011, walk-ins every day.">
           <defs>
-            <linearGradient id="woodg" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#6B4A28"/>
-              <stop offset="1" stop-color="#3E2A16"/>
+            <!-- Gold leaf: the sheen is what separates gilding from yellow paint.
+                 Light at the top edge, deeper through the middle, light again at
+                 the base, the way leaf catches a shop window. -->
+            <linearGradient id="leaf" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#F2DC9A"/>
+              <stop offset=".42" stop-color="#E9CC72"/>
+              <stop offset=".58" stop-color="#B8902A"/>
+              <stop offset="1" stop-color="#E4C468"/>
+            </linearGradient>
+            <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#17171A"/>
+              <stop offset="1" stop-color="#08080A"/>
             </linearGradient>
             <filter id="grain">
               <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" result="n"/>
               <feColorMatrix in="n" type="saturate" values="0"/>
-              <feComponentTransfer><feFuncA type="table" tableValues="0 0.18"/></feComponentTransfer>
+              <feComponentTransfer><feFuncA type="table" tableValues="0 0.14"/></feComponentTransfer>
             </filter>
           </defs>
-          <rect x="8" y="10" width="624" height="260" rx="6" fill="#1a120a"/>
-          <rect x="18" y="20" width="604" height="240" fill="url(#woodg)"/>
+          <rect x="8" y="10" width="624" height="260" rx="4" fill="#000"/>
+          <rect x="18" y="20" width="604" height="240" fill="url(#glass)"/>
           <rect x="18" y="20" width="604" height="240" filter="url(#grain)"/>
-          <rect x="32" y="34" width="576" height="212" fill="none" stroke="#C6A02A" stroke-width="4"/>
-          <rect x="40" y="42" width="560" height="196" fill="none" stroke="#EDE1BE" stroke-width="1.5" opacity=".55"/>
-          <path d="M70 78 H570" stroke="#C6A02A" stroke-width="2"/>
-          <text x="320" y="72" text-anchor="middle" font-family="Yellowtail, cursive" font-size="34" fill="#F7F1DC">Downtown · Since 2011</text>
-          <text x="320" y="132" text-anchor="middle" font-family="Bungee, Impact, sans-serif" font-size="42" fill="#F7F1DC">SAN CLEMENTE</text>
-          <text x="320" y="178" text-anchor="middle" font-family="Bungee, Impact, sans-serif" font-size="48" fill="#E7C75A">TATTOO</text>
-          <path d="M120 198 H520" stroke="#B01522" stroke-width="8"/>
-          <text x="320" y="228" text-anchor="middle" font-family="Archivo, sans-serif" font-size="16" fill="#F7F1DC" letter-spacing="4">WALK-INS EVERY DAY</text>
+          <!-- the sign painter's double frame: heavy gold rule, hairline inside -->
+          <rect x="30" y="32" width="580" height="216" fill="none" stroke="url(#leaf)" stroke-width="5"/>
+          <rect x="40" y="42" width="560" height="196" fill="none" stroke="#C8A02E" stroke-width="1" opacity=".7"/>
+          <path d="M70 80 H570" stroke="#C8A02E" stroke-width="1.5" opacity=".8"/>
+          <text x="320" y="72" text-anchor="middle" font-family="Yellowtail, cursive" font-size="34" fill="url(#leaf)">Downtown · Since 2011</text>
+          <text x="320" y="134" text-anchor="middle" font-family="Bungee, Impact, sans-serif" font-size="42" fill="#F6F5F2">SAN CLEMENTE</text>
+          <text x="320" y="180" text-anchor="middle" font-family="Bungee, Impact, sans-serif" font-size="48" fill="url(#leaf)">TATTOO</text>
+          <path d="M120 200 H520" stroke="#B3121E" stroke-width="7"/>
+          <text x="320" y="230" text-anchor="middle" font-family="Archivo, sans-serif" font-size="16" fill="#F6F5F2" letter-spacing="4">WALK-INS EVERY DAY</text>
         </svg>
       </div>
       <div>
@@ -156,7 +166,7 @@
     </div>
   </section>
 
-  <section id="book" class="paper" aria-labelledby="book-h">
+  <section id="book" aria-labelledby="book-h">
     <div class="wrap book-grid">
       <div>
         <h2 id="book-h">Walk in or book</h2>

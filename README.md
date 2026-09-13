@@ -1,7 +1,11 @@
-# San Clemente Tattoo
+# San Clemente Tattoo — finished product
 
 The shop's website. One page, no build step, no framework, no runtime
-dependencies. Drop the folder on Netlify and it works.
+dependencies. Point any static host at the repo root and it works.
+
+This is the finished-product build: the same gallery, viewer, booking flow and
+test suite as `SanClementeTattoo7`, carrying the shop's own palette. Black,
+gray, red and gold, with white for reading.
 
 **Live right now:** https://sc-tattoo.netlify.app — this is the address the
 shop hands out and the one `main` deploys to.
@@ -24,7 +28,7 @@ of search for now (OPEN-QUESTIONS #11).
 | `assets/g/` | Responsive WebP derivatives. **This** is what visitors load. Generated. |
 | `assets/fonts/` | Self-hosted WOFF2. No third-party font requests. |
 | `tools/` | Build and check scripts. See below. |
-| `tests/` | Playwright suite, 336 tests across phone, tablet and desktop. |
+| `tests/` | Playwright suite, 339 tests across phone, tablet and desktop. |
 | `netlify.toml` | Redirects, cache headers, CSP and the other security headers. |
 | `_headers`, `_redirects` | The same rules in the portable format Cloudflare Pages and most other static hosts read. Keep in step with `netlify.toml`. |
 | `AUDIT.md` | What this rebuild changed and why, with the image audit results. |
@@ -271,25 +275,40 @@ nude back-piece set.
 
 ## The look
 
-Black ground, white lettering, red for anything that wants a hand on it. Two
-things about it are deliberate and easy to undo by accident:
+Black ground, gray for structure, red for anything that wants a hand on it,
+gold for the shop's own name and its signage, white for reading. Those are the
+four colours the shop asked for plus the fifth for highlights, and the reason
+the split lands this way is that gold on black is not decoration in this trade
+— it is the trade. Sign painters have gilded storefront glass in gold leaf on
+black for a century. So gold carries the headings, the rules, the shop's name
+and the active states; red is held back for action, which is the only thing
+that keeps red loud.
 
-- **Every colour comes from a token** in the two palette blocks at the top of
-  `assets/css/app.css`. Nothing hardcodes a hex outside those blocks. That is
-  what lets one section run a completely different palette without a single
-  duplicated rule.
-- **`--red` never carries body text on black.** It clears 3.9:1 against the
-  page, which is fine for a rule, a border or a button face and short of the
-  4.5:1 that text needs. `--red-soft` is the one that goes on type. The
-  contrast test in `tests/a11y.spec.js` measures the rendered colours, so
-  getting this wrong fails the suite rather than shipping.
+Three things about it are deliberate and easy to undo by accident:
 
-The walk-in and booking section (`#book`, `class="paper"`) keeps the shop's
-painted-sign colours: warm paper, cream panels, ink lettering. It is the
-exception the shop asked for, and on a black page it reads as the one lit panel
-on the wall, which is where the calls to action live. The hero's painted sign
-keeps its own palette for the same reason — it is a painted object hanging on a
-black wall, not a surface to be recoloured.
+- **Every colour comes from a token** in the palette block at the top of
+  `assets/css/app.css`. Nothing hardcodes a hex outside it, and
+  `tests/a11y.spec.js` reads the stylesheet and fails on any hex that is not
+  one of the eleven tokens (pure black and pure white excepted). That is what
+  stops a palette drifting away one convenient colour at a time.
+- **`--red` never carries type.** It is 2.83:1 against the ground, which is
+  fine for a fill, a border or a keyline and short of even the 3:1 that large
+  text needs. `--red-lt` (4.81:1) is the one that goes on text. Getting this
+  backwards is the single most likely way to break the design.
+- **Gold is dark enough to carry body text**, at 7.99:1. Most golds are not.
+  Brightening `--gold` toward something more obviously metallic will fail the
+  contrast test, which measures the rendered colours rather than the
+  stylesheet, so it fails the suite rather than shipping.
+
+The hero sign is gilded glass: black ground, gold-leaf double frame, white
+`SAN CLEMENTE` over gold `TATTOO`, red keyline. The leaf effect is a three-stop
+gradient — light at the top edge, deeper through the middle, light again at the
+base — because that is how leaf catches a shop window, and a flat yellow reads
+as paint.
+
+The booking block is the one gold-framed panel on the page. The shop asked for
+the walk-in section to stand apart from the rest; on a black wall the way to do
+that is to gild the frame, not to paint the panel another colour.
 
 ## Which version am I looking at
 

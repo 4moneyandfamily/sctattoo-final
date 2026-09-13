@@ -22,7 +22,7 @@ const page = (w, h, body) => `<!doctype html><meta charset="utf-8">
 <style>${fontCss}</style>
 <style>
   html,body{margin:0;padding:0}
-  body{width:${w}px;height:${h}px;overflow:hidden;background:#14110C;color:#F7F1DC}
+  body{width:${w}px;height:${h}px;overflow:hidden;background:#0B0B0C;color:#F6F5F2}
   *{box-sizing:border-box}
 </style>${body}`;
 
@@ -33,15 +33,15 @@ const og = page(1200, 630, `
         background:
           radial-gradient(ellipse at 15% 0%, rgba(198,160,42,.20), transparent 55%),
           repeating-linear-gradient(0deg, transparent, transparent 30px, rgba(247,241,220,.035) 31px),
-          #14110C;
-        border-right:10px solid #B01522}
+          #0B0B0C;
+        border-right:10px solid #B3121E}
   .eyebrow{font-family:Archivo,sans-serif;font-weight:800;font-size:21px;letter-spacing:.22em;
-           text-transform:uppercase;color:#C6A02A;margin:0 0 20px}
-  .name{font-family:Bungee,Impact,sans-serif;font-size:82px;line-height:.95;margin:0;color:#F7F1DC}
-  .name em{display:block;font-style:normal;color:#E7C75A}
-  .rule{height:9px;background:#B01522;width:300px;margin:30px 0 26px}
-  .script{font-family:Yellowtail,cursive;font-size:44px;color:#EDE1BE;margin:0 0 22px;line-height:1}
-  .meta{font-family:Archivo,sans-serif;font-size:25px;line-height:1.5;color:#EDE1BE;margin:0}
+           text-transform:uppercase;color:#C8A02E;margin:0 0 20px}
+  .name{font-family:Bungee,Impact,sans-serif;font-size:82px;line-height:.95;margin:0;color:#F6F5F2}
+  .name em{display:block;font-style:normal;color:#E9CC72}
+  .rule{height:9px;background:#B3121E;width:300px;margin:30px 0 26px}
+  .script{font-family:Yellowtail,cursive;font-size:44px;color:#E9CC72;margin:0 0 22px;line-height:1}
+  .meta{font-family:Archivo,sans-serif;font-size:25px;line-height:1.5;color:#A9A9B0;margin:0}
   .meta b{color:#fff}
   .right{flex:0 0 38%;position:relative}
   .right img{width:100%;height:100%;object-fit:cover;display:block}
@@ -61,10 +61,10 @@ const og = page(1200, 630, `
 const icon = page(512, 512, `
 <style>
   .i{width:512px;height:512px;display:flex;flex-direction:column;align-items:center;justify-content:center;
-     background:#14110C;border:26px solid #B01522}
-  .i span{font-family:Bungee,Impact,sans-serif;font-size:190px;line-height:.86;color:#F7F1DC}
-  .i span.g{color:#E7C75A}
-  .i i{display:block;width:210px;height:12px;background:#C6A02A;margin:18px 0}
+     background:#0B0B0C;border:26px solid #B3121E}
+  .i span{font-family:Bungee,Impact,sans-serif;font-size:190px;line-height:.86;color:#F6F5F2}
+  .i span.g{color:#E9CC72}
+  .i i{display:block;width:210px;height:12px;background:#C8A02E;margin:18px 0}
 </style>
 <div class="i"><span>SC</span><i></i><span class="g">TAT</span></div>`);
 
@@ -108,11 +108,11 @@ await browser.close();
 
 // Flat SVG favicon: no raster, scales everywhere, tiny.
 await writeFile('assets/favicon.svg', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="San Clemente Tattoo">
-<rect width="64" height="64" fill="#14110C"/>
-<rect x="3" y="3" width="58" height="58" fill="none" stroke="#B01522" stroke-width="6"/>
-<path d="M12 33h40" stroke="#C6A02A" stroke-width="4"/>
-<text x="32" y="27" text-anchor="middle" font-family="Impact,Haettenschweiler,sans-serif" font-size="19" fill="#F7F1DC">SC</text>
-<text x="32" y="50" text-anchor="middle" font-family="Impact,Haettenschweiler,sans-serif" font-size="16" fill="#E7C75A">TAT</text>
+<rect width="64" height="64" fill="#0B0B0C"/>
+<rect x="3" y="3" width="58" height="58" fill="none" stroke="#B3121E" stroke-width="6"/>
+<path d="M12 33h40" stroke="#C8A02E" stroke-width="4"/>
+<text x="32" y="27" text-anchor="middle" font-family="Impact,Haettenschweiler,sans-serif" font-size="19" fill="#F6F5F2">SC</text>
+<text x="32" y="50" text-anchor="middle" font-family="Impact,Haettenschweiler,sans-serif" font-size="16" fill="#E9CC72">TAT</text>
 </svg>
 `);
 console.log('assets/favicon.svg');

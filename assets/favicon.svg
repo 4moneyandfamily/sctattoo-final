@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="San Clemente Tattoo">
-<rect width="64" height="64" fill="#14110C"/>
-<rect x="3" y="3" width="58" height="58" fill="none" stroke="#B01522" stroke-width="6"/>
-<path d="M12 33h40" stroke="#C6A02A" stroke-width="4"/>
-<text x="32" y="27" text-anchor="middle" font-family="Impact,Haettenschweiler,sans-serif" font-size="19" fill="#F7F1DC">SC</text>
-<text x="32" y="50" text-anchor="middle" font-family="Impact,Haettenschweiler,sans-serif" font-size="16" fill="#E7C75A">TAT</text>
+<rect width="64" height="64" fill="#0B0B0C"/>
+<rect x="3" y="3" width="58" height="58" fill="none" stroke="#B3121E" stroke-width="6"/>
+<path d="M12 33h40" stroke="#C8A02E" stroke-width="4"/>
+<text x="32" y="27" text-anchor="middle" font-family="Impact,Haettenschweiler,sans-serif" font-size="19" fill="#F6F5F2">SC</text>
+<text x="32" y="50" text-anchor="middle" font-family="Impact,Haettenschweiler,sans-serif" font-size="16" fill="#E9CC72">TAT</text>
 </svg>

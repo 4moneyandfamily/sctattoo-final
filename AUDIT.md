@@ -757,3 +757,100 @@ carries Thadius's.
   (budget 1400), 22 requests (60), LCP 1116 ms (2500), CLS 0.0006 (0.1), app JS
   28.3 KB (32), data JS 45.4 KB (60), CSS 23.7 KB (30). Whole gallery revealed:
   4.38 MB (budget 8).
+
+---
+
+# Finished product: the gilded pass
+
+Split off from `SanClementeTattoo7` as a stylistic overhaul. The nuts and bolts
+are untouched — same 165 projects, same gallery order, same viewer, same
+booking flow, same tests. What changed is the palette and the treatment.
+
+## Reconciling two instructions that looked contradictory
+
+The shop said two things: a black background with white lettering, and that his
+favourite colours are black, gray, red and gold, with white if a fifth is
+needed. Those read as a conflict and are not one. Black ground with white
+lettering is the base; black, gray, red and gold is the system built on it. The
+split that makes both true at once:
+
+| Colour | Job |
+|---|---|
+| Black | the ground, and two raised surfaces above it |
+| Gray | structure — hairlines, frames, secondary type |
+| Gold | the shop's own name, the headings, the rules, active states |
+| Red | action only: calls to action, keylines, the dock |
+| White | body copy, and the one display word that needs to shout |
+
+Gold does the heaviest lifting because of what this trade actually looks like.
+Sign painters gild storefront glass in gold leaf on black, and have for a
+century; it is the most authentic pairing available to a traditional street
+shop, and it is exactly the pairing the shop named first. Red held back for
+action is what keeps red loud — a page with red everywhere has no emphasis
+left to spend.
+
+## The palette, with the numbers
+
+Every value was checked before it was written, not after:
+
+| Token | Value | On the ground | Verdict |
+|---|---|---|---|
+| `--white` | `#F6F5F2` | 18.05:1 | body copy |
+| `--gold-lt` | `#E9CC72` | 12.50:1 | display type, highlights |
+| `--gray-text` | `#A9A9B0` | 8.42:1 | secondary type |
+| `--gold` | `#C8A02E` | 7.99:1 | type and rules |
+| `--red-lt` | `#E4404C` | 4.81:1 | type, links |
+| `--red` | `#B3121E` | **2.83:1** | fills and rules only, never type |
+
+Two of those deserve their comments in the stylesheet. `--gold` is
+deliberately darker than a "metallic" gold would be, because at 7.99:1 it can
+carry body-size text and a brighter one cannot. `--red` is the trap: it looks
+like a text colour and is not, not even at display size, which is why a second
+red exists.
+
+White is `#F6F5F2` rather than `#FFFFFF`. On a near-black ground full white
+glares, and this page is mostly read on a phone outdoors.
+
+The ground is `#0B0B0C` rather than `#000000`. Pure black flattens photographs
+and makes them look like they are floating; a hair off it reads richer and
+gives the two raised surfaces somewhere to sit.
+
+## Treatment
+
+- **Gilded headings.** Section headings in gold leaf, the hand-lettered line
+  beneath them in red, and under that the sign painter's double rule — two
+  gold hairlines with a gap. Three rules of CSS and it is most of the look.
+- **The sign is now gilded glass**, not brown wood. Black ground, gold-leaf
+  double frame, white `SAN CLEMENTE` over gold `TATTOO`, red keyline. The leaf
+  is a three-stop gradient, light-deep-light, because that is how leaf catches
+  a window; flat yellow reads as paint. The brown wood was the one thing on the
+  page outside the shop's colours.
+- **Gray for structure, gold for attention.** Cards and panels take a 1px gray
+  hairline that goes gold on hover. The photographs are the loudest thing on
+  this page and the frame's whole job is to stay out of their way, which is why
+  the borders went from 3px to 1px.
+- **Active states are gilded.** The selected filter chip is a gold fill with
+  near-black type; the photo-count badge is a gold ring; "Open now" is gold.
+  The old traffic-light green is gone — it was never one of the shop's colours.
+- **The booking block is the one gold-framed panel.** Gilding the frame beats
+  painting the panel a different colour, which is what the previous build did
+  with a beige section that no longer has a place in this palette.
+- **Red keylines** under the top bar, the hero, the footer and the dock, each
+  paired with a gold hairline. It is the edge of a painted sign, repeated, and
+  it is what ties the page together top to bottom.
+
+## What guards it
+
+`tests/a11y.spec.js` gained two things. The contrast test now samples every
+surface that carries type, gilded ones included — headings, the active chip,
+the count badge, the open pill, legends, the hours table, buttons, the dock —
+because gold is the easiest colour here to brighten into failing. And a new
+test pins the palette itself: it checks each token is a real hex, that the
+blacks, grays and white are actually neutral rather than tinted, that the two
+reds are red and the two golds are gold by hue angle, and then reads the whole
+stylesheet and fails on any hex that is not one of the eleven tokens. A palette
+does not usually get abandoned in one edit; it gets abandoned one convenient
+colour at a time, and that test is what makes that impossible.
+
+338 tests pass, 1 skipped. Lint clean. The social card and icons were
+regenerated in the new palette.

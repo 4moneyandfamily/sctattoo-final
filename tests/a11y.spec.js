@@ -101,8 +101,15 @@ test('touch targets are at least 44px', async ({ page }) => {
 
 test('body, caption and footer text all clear WCAG AA contrast', async ({ page }) => {
   const samples = await page.$$eval(
-    'body, .muted, .card-cap span, .card-cap b, .filter-label, .legal, .foot-head, footer a, .eyebrow, .form-note, .v-by',
-    els => els.slice(0, 40).map(e => {
+    // Everything that carries type, including every gilded surface: the
+    // headings, the active filter chip, the photo-count badge and the open
+    // pill all put dark type on gold or gold type on black, and gold is the
+    // easiest colour in the palette to brighten into failing.
+    'body, .muted, .card-cap span, .card-cap b, .filter-label, .legal, .foot-head, footer a,'
+    + ' .eyebrow, .form-note, .v-by, h2, .script, .filters button, .count, .pill, legend,'
+    + ' .hours-now, .hours-list li, .btn, .dock a, .artist .handle, .artist .seework,'
+    + ' .v-title, .v-counter, .steps-how h3, .steps-how p, .lede, address, ol.care li, summary',
+    els => els.slice(0, 90).map(e => {
       // walk up for the first non-transparent background
       let bg = 'rgba(0, 0, 0, 0)', n = e;
       while (n && (bg === 'rgba(0, 0, 0, 0)' || bg === 'transparent')) {
@@ -186,4 +193,47 @@ test('the cover mechanism still works if a photo is ever flagged', async ({ page
 
   await page.locator('#card-set-goddess-bodysuit').click();   // second tap opens it
   await expect(page.locator('#viewer')).toHaveJSProperty('open', true);
+});
+
+test('the page uses the shop’s palette and nothing else', async ({ page }) => {
+  // Greg named four colours plus white: black, gray, red, gold, white. This
+  // pins them, because a palette is the easiest thing in a stylesheet for a
+  // later edit to drift away from one convenient hex at a time.
+  const tok = await page.evaluate(() => {
+    const s = getComputedStyle(document.documentElement);
+    const names = ['--ink', '--ink-2', '--ink-3', '--gray', '--gray-2', '--gray-text',
+                   '--white', '--red', '--red-lt', '--gold', '--gold-lt'];
+    return Object.fromEntries(names.map(n => [n, s.getPropertyValue(n).trim()]));
+  });
+  for (const [n, v] of Object.entries(tok)) {
+    expect(v, `${n} is not defined`).toMatch(/^#[0-9A-Fa-f]{6}$/);
+  }
+
+  const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+  const hue = (h) => {
+    const [r, g, b] = hex(h).map(v => v / 255);
+    const max = Math.max(r, g, b), min = Math.min(r, g, b), d = max - min;
+    if (d < 0.04) return 'neutral';                    // black, gray, white
+    let deg = max === r ? ((g - b) / d) % 6 : max === g ? (b - r) / d + 2 : (r - g) / d + 4;
+    deg = (deg * 60 + 360) % 360;
+    if (deg < 20 || deg > 340) return 'red';
+    if (deg >= 35 && deg <= 60) return 'gold';
+    return 'off-palette:' + Math.round(deg);
+  };
+  // the three blacks, two grays and the white must be neutral, not tinted
+  for (const n of ['--ink', '--ink-2', '--ink-3', '--gray', '--gray-2', '--gray-text', '--white']) {
+    expect(hue(tok[n]), `${n} (${tok[n]}) should be neutral`).toBe('neutral');
+  }
+  expect(hue(tok['--red']), tok['--red']).toBe('red');
+  expect(hue(tok['--red-lt']), tok['--red-lt']).toBe('red');
+  expect(hue(tok['--gold']), tok['--gold']).toBe('gold');
+  expect(hue(tok['--gold-lt']), tok['--gold-lt']).toBe('gold');
+
+  // and no stylesheet rule may reintroduce a colour from outside it
+  const css = await (await page.request.get('/assets/css/app.css')).text();
+  const stray = [...css.matchAll(/#[0-9A-Fa-f]{3,6}\b/g)].map(m => m[0].toUpperCase())
+    .filter(h => h.length === 7)
+    .filter(h => !Object.values(tok).map(v => v.toUpperCase()).includes(h))
+    .filter(h => !['#000000', '#FFFFFF', '#000', '#FFF'].includes(h));
+  expect(stray, 'hex values outside the palette block').toEqual([]);
 });
