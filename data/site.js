@@ -29,15 +29,15 @@ window.SITE = {
 
   hours: {
     timezone: "America/Los_Angeles",
-    display: "Noon to 8 pm, seven days",
+    display: "Noon to 7 pm, seven days",
     weekly: [
-      { day: "Sunday", open: "12:00", close: "20:00" },
-      { day: "Monday", open: "12:00", close: "20:00" },
-      { day: "Tuesday", open: "12:00", close: "20:00" },
-      { day: "Wednesday", open: "12:00", close: "20:00" },
-      { day: "Thursday", open: "12:00", close: "20:00" },
-      { day: "Friday", open: "12:00", close: "20:00" },
-      { day: "Saturday", open: "12:00", close: "20:00" },
+      { day: "Sunday", open: "12:00", close: "19:00" },
+      { day: "Monday", open: "12:00", close: "19:00" },
+      { day: "Tuesday", open: "12:00", close: "19:00" },
+      { day: "Wednesday", open: "12:00", close: "19:00" },
+      { day: "Thursday", open: "12:00", close: "19:00" },
+      { day: "Friday", open: "12:00", close: "19:00" },
+      { day: "Saturday", open: "12:00", close: "19:00" },
     ]
   },
 
@@ -54,7 +54,6 @@ window.SITE = {
 
      What each one means, so the filters stop drifting:
        Paintings    — artwork on paper, board or canvas. Not on skin.
-       Lettering    — the piece is primarily script or text.
        Black & grey — tattooed in black and grey wash with NO colour ink.
                       Red or any other colour in the piece disqualifies it.
                       Colour belonging to a neighbouring tattoo does not.
@@ -63,10 +62,15 @@ window.SITE = {
        Color        — colour-led work outside the bold traditional idiom.
 
      The Traditional / Color line is a genre judgement and the archive is not
-     fully consistent about Japanese colour work; see AUDIT.md. Black & grey,
-     Paintings and Lettering are not judgement calls and npm run lint enforces
-     the ones it can check. */
-  styles: ["Black & grey","Color","Paintings","Traditional","Lettering"],
+     fully consistent about Japanese colour work; see AUDIT.md. Black & grey
+     and Paintings are not judgement calls and npm run lint enforces the ones
+     it can check.
+
+     There is no Lettering filter. The shop's read is that its three pieces
+     were colour work that happened to contain script, and three cards behind
+     a filter of their own told a visitor nothing. They now sit at the end of
+     Color. */
+  styles: ["Black & grey","Color","Paintings","Traditional"],
 
   faq: [
     ["Do you take walk-ins?", "Yes. First come, first served, seven days. If the shop is slammed or the piece is a custom, we will book you instead."],
@@ -106,7 +110,7 @@ window.SITE = {
      `npm run lint` will fail on it. */
   featured: [
     // full backs and bodysuits first
-    "p-r2-james-james-12",        // Koi full-back bodysuit
+    "set-james-koi-back",         // Koi full-back bodysuit
     "set-mary-back",              // Virgin Mary full back piece
     "set-james-dragon-back",      // Dragon back piece, Japanese style
     "p-r2-brian-brian-03",        // Eagle and skull full-back piece
@@ -132,7 +136,7 @@ window.SITE = {
     "p-orig-ig-193838",           // Eagle on the back of the head
     "set-goddess-bodysuit",       // Goddess full-back bodysuit
     "p-r4-chas-chas-11",          // Rose tattoo
-    "p-r2-greg-greg-02",          // Religious flash painting — the owner's own work
+    "set-greg-religious-flash",   // Religious flash painting — the owner's own work
   ],
 
   buried: [
@@ -188,7 +192,6 @@ window.SITE = {
     { id: "p-orig-ig-193848", style: "Paintings", artistId: "james", title: "Eagle backpiece design, up for grabs", photos: [{ f: "orig-ig-193848.jpg", w: 1080, h: 1155, cap: "Eagle backpiece design, up for grabs" }] },
     { id: "p-orig-ig-193909", style: "Color", artistId: "james", title: "Demon mask", photos: [{ f: "orig-ig-193909.jpg", w: 1080, h: 1179, cap: "Demon mask" }] },
     { id: "p-orig-ig-193916", style: "Black & grey", artistId: "brian", title: "Eagle and skull chest piece", photos: [{ f: "orig-ig-193916.jpg", w: 1080, h: 1126, cap: "Eagle and skull chest piece" }] },
-    { id: "p-orig-ig-193920", style: "Traditional", artistId: "brian", title: "Black panther torso piece", photos: [{ f: "orig-ig-193920.jpg", w: 1080, h: 1088, cap: "Black panther torso piece" }] },
     { id: "set-brian-demon-leg", style: "Traditional", artistId: "brian", title: "Demon head on the thigh",
       photos: [
         { f: "orig-ig-193930.jpg", w: 588, h: 1158, cap: "Demon leg sleeve, front view" },
@@ -212,6 +215,7 @@ window.SITE = {
     { id: "p-orig-ig-194017", style: "Paintings", artistId: "greg", title: "Dagger, swallows and roses shirt art", photos: [{ f: "orig-ig-194017.jpg", w: 1080, h: 1321, cap: "Dagger, swallows and roses shirt art" }] },
     { id: "set-james-dragon-sleeve", style: "Color", artistId: "james", title: "Dragon sleeve",
       photos: [
+        { f: "r5-james-05.jpg", w: 729, h: 1400, cap: "Dragon sleeve, full arm" },
         { f: "orig-ig-194041.jpg", w: 1076, h: 1154, cap: "Dragon sleeve, close-up" },
         { f: "orig-ig-194039.jpg", w: 1076, h: 1254, cap: "Dragon sleeve" },
         { f: "orig-ig-194025.jpg", w: 1080, h: 1132, cap: "Dragon sleeve (another view)" },
@@ -245,7 +249,11 @@ window.SITE = {
         { f: "orig-ig-194140.jpg", w: 917, h: 1254, cap: "Dragon backpiece" },
       ] },
     { id: "p-orig-ig-194144", style: "Color", artistId: "chas", title: "Praying hands with rose and Family banner, rib piece", photos: [{ f: "orig-ig-194144.jpg", w: 1058, h: 1080, cap: "Praying hands with rose and Family banner, rib piece" }] },
-    { id: "p-orig-ig-194150", style: "Black & grey", artistId: "james", title: "Lady head with pearls", photos: [{ f: "orig-ig-194150.jpg", w: 1080, h: 1254, cap: "Lady head with pearls" }] },
+    { id: "set-james-lady-pearls", style: "Black & grey", artistId: "james", title: "Lady head with pearls",
+      photos: [
+        { f: "orig-ig-194150.jpg", w: 1080, h: 1254, cap: "Lady head with pearls" },
+        { f: "r5-james-21.jpg", w: 833, h: 571, cap: "Lady head with pearls, healed" },
+      ] },
     { id: "p-orig-ig-194153", style: "Color", artistId: "james", title: "Lady head with flower and skull", photos: [{ f: "orig-ig-194153.jpg", w: 1080, h: 1254, cap: "Lady head with flower and skull" }] },
     { id: "p-orig-os-5261263", style: "Paintings", artistId: null, title: "Skeleton motorcycle", photos: [{ f: "orig-os-5261263.jpg", w: 640, h: 480, cap: "Skeleton motorcycle" }] },
     { id: "p-orig-os-5261262", style: "Paintings", artistId: null, title: "'Blessed' skull and heart flash panel", photos: [{ f: "orig-os-5261262.jpg", w: 334, h: 480, cap: "'Blessed' skull and heart flash panel" }] },
@@ -268,10 +276,8 @@ window.SITE = {
     { id: "p-orig-os-5261245", style: "Paintings", artistId: null, title: "Dragon panel", photos: [{ f: "orig-os-5261245.jpg", w: 257, h: 480, cap: "Dragon panel" }] },
     { id: "p-orig-os-5261244", style: "Paintings", artistId: null, title: "Dagger flash sheet", photos: [{ f: "orig-os-5261244.jpg", w: 356, h: 480, cap: "Dagger flash sheet" }] },
     { id: "p-orig-os-5261243", style: "Paintings", artistId: "brian", title: "Horse flash painting", photos: [{ f: "orig-os-5261243.jpg", w: 585, h: 480, cap: "Horse flash painting" }] },
-    { id: "p-orig-os-4503448", style: "Lettering", artistId: "thad", title: "Script with bow", photos: [{ f: "orig-os-4503448.jpg", w: 480, h: 640, cap: "Script with bow" }] },
     { id: "p-orig-os-4503447", style: "Color", artistId: "thad", title: "Revolver with lettering", photos: [{ f: "orig-os-4503447.jpg", w: 480, h: 640, cap: "Revolver with lettering" }] },
     { id: "p-orig-os-4503446", style: "Color", artistId: "thad", title: "Lady head with roses, color", photos: [{ f: "orig-os-4503446.jpg", w: 480, h: 640, cap: "Lady head with roses, color" }] },
-    { id: "p-orig-os-4503445", style: "Lettering", artistId: "thad", title: "Skull with lettering", photos: [{ f: "orig-os-4503445.jpg", w: 480, h: 640, cap: "Skull with lettering" }] },
     { id: "p-orig-os-4503444", style: "Black & grey", artistId: "thad", title: "Wings back piece", photos: [{ f: "orig-os-4503444.jpg", w: 480, h: 640, cap: "Wings back piece" }] },
     { id: "p-orig-os-4503443", style: "Color", artistId: "thad", title: "Elephant mandala", photos: [{ f: "orig-os-4503443.jpg", w: 360, h: 480, cap: "Elephant mandala" }] },
     { id: "p-orig-os-4503442", style: "Color", artistId: "thad", title: "Skull with flames and lettering", photos: [{ f: "orig-os-4503442.jpg", w: 480, h: 640, cap: "Skull with flames and lettering" }] },
@@ -282,7 +288,6 @@ window.SITE = {
     { id: "p-orig-os-4503434", style: "Color", artistId: null, title: "Koi shoulder", photos: [{ f: "orig-os-4503434.jpg", w: 270, h: 480, cap: "Koi shoulder" }] },
     { id: "p-orig-os-4503433", style: "Traditional", artistId: null, title: "Rattlesnake", photos: [{ f: "orig-os-4503433.jpg", w: 480, h: 480, cap: "Rattlesnake" }] },
     { id: "p-orig-os-4503432", style: "Black & grey", artistId: null, title: "Mandala thigh", photos: [{ f: "orig-os-4503432.jpg", w: 270, h: 480, cap: "Mandala thigh" }] },
-    { id: "p-orig-os-4503431", style: "Lettering", artistId: null, title: "Horseshoe with script", photos: [{ f: "orig-os-4503431.jpg", w: 270, h: 480, cap: "Horseshoe with script" }] },
     { id: "p-orig-os-4503430", style: "Traditional", artistId: null, title: "Traditional back piece with lettering", photos: [{ f: "orig-os-4503430.jpg", w: 270, h: 480, cap: "Traditional back piece with lettering" }] },
     { id: "set-brian-tiger", style: "Color", artistId: "brian", title: "Tiger shoulder piece",
       photos: [
@@ -296,9 +301,16 @@ window.SITE = {
     { id: "p-orig-os-4503398", style: "Traditional", artistId: "brian", title: "Rose on hand", photos: [{ f: "orig-os-4503398.jpg", w: 480, h: 640, cap: "Rose on hand" }] },
     { id: "p-orig-os-4503397", style: "Color", artistId: "brian", title: "Dragon back piece", photos: [{ f: "orig-os-4503397.jpg", w: 384, h: 480, cap: "Dragon back piece" }] },
     { id: "p-orig-ig-193838", style: "Black & grey", artistId: null, title: "Eagle head tattoo on back of head", photos: [{ f: "orig-ig-193838.jpg", w: 928, h: 1381, cap: "Eagle head tattoo on back of head" }] },
-    { id: "p-orig-ig-193923", style: "Traditional", artistId: "brian", title: "Panther head piece", photos: [{ f: "orig-ig-193923.jpg", w: 908, h: 1080, cap: "Panther head piece" }] },
-    { id: "p-r2-greg-greg-01", style: "Paintings", artistId: "greg", title: "Religious flash painting (Jesus/Mary torso piece), framed", photos: [{ f: "r2-greg-greg-01.jpg", w: 1080, h: 1108, cap: "Religious flash painting (Jesus/Mary torso piece), framed" }] },
-    { id: "p-r2-greg-greg-02", style: "Paintings", artistId: "greg", title: "Religious flash painting, second piece", photos: [{ f: "r2-greg-greg-02.jpg", w: 1080, h: 1212, cap: "Religious flash painting, second piece" }] },
+    { id: "set-brian-panther", style: "Traditional", artistId: "brian", title: "Panther head piece",
+      photos: [
+        { f: "orig-ig-193920.jpg", w: 1080, h: 1088, cap: "Panther head piece, whole tattoo" },
+        { f: "orig-ig-193923.jpg", w: 908, h: 1080, cap: "Panther head piece, close up" },
+      ] },
+    { id: "set-greg-religious-flash", style: "Paintings", artistId: "greg", title: "Religious flash painting",
+      photos: [
+        { f: "r2-greg-greg-02.jpg", w: 1080, h: 1212, cap: "Religious flash painting, flat on the wall" },
+        { f: "r2-greg-greg-01.jpg", w: 1080, h: 1108, cap: "Religious flash painting, framed and hung" },
+      ] },
     { id: "p-r2-greg-greg-08", style: "Paintings", artistId: "greg", title: "Goblet/skull chalice flash painting", photos: [{ f: "r2-greg-greg-08.jpg", w: 900, h: 1283, cap: "Goblet/skull chalice flash painting" }] },
     { id: "p-r2-greg-greg-09", style: "Paintings", artistId: "greg", title: "'Blessed' skull and mermaid flash painting", photos: [{ f: "r2-greg-greg-09.jpg", w: 909, h: 1440, cap: "'Blessed' skull and mermaid flash painting" }] },
     { id: "p-r2-james-james-01", style: "Paintings", artistId: "james", title: "Eagle and dragon flash sheets", photos: [{ f: "r2-james-james-01.jpg", w: 1080, h: 1157, cap: "Eagle and dragon flash sheets" }] },
@@ -311,7 +323,11 @@ window.SITE = {
     { id: "p-r2-james-james-08", style: "Black & grey", artistId: "james", title: "Roaring panther head, black & grey", photos: [{ f: "r2-james-james-08.jpg", w: 1080, h: 1241, cap: "Roaring panther head, black & grey" }] },
     { id: "p-r2-james-james-09", style: "Traditional", artistId: "james", title: "Oni/demon face thigh tattoo", photos: [{ f: "r2-james-james-09.jpg", w: 1080, h: 1624, cap: "Oni/demon face thigh tattoo" }] },
     { id: "p-r2-james-james-11", style: "Paintings", artistId: "james", title: "Snake and dagger flash painting", photos: [{ f: "r2-james-james-11.jpg", w: 1080, h: 1072, cap: "Snake and dagger flash painting" }] },
-    { id: "p-r2-james-james-12", style: "Traditional", artistId: "james", title: "Koi full-back bodysuit", photos: [{ f: "r2-james-james-12.jpg", w: 1046, h: 1248, cap: "Koi full-back bodysuit" }] },
+    { id: "set-james-koi-back", style: "Traditional", artistId: "james", title: "Koi full-back bodysuit",
+      photos: [
+        { f: "r2-james-james-12.jpg", w: 1046, h: 1248, cap: "Koi full-back bodysuit" },
+        { f: "r5-james-07.jpg", w: 1000, h: 1008, cap: "Koi full-back bodysuit, wider view" },
+      ] },
     { id: "p-r2-james-james-13", style: "Traditional", artistId: "james", title: "Foo dog thigh tattoo", photos: [{ f: "r2-james-james-13.jpg", w: 1080, h: 1684, cap: "Foo dog thigh tattoo" }] },
     { id: "p-r2-james-james-14", style: "Black & grey", artistId: "james", title: "Chrysanthemum blackwork thigh tattoo", photos: [{ f: "r2-james-james-14.jpg", w: 1080, h: 1247, cap: "Chrysanthemum blackwork thigh tattoo" }] },
     { id: "p-r2-james-james-15", style: "Color", artistId: "james", title: "Panther head, color", photos: [{ f: "r2-james-james-15.jpg", w: 1080, h: 1248, cap: "Panther head, color" }] },
@@ -382,5 +398,39 @@ window.SITE = {
       ] },
     { id: "p-r4-thad-thad-14", style: "Traditional", artistId: "thad", title: "Flame and eagle arm sleeve, healing", photos: [{ f: "r4-thad-thad-14.jpg", w: 1080, h: 1157, cap: "Flame and eagle arm sleeve, healing" }] },
     { id: "p-r4-thad-thad-15", style: "Traditional", artistId: "thad", title: "Wolf with hearts tattoo", photos: [{ f: "r4-thad-thad-15.jpg", w: 1080, h: 1086, cap: "Wolf with hearts tattoo" }] },
+
+    /* September 2026 intake: 23 photos from the shop, all credited to James
+       Whelan. 04 was dropped as an identical duplicate of the existing
+       "Lady head with flower and skull"; 05, 07 and 21 are different angles of
+       tattoos already on the site and joined those cards instead of making new
+       ones. See AUDIT.md for the dedup evidence. */
+    { id: "p-r5-james-01", style: "Color", artistId: "james", title: "Namakubi severed head", photos: [{ f: "r5-james-01.jpg", w: 1125, h: 1238, cap: "Namakubi severed head" }] },
+    { id: "p-r5-james-02", style: "Black & grey", artistId: "james", title: "Lady head with sombrero and rose", photos: [{ f: "r5-james-02.jpg", w: 1000, h: 1089, cap: "Lady head with sombrero and rose" }] },
+    { id: "p-r5-james-03", style: "Color", artistId: "james", title: "Demon head with sword", photos: [{ f: "r5-james-03.jpg", w: 1125, h: 975, cap: "Demon head with sword" }] },
+    { id: "p-r5-james-06", style: "Black & grey", artistId: "james", title: "Black and grey Japanese sleeve", photos: [{ f: "r5-james-06.jpg", w: 1000, h: 1052, cap: "Black and grey Japanese sleeve" }] },
+    { id: "p-r5-james-08", style: "Color", artistId: "james", title: "Tiger head chest piece", photos: [{ f: "r5-james-08.jpg", w: 1000, h: 1121, cap: "Tiger head chest piece" }] },
+    { id: "p-r5-james-09", style: "Color", artistId: "james", title: "Wolf head chest piece", photos: [{ f: "r5-james-09.jpg", w: 1125, h: 972, cap: "Wolf head chest piece" }] },
+    { id: "p-r5-james-10", style: "Black & grey", artistId: "james", title: "Lady head with skull and roses, chest", photos: [{ f: "r5-james-10.jpg", w: 1125, h: 972, cap: "Lady head with skull and roses, chest" }] },
+    { id: "p-r5-james-11", style: "Black & grey", artistId: "james", title: "Snake forearm piece", photos: [{ f: "r5-james-11.jpg", w: 1125, h: 1238, cap: "Snake forearm piece" }] },
+    { id: "p-r5-james-12", style: "Color", artistId: "james", title: "Lady head with rose and headscarf", photos: [{ f: "r5-james-12.jpg", w: 1125, h: 1134, cap: "Lady head with rose and headscarf" }] },
+    { id: "p-r5-james-13", style: "Black & grey", artistId: "james", title: "Cowboy skull", photos: [{ f: "r5-james-13.jpg", w: 1125, h: 972, cap: "Cowboy skull" }] },
+    { id: "p-r5-james-14", style: "Black & grey", artistId: "james", title: "Cowgirl portrait", photos: [{ f: "r5-james-14.jpg", w: 1125, h: 1060, cap: "Cowgirl portrait" }] },
+    { id: "p-r5-james-15", style: "Black & grey", artistId: "james", title: "Lady head with skull, black and grey", photos: [{ f: "r5-james-15.jpg", w: 1125, h: 1050, cap: "Lady head with skull, black and grey" }] },
+    { id: "p-r5-james-16", style: "Color", artistId: "james", title: "Hannya mask", photos: [{ f: "r5-james-16.jpg", w: 1125, h: 1090, cap: "Hannya mask" }] },
+    { id: "p-r5-james-17", style: "Black & grey", artistId: "james", title: "Rose, black and grey", photos: [{ f: "r5-james-17.jpg", w: 1125, h: 972, cap: "Rose, black and grey" }] },
+    { id: "p-r5-james-18", style: "Black & grey", artistId: "james", title: "Sacred heart with cross", photos: [{ f: "r5-james-18.jpg", w: 1125, h: 1613, cap: "Sacred heart with cross" }] },
+    { id: "p-r5-james-19", style: "Color", artistId: "james", title: "Eagle with leaves, forearm", photos: [{ f: "r5-james-19.jpg", w: 1125, h: 1238, cap: "Eagle with leaves, forearm" }] },
+    { id: "p-r5-james-20", style: "Color", artistId: "james", title: "Snake on the stomach, red and black", photos: [{ f: "r5-james-20.jpg", w: 833, h: 944, cap: "Snake on the stomach, red and black" }] },
+    { id: "p-r5-james-22", style: "Black & grey", artistId: "james", title: "Eagle chest piece, black and grey", photos: [{ f: "r5-james-22.jpg", w: 833, h: 660, cap: "Eagle chest piece, black and grey" }] },
+    { id: "p-r5-james-23", style: "Color", artistId: "james", title: "Chrysanthemum, color", photos: [{ f: "r5-james-23.jpg", w: 826, h: 677, cap: "Chrysanthemum, color" }] },
+
+    /* The three ex-Lettering pieces. They are colour work with script in
+       them, not a category of their own, and they sit last in projects so
+       they land at the end of the Color filter. All three are the shop's
+       attribution to Thadius Gardner. */
+    { id: "p-orig-os-4503448", style: "Color", artistId: "thad", title: "Script with bow", photos: [{ f: "orig-os-4503448.jpg", w: 480, h: 640, cap: "Script with bow" }] },
+    { id: "p-orig-os-4503445", style: "Color", artistId: "thad", title: "Skull with lettering", photos: [{ f: "orig-os-4503445.jpg", w: 480, h: 640, cap: "Skull with lettering" }] },
+    { id: "p-orig-os-4503431", style: "Color", artistId: "thad", title: "Horseshoe with script", photos: [{ f: "orig-os-4503431.jpg", w: 270, h: 480, cap: "Horseshoe with script" }] },
+
   ]
 };
