@@ -12,6 +12,21 @@
 
   /* ---- preview deployments must not compete with the real domain --------- */
   var CANON = 'sanclementetattoo.com';
+
+  /* Where this site is actually serving the public. This is a different
+     question from which host is canonical for search, and the two answers
+     currently disagree: the shop's own domain still points at the old site,
+     so sc-tattoo.netlify.app is the live address the shop hands out while
+     sanclementetattoo.com is the canonical one. Everything outside this list
+     is a rehearsal — localhost, Netlify deploy previews
+     (deploy-preview-N--sc-tattoo.netlify.app) and branch deploys
+     (branch--sc-tattoo.netlify.app) all fall outside it, because the match is
+     exact. Drop the netlify.app entry once the domain moves over. */
+  var LIVE_HOSTS = ['sanclementetattoo.com', 'www.sanclementetattoo.com', 'sc-tattoo.netlify.app'];
+  function liveHost(h) { return LIVE_HOSTS.indexOf(h) !== -1; }
+  function isLiveHost() { return liveHost(location.hostname); }
+  window.liveHost = liveHost;        // read by the test suite
+
   if (location.hostname && location.hostname !== CANON && location.hostname !== 'www.' + CANON) {
     var m = document.createElement('meta');
     m.name = 'robots';
@@ -462,13 +477,19 @@
   var openedAt = Date.now();
 
   /* Dry run: log the inquiry, show what would have been sent, post nothing.
-     On by default anywhere that is not the live domain, so local and preview
-     testing can never drop a fake booking in the shop's inbox. */
+     On by default anywhere that is not a live host, so local and preview
+     testing can never drop a fake booking in the shop's inbox.
+
+     Keyed on isLiveHost(), deliberately not on the canonical domain. A real
+     customer on the address the shop is actually handing out has to get a real
+     submission; telling them "this is not the live site" while they are
+     standing on it is the worse failure of the two. Previews are still
+     covered, because LIVE_HOSTS matches exactly. */
   function isDryRun() {
     var q = new URLSearchParams(location.search);
     if (q.get('dryrun') === '1') return true;
     if (q.get('dryrun') === '0') return false;
-    return location.hostname !== CANON && location.hostname !== 'www.' + CANON;
+    return !isLiveHost();
   }
 
   /* A form that silently stops working is worse than no form. Every failure is
