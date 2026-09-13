@@ -4,6 +4,7 @@
 import { chromium } from '@playwright/test';
 import { writeFile, readFile, mkdir } from 'node:fs/promises';
 import path from 'node:path';
+import { existsSync, readdirSync } from 'node:fs';
 
 const ROOT = process.cwd();
 const shot = 'photos/r2-greg-greg-05.jpg';            // the shop's red front door
@@ -52,7 +53,7 @@ const og = page(1200, 630, `
     <h1 class="name">SAN CLEMENTE<em>TATTOO</em></h1>
     <div class="rule"></div>
     <p class="script">Walk-ins every day</p>
-    <p class="meta"><b>117 Avenida Granada</b> · San Clemente, CA<br>Noon to 8 pm, seven days · (949) 498-8487</p>
+    <p class="meta"><b>117 Avenida Granada</b> · San Clemente, CA<br>12:00 PM to 7:00 PM, daily · (949) 498-8487</p>
   </div>
   <div class="right"><img src="data:image/jpeg;base64,${b64}" alt=""></div>
 </div>`);
@@ -68,8 +69,21 @@ const icon = page(512, 512, `
 <div class="i"><span>SC</span><i></i><span class="g">TAT</span></div>`);
 
 // This sandbox ships one Chromium build that may not match the installed
-// Playwright version, so allow an explicit binary via CHROMIUM_PATH.
-const exe = process.env.CHROMIUM_PATH;
+// Playwright version, and no headless-shell build at all, so find a real
+// browser the same way playwright.config.js does before falling back to
+// Playwright's own managed download.
+function findChromium() {
+  if (process.env.CHROMIUM_PATH) return process.env.CHROMIUM_PATH;
+  const root = process.env.PLAYWRIGHT_BROWSERS_PATH;
+  if (!root || !existsSync(root)) return undefined;
+  const dirs = readdirSync(root).filter(d => /^chromium-\d+$/.test(d)).sort().reverse();
+  for (const d of dirs) {
+    const bin = path.join(root, d, 'chrome-linux', 'chrome');
+    if (existsSync(bin)) return bin;
+  }
+  return undefined;
+}
+const exe = findChromium();
 const browser = await chromium.launch(exe ? { executablePath: exe } : {});
 await mkdir('assets', { recursive: true });
 

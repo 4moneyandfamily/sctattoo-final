@@ -73,7 +73,7 @@ test('the reviewed groups really are grouped', async ({ page }) => {
   // no longer behind a cover: the shop asked for it shown like any other card
   expect(find('set-goddess-bodysuit').sensitive).toBeUndefined();
   expect(find('set-mary-back').photos).toHaveLength(3);
-  expect(find('set-james-dragon-sleeve').photos).toHaveLength(10);
+  expect(find('set-james-dragon-sleeve').photos).toHaveLength(11);
   expect(find('set-bulldog').photos).toHaveLength(2);
   expect(find('set-mahakala').photos).toHaveLength(2);
   // one tattoo cannot have two artists
@@ -103,9 +103,9 @@ test('the owner is named Brother Greg and his surname appears nowhere', async ({
 
 test('style and artist filters narrow the grid and can be cleared', async ({ page }) => {
   const S = await site(page);
-  await page.locator('#style-filters button', { hasText: /^Lettering$/ }).click();
-  const lettering = S.projects.filter(p => p.style === 'Lettering').length;
-  await expect(page.locator('#tally')).toContainText(`of ${lettering}`);
+  await page.locator('#style-filters button', { hasText: /^Paintings$/ }).click();
+  const paintings = S.projects.filter(p => p.style === 'Paintings').length;
+  await expect(page.locator('#tally')).toContainText(`of ${paintings}`);
 
   await page.locator('#style-filters button', { hasText: /^All$/ }).click();
   await expect(page.locator('#tally')).toContainText(`of ${S.projects.length}`);
@@ -117,7 +117,7 @@ test('style and artist filters narrow the grid and can be cleared', async ({ pag
 
 test('a filter combination with no work shows the empty state, not a blank grid', async ({ page }) => {
   await page.locator('#artist-filters button', { hasText: /^Brother Greg$/ }).click();
-  await page.locator('#style-filters button', { hasText: /^Lettering$/ }).click();
+  await page.locator('#style-filters button', { hasText: /^Black & grey$/ }).click();
   await expect(page.locator('#grid-empty')).toBeVisible();
   await expect(page.locator('.card')).toHaveCount(0);
   await expect(page.locator('#more')).toBeHidden();
@@ -162,7 +162,7 @@ test('every multi-photo card leads with the cover the shop chose', async ({ page
     'set-mary-back': 'orig-ig-193825.jpg',
     'set-brian-demon-leg': 'orig-ig-193930.jpg',
     'set-mahakala': 'orig-ig-194002.jpg',
-    'set-james-dragon-sleeve': 'orig-ig-194041.jpg',
+    'set-james-dragon-sleeve': 'r5-james-05.jpg',
     'set-chas-skel-scorp': 'orig-ig-194120.jpg',
     'set-james-dragon-back': 'orig-ig-194138.jpg',
     'set-brian-tiger': 'orig-os-4503420.jpg',
@@ -176,6 +176,11 @@ test('every multi-photo card leads with the cover the shop chose', async ({ page
     'set-chas-severed-head': 'orig-ig-193732.jpg',
     'set-james-eagle': 'orig-ig-193751.jpg',
     'set-brian-lady-head': 'r2-brian-brian-10.jpg',
+    // September 2026: same tattoo or painting shot twice, better image first
+    'set-brian-panther': 'orig-ig-193920.jpg',
+    'set-greg-religious-flash': 'r2-greg-greg-02.jpg',
+    'set-james-koi-back': 'r2-james-james-12.jpg',
+    'set-james-lady-pearls': 'orig-ig-194150.jpg',
   };
   const S = await site(page);
   for (const [id, cover] of Object.entries(expected)) {
@@ -239,7 +244,7 @@ test('the Black & grey filter contains no colour work', async ({ page }) => {
   // spotted it on the live site. These are the specific offenders.
   const S = await site(page);
   const byId = Object.fromEntries(S.projects.map(p => [p.id, p]));
-  for (const id of ['p-orig-ig-193920', 'p-orig-ig-193926', 'p-orig-ig-194010',
+  for (const id of ['set-brian-panther', 'p-orig-ig-193926', 'p-orig-ig-194010',
                     'p-orig-os-4503443', 'p-orig-os-4503438']) {
     expect(byId[id], id).toBeTruthy();
     expect(byId[id].style, `${id} "${byId[id].title}" is back under Black & grey`)
@@ -328,4 +333,114 @@ test('the ornamental sleeve is off the front page and near the end', async ({ pa
   expect(S.buried).toContain('p-orig-ig-193943');
   const ids = (await order(page)).map(p => p.id);
   expect(ids.indexOf('p-orig-ig-193943')).toBeGreaterThan(ids.length - S.buried.length - 1);
+});
+
+test('Lettering is gone and its three pieces sit at the end of Color', async ({ page }) => {
+  const S = await site(page);
+  expect(S.styles).not.toContain('Lettering');
+  await expect(page.locator('#style-filters button', { hasText: /^Lettering$/ })).toHaveCount(0);
+  expect(S.projects.filter(p => p.style === 'Lettering')).toHaveLength(0);
+
+  const moved = ['p-orig-os-4503448', 'p-orig-os-4503445', 'p-orig-os-4503431'];
+  const byId = Object.fromEntries(S.projects.map(p => [p.id, p]));
+  for (const id of moved) {
+    expect(byId[id], id).toBeTruthy();
+    expect(byId[id].style, id).toBe('Color');
+    expect(byId[id].artistId, id).toBe('thad');
+  }
+  // last in the Color filter, which is where the shop asked for them
+  const colour = (await order(page)).filter(p => p.style === 'Color').map(p => p.id);
+  expect(colour.slice(-3).sort()).toEqual([...moved].sort());
+});
+
+test('the shop hours read 12:00 PM to 7:00 PM, every day, everywhere', async ({ page }) => {
+  const S = await site(page);
+  expect(S.hours.weekly).toHaveLength(7);
+  for (const d of S.hours.weekly) {
+    expect(d.open, d.day).toBe('12:00');
+    expect(d.close, d.day).toBe('19:00');
+  }
+  await expect(page.locator('#hours-now')).toHaveText('12:00 PM to 7:00 PM, daily');
+  const rows = page.locator('#hours-list li');
+  await expect(rows).toHaveCount(7);
+  for (let i = 0; i < 7; i++) {
+    await expect(rows.nth(i)).toContainText('12:00 PM \u2013 7:00 PM');
+  }
+  await expect(page.locator('footer')).toContainText('12:00 PM to 7:00 PM');
+  // nothing anywhere still says the old closing time
+  const html = (await page.content()).toLowerCase();
+  expect(html).not.toContain('8 pm');
+  expect(html).not.toContain('20:00');
+});
+
+test('the visitor-facing copy no longer says "the wall" or "card"', async ({ page }) => {
+  // Greg's note: visitors did not know what "the wall" meant. Class names and
+  // code comments are not visitor-facing, so this reads rendered text only.
+  const text = await page.evaluate(() => document.body.innerText.toLowerCase());
+  expect(text).not.toMatch(/\bwall\b/);
+  expect(text).not.toMatch(/\bcards?\b/);
+  await expect(page.locator('#gallery-h')).toHaveText('The work');
+});
+
+test('How it works spells out walk-ins, the deposit and free consultations', async ({ page }) => {
+  const how = page.locator('#how');
+  await expect(page.locator('#how-h')).toHaveText('How it works');
+  await expect(how.locator('.steps-how > li')).toHaveCount(3);
+  const text = (await how.innerText()).toLowerCase();
+  expect(text).toContain('first come, first served');
+  expect(text).toContain('between appointments');
+  expect(text).toMatch(/call the shop before you come down|the earlier in the day/);
+  expect(text).toContain('small deposit');
+  expect(text).toMatch(/goes toward the price/);
+  expect(text).toMatch(/holds the chair/);
+  expect(text).toContain('consultations are free');
+  expect(text).toContain('do not need an appointment');
+  // it does not invent a deposit amount
+  expect(text).not.toMatch(/\$\s?\d/);
+});
+
+test('the September merges each open as a two-photo swipeable card', async ({ page }) => {
+  for (const [id, n] of [['set-brian-panther', 2], ['set-greg-religious-flash', 2],
+                         ['set-james-koi-back', 2], ['set-james-lady-pearls', 2]]) {
+    await page.goto('/#work/' + id);
+    await expect(page.locator('#viewer')).toHaveJSProperty('open', true);
+    await expect(page.locator('#v-rail .v-slide')).toHaveCount(n);
+    await expect(page.locator('#v-counter')).toHaveText(`1 / ${n}`);
+    await page.locator('#v-next').click();
+    await expect(page.locator('#v-counter')).toHaveText(`${n} / ${n}`);
+    await page.keyboard.press('Escape');
+    // wait for the close to settle: closing pops the history entry the open
+    // pushed, and racing the next hash navigation against that pop lands on a
+    // half-torn-down viewer.
+    await expect(page.locator('#viewer')).toHaveJSProperty('open', false);
+    await expect(page.locator(`#card-${id} .count`)).toHaveText(String(n));
+  }
+  // and the cards they replaced no longer take a slot of their own
+  const ids = (await order(page)).map(x => x.id);
+  for (const gone of ['p-orig-ig-193920', 'p-orig-ig-193923', 'p-r2-greg-greg-01',
+                      'p-r2-greg-greg-02', 'p-r2-james-james-12', 'p-orig-ig-194150']) {
+    expect(ids, gone).not.toContain(gone);
+  }
+});
+
+test('the September intake is on the site, credited to James Whelan', async ({ page }) => {
+  const S = await site(page);
+  const files = new Set();
+  S.projects.forEach(p => p.photos.forEach(ph => files.add(ph.f)));
+  // 23 supplied, 04 dropped as an identical duplicate of an existing photo
+  const kept = [1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
+  expect(kept).toHaveLength(22);
+  for (const n of kept) {
+    const f = `r5-james-${String(n).padStart(2, '0')}.jpg`;
+    expect(files.has(f), `${f} missing from the gallery`).toBe(true);
+  }
+  expect(files.has('r5-james-04.jpg'), 'the duplicate was imported anyway').toBe(false);
+  // every project carrying one of them credits James Whelan
+  for (const p of S.projects) {
+    if (p.photos.some(ph => ph.f.startsWith('r5-james-'))) {
+      expect(p.artistId, `${p.id} is not credited to James Whelan`).toBe('james');
+    }
+  }
+  expect(S.artists.find(a => a.id === 'james').name).toBe('James Whelan');
+  expect(S.artists.find(a => a.id === 'james').handle).toBe('_jameswhelan');
 });
