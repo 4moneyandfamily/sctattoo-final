@@ -13,17 +13,22 @@
   /* ---- preview deployments must not compete with the real domain --------- */
   var CANON = 'sanclementetattoo.com';
 
-  /* Where this site is actually serving the public. This is a different
-     question from which host is canonical for search, and the two answers
-     currently disagree: the shop's own domain still points at the old site,
-     so sc-tattoo.netlify.app is the live address the shop hands out while
-     sanclementetattoo.com is the canonical one. Everything outside this list
-     is a rehearsal — localhost, Netlify deploy previews
-     (deploy-preview-N--sc-tattoo.netlify.app) and branch deploys
-     (branch--sc-tattoo.netlify.app) all fall outside it, because the match is
-     exact. Drop the netlify.app entry once the domain moves over. */
-  var LIVE_HOSTS = ['sanclementetattoo.com', 'www.sanclementetattoo.com', 'sc-tattoo.netlify.app'];
-  function liveHost(h) { return LIVE_HOSTS.indexOf(h) !== -1; }
+  /* Where this site is actually serving the public. A different question from
+     which host is canonical for search, and the two answers currently
+     disagree: the shop's own domain still points at the old site, so a
+     netlify.app or pages.dev address is the live one while
+     sanclementetattoo.com is the canonical one.
+
+     The list lives in SITE.liveHosts in data/site.js, so putting the site on
+     a new host is a one-line edit to the data file and nothing else. The
+     fallback here covers only the case where the data file failed to load,
+     and it is the canonical domain alone: if the config cannot be read, the
+     safe assumption is that this is not the live site and the booking form
+     must not pretend to send. */
+  function liveHost(h) {
+    var list = (SITE && SITE.liveHosts) || [CANON, 'www.' + CANON];
+    return list.indexOf(h) !== -1;
+  }
   function isLiveHost() { return liveHost(location.hostname); }
   window.liveHost = liveHost;        // read by the test suite
 
@@ -458,6 +463,13 @@
 
     var hnow = $('hours-now');
     if (hnow) hnow.textContent = SITE.hours.display;
+
+    /* The build stamp, and the host it is being served from. Two seconds of
+       squinting at a footer beats an afternoon of "I pushed it and the site
+       still looks old" — it says immediately whether you are looking at a
+       deploy that never landed, a cached page, or a different site entirely. */
+    var stamp = $('build-stamp');
+    if (stamp && SITE.build) stamp.textContent = ' Build ' + SITE.build + ' · ' + location.hostname;
 
     $('hours-list').innerHTML = SITE.hours.weekly.map(function (d) {
       return '<li data-day="' + esc(d.day) + '"><span>' + esc(d.day) + '</span><span>' + esc(spanLabel(d)) + '</span></li>';

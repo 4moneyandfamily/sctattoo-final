@@ -1,0 +1,40 @@
+# Host-portable copy of the header rules in netlify.toml.
+#
+# Netlify reads netlify.toml first and this file is redundant there. Cloudflare
+# Pages, and most other static hosts, read this file and know nothing about
+# netlify.toml — so this is what keeps the CSP, the caching and the security
+# headers intact when the site is served from somewhere else. Keep the two in
+# step; netlify.toml carries the commentary explaining each rule.
+
+/*
+  Content-Security-Policy: default-src 'self'; base-uri 'none'; object-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'self'; form-action 'self'; frame-src https://www.openstreetmap.org; frame-ancestors 'none'; upgrade-insecure-requests
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+  Cross-Origin-Opener-Policy: same-origin
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+
+# Content-stable: the filenames carry their width, so cache them hard.
+/assets/g/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/photos/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# These four filenames never change, so only a cache rule stops a CDN serving
+# yesterday's site. Cloudflare caches .css and .js for hours by default.
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/data/site.js
+  Cache-Control: public, max-age=0, must-revalidate
+
+/assets/css/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/assets/js/*
+  Cache-Control: public, max-age=0, must-revalidate

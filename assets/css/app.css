@@ -475,6 +475,9 @@ footer a:hover { color: #fff; }
 .ig-list { list-style: none; padding: 0; margin: 0; }
 .ig-list li { margin: 0 0 .35rem; }
 .legal { font-family: "Archivo", sans-serif; font-size: .8rem; color: var(--text-soft); margin-top: 1.6rem; }
+/* Quiet enough that a visitor never reads it, present enough that anyone
+   checking a deploy can find it without dev tools. */
+.build { opacity: .55; white-space: nowrap; }
 
 .dock {
   position: fixed; bottom: 0; left: 0; right: 0; z-index: 50;

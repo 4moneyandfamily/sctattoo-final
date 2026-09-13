@@ -1,0 +1,6 @@
+# Host-portable copy of the redirects in netlify.toml, for Cloudflare Pages and
+# any other static host that reads this file. Old multi-page URLs keep landing
+# somewhere useful.
+/home.html     /       301
+/contact.html  /#book  301
+/links.html    /#crew  301

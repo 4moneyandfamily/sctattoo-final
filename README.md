@@ -24,8 +24,9 @@ of search for now (OPEN-QUESTIONS #11).
 | `assets/g/` | Responsive WebP derivatives. **This** is what visitors load. Generated. |
 | `assets/fonts/` | Self-hosted WOFF2. No third-party font requests. |
 | `tools/` | Build and check scripts. See below. |
-| `tests/` | Playwright suite, 330 tests across phone, tablet and desktop. |
+| `tests/` | Playwright suite, 336 tests across phone, tablet and desktop. |
 | `netlify.toml` | Redirects, cache headers, CSP and the other security headers. |
+| `_headers`, `_redirects` | The same rules in the portable format Cloudflare Pages and most other static hosts read. Keep in step with `netlify.toml`. |
 | `AUDIT.md` | What this rebuild changed and why, with the image audit results. |
 | `OPEN-QUESTIONS.md` | **Read this.** Things only Brother Greg can answer. |
 | `LICENSES.md` | Font, icon and dependency licence audit. |
@@ -289,3 +290,46 @@ exception the shop asked for, and on a black page it reads as the one lit panel
 on the wall, which is where the calls to action live. The hero's painted sign
 keeps its own palette for the same reason — it is a painted object hanging on a
 black wall, not a surface to be recoloured.
+
+## Which version am I looking at
+
+The footer ends with a small `Build <date> · <hostname>`. It is there because
+this site has run in parallel on several hosts and several accounts, and
+"I pushed it and the site still looks old" has three completely different
+causes that look identical from the outside:
+
+1. **The deploy never ran.** The stamp shows an older date than the last
+   commit. On Netlify's free tier, hitting the credit cap pauses *production
+   deploys while leaving deploy previews working and published sites up* — so
+   previews show the new work, the live URL keeps serving the last successful
+   deploy, and nothing anywhere reports an error. Check the project's deploy
+   list for paused or skipped builds, and the banner at the top of the team
+   dashboard.
+2. **A cache.** The stamp shows the right date on a hard reload but not a
+   normal one. Every unversioned file is pinned to `must-revalidate` in both
+   `netlify.toml` and `_headers`, so this should not happen — but a CDN added
+   in front of the host can reintroduce it.
+3. **A different site.** The hostname in the stamp is not the URL you think
+   you typed. More than one host has served a build of this shop.
+
+Bump `SITE.build` in `data/site.js` with any change that should be visible.
+
+## Moving hosts
+
+Nothing here is tied to Netlify. There is no build step: `publish = "."`, no
+build command, no framework, no runtime dependencies. Point any static host at
+the repo root and it works.
+
+`_headers` and `_redirects` carry the same CSP, security headers, cache policy
+and redirects as `netlify.toml`, in the format Cloudflare Pages and most other
+static hosts read. `tests/seo.spec.js` fails if the two drift apart.
+
+Two things to do after moving:
+
+1. **Add the new hostname to `SITE.liveHosts`** in `data/site.js`. Until you
+   do, the booking form treats the new address as a rehearsal and posts
+   nothing — a real customer would be told "this is not the live site".
+2. **Leave `CANON` alone.** It is `sanclementetattoo.com`, and the `noindex`
+   that keeps stand-in addresses out of search keys off it. The day DNS points
+   at the new host, the site becomes indexable with the correct canonical on
+   its own, with no code change.

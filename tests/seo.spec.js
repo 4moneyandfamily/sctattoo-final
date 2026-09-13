@@ -135,3 +135,40 @@ test('the page declares its language and viewport', async ({ page }) => {
   expect(vp).not.toContain('user-scalable=no');   // never block pinch zoom
   expect(vp).not.toContain('maximum-scale');
 });
+
+test('the footer carries a build stamp and the host, so a stale deploy is obvious', async ({ page }) => {
+  // This shop has had parallel builds on several hosts and a paused deploy
+  // queue that silently pinned the live site to an old version. A stamp on the
+  // page is the difference between seeing that in one second and guessing.
+  const S = await page.evaluate(() => window.SITE);
+  expect(S.build, 'SITE.build is missing').toMatch(/^\d{4}-\d{2}-\d{2}[a-z]?$/);
+  const stamp = page.locator('#build-stamp');
+  await expect(stamp).toContainText(S.build);
+  await expect(stamp).toContainText('127.0.0.1');   // the host it is served from
+});
+
+test('the header and redirect rules are host-portable, not Netlify-only', async ({ page }) => {
+  // A credit cap on one host must never be the reason the site cannot move.
+  const toml = await (await page.request.get('/netlify.toml')).text();
+  const headers = await (await page.request.get('/_headers')).text();
+  const redirects = await (await page.request.get('/_redirects')).text();
+
+  // the CSP, the security headers and both cache policies travel with the site
+  for (const rule of ["default-src 'self'", 'X-Frame-Options', 'X-Content-Type-Options',
+                      'Referrer-Policy', 'Permissions-Policy', 'Cross-Origin-Opener-Policy',
+                      'Strict-Transport-Security', 'max-age=31536000, immutable',
+                      'max-age=0, must-revalidate']) {
+    expect(headers, `_headers is missing ${rule}`).toContain(rule);
+    expect(toml, `netlify.toml is missing ${rule}`).toContain(rule);
+  }
+  // the unversioned filenames are all pinned to revalidate in both files
+  for (const path of ['/index.html', '/data/site.js', '/assets/css/', '/assets/js/']) {
+    expect(headers, `_headers does not cover ${path}`).toContain(path);
+    expect(toml, `netlify.toml does not cover ${path}`).toContain(path);
+  }
+  // and the old page URLs still redirect
+  for (const from of ['/home.html', '/contact.html', '/links.html']) {
+    expect(redirects, `_redirects is missing ${from}`).toContain(from);
+    expect(toml, `netlify.toml is missing ${from}`).toContain(from);
+  }
+});

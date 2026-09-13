@@ -8,6 +8,36 @@
  * the w/h numbers; tools/add-photos.mjs prints them for you.
  */
 window.SITE = {
+  /* Printed small at the very end of the footer, and that is the whole point:
+     "which version am I looking at?" should be answerable in one second, on a
+     phone, by anyone, with no dev tools. This shop has had several parallel
+     builds on several hosts, and without a stamp on the page there is no way
+     to tell a deploy that did not land from a browser showing a cached copy
+     from a URL pointing at a different site entirely.
+
+     Bump it with any change that should be visible to a visitor. Format is
+     the date, plus a letter if there is more than one in a day. */
+  build: "2026-09-13a",
+
+  /* Every address where this site serves the public. Add one here, in this
+     file, the moment the site goes up somewhere new — it needs no code change
+     and no deploy of anything but this file.
+
+     It decides one thing: whether the booking form really submits. A host that
+     is NOT on this list runs the form in dry-run and posts nothing, which is
+     what keeps test bookings out of the shop's inbox on previews and local
+     copies. Which means the cost of forgetting to add a host here is a real
+     customer being told "this is not the live site". Add it.
+
+     Matched exactly, on purpose, so preview subdomains
+     (deploy-preview-7--*.netlify.app, *.pages.dev previews, branch deploys)
+     and lookalike hostnames never qualify by accident. */
+  liveHosts: [
+    "sanclementetattoo.com",
+    "www.sanclementetattoo.com",
+    "sc-tattoo.netlify.app"
+  ],
+
   shop: {
     name: "San Clemente Tattoo",
     owner: "Brother Greg",
