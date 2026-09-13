@@ -93,6 +93,21 @@
   /* ====================================================================== */
   function hm(s) { var p = s.split(':'); return (+p[0]) * 60 + (+p[1]); }
 
+  /* Every hours string on the page is derived from SITE.hours.weekly. Nothing
+     here spells out an opening time, so changing the data changes the page,
+     the hours table, the status line and the form's reply together. */
+  function clockLabel(s) {
+    var p = s.split(':'), h = +p[0], m = +p[1];
+    var ampm = h >= 12 ? 'PM' : 'AM';
+    var h12 = h % 12 === 0 ? 12 : h % 12;
+    return h12 + ':' + (m < 10 ? '0' + m : m) + ' ' + ampm;
+  }
+  function spanLabel(row) { return clockLabel(row.open) + ' \u2013 ' + clockLabel(row.close); }
+  function sameEveryDay() {
+    var w = SITE.hours.weekly, a = w[0];
+    return w.every(function (d) { return d.open === a.open && d.close === a.close; }) ? a : null;
+  }
+
   function status() {
     var now = new Date();
     var f = new Intl.DateTimeFormat('en-US', {
@@ -119,7 +134,13 @@
       pill.classList.toggle('open', s.open);
       pill.classList.toggle('shut', !s.open);
     }
-    if (when) when.textContent = s.open ? 'Until 8 pm Pacific' : 'Noon to 8 pm Pacific · now ' + s.clock + ' Pacific';
+    var every = sameEveryDay();
+    var daily = every ? spanLabel(every) + ' daily' : '';
+    if (when) {
+      when.textContent = s.open && s.row
+        ? 'Until ' + clockLabel(s.row.close) + ' Pacific'
+        : (daily || 'See hours below') + ' Pacific \u00b7 now ' + s.clock + ' Pacific';
+    }
     if (book) {
       book.textContent = s.open
         ? 'The shop is open. Walk in, or send a request if you want a held time.'
@@ -420,8 +441,11 @@
       return '<details><summary>' + esc(qa[0]) + '</summary><p>' + esc(qa[1]) + '</p></details>';
     }).join('');
 
+    var hnow = $('hours-now');
+    if (hnow) hnow.textContent = SITE.hours.display;
+
     $('hours-list').innerHTML = SITE.hours.weekly.map(function (d) {
-      return '<li data-day="' + esc(d.day) + '"><span>' + esc(d.day) + '</span><span>Noon &ndash; 8 pm</span></li>';
+      return '<li data-day="' + esc(d.day) + '"><span>' + esc(d.day) + '</span><span>' + esc(spanLabel(d)) + '</span></li>';
     }).join('');
 
     var strip = $('shop-strip');
@@ -529,7 +553,8 @@
       .then(function (res) {
         if (!res.ok) throw new Error('HTTP ' + res.status);
         showResult('ok',
-          '<p><strong>Request sent.</strong> The shop answers during open hours, noon to 8 pm Pacific.</p>' +
+          '<p><strong>Request sent.</strong> The shop answers during open hours, ' +
+          esc((sameEveryDay() ? spanLabel(sameEveryDay()) + ' daily' : 'see the hours below')) + ' Pacific.</p>' +
           '<p>In a hurry? Call <a href="' + esc(SITE.shop.phoneHref) + '">' + esc(SITE.shop.phone) + '</a>.</p>');
         form.reset();
         openedAt = Date.now();

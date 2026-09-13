@@ -29,7 +29,7 @@ window.SITE = {
 
   hours: {
     timezone: "America/Los_Angeles",
-    display: "Noon to 7 pm, seven days",
+    display: "12:00 PM to 7:00 PM, daily",
     weekly: [
       { day: "Sunday", open: "12:00", close: "19:00" },
       { day: "Monday", open: "12:00", close: "19:00" },

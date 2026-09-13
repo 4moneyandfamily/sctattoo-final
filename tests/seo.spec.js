@@ -88,7 +88,7 @@ test('structured data is valid, complete and free of the surname', async ({ page
   expect(d.address.postalCode).toBe('92672');
   expect(d.founder.name).toBe('Brother Greg');
   expect(d.openingHoursSpecification[0].opens).toBe('12:00');
-  expect(d.openingHoursSpecification[0].closes).toBe('20:00');
+  expect(d.openingHoursSpecification[0].closes).toBe('19:00');
   expect(d.openingHoursSpecification[0].dayOfWeek).toHaveLength(7);
   expect(d.image).toMatch(/^https:\/\//);
   expect(d.url).toBe(CANON);

@@ -84,7 +84,7 @@ test('closing a deep-linked viewer leaves the page usable', async ({ page }) => 
   await expect(page.locator('#viewer')).toHaveJSProperty('open', false);
   await expect(page.locator('html')).not.toHaveClass(/viewer-open/);
   // and the gallery still responds
-  await page.locator('#style-filters button', { hasText: /^Lettering$/ }).click();
+  await page.locator('#style-filters button', { hasText: /^Paintings$/ }).click();
   await expect(page.locator('#tally')).toContainText('Showing');
 });
 

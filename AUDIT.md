@@ -562,3 +562,198 @@ saturation measurement for exactly that reason. Rather than argue the call, it
 came off the front page and went to the end of the running order, at the shop's
 request. Its style label is unchanged. `Plague doctor back piece` took its
 place in the featured 24.
+
+---
+
+# September 2026 pass
+
+Six things were asked for: clean the photo flaws, take in 23 new photos, merge
+the duplicate-angle pairs, go black, fix the hours, and replace the "wall" and
+"card" wording with a How It Works. What follows is the evidence behind the
+judgement calls.
+
+## Screenshot chrome: it was on half the archive, and here is how that was found
+
+The brief said roughly half the gallery carried Instagram's own furniture. That
+turned out to be exactly right, and finding it took three passes because the
+obvious approaches both fail:
+
+- **Statistics over corners don't work.** A first detector measured dark and
+  light pixel fractions in each corner ROI and produced 93 candidates out of
+  186 — a number that looked plausible and was mostly noise, because it cannot
+  tell a semi-transparent grey pill from dark artwork.
+- **Downscaled contact sheets don't work either.** A 23px icon disappears, and
+  a smooth out-of-focus corner resampled with nearest-neighbour grows a crisp
+  hexagonal edge that looks exactly like an eraser smear. Two files were nearly
+  cropped for a smudge that was only soft background.
+
+What worked was looking at every corner of every master at 1:1, in tile sheets
+of 48, and then writing detectors calibrated against what the eye had already
+confirmed:
+
+| Flaw | Files | How it was found |
+|---|---|---|
+| Carousel counter pill, top-right | 84 | Pure-white achromatic glyph groups in the top-right region, then filtered to the canonical Instagram position: pill spanning y 35-83 with its right edge ~42px in, at 1080px wide. Every hit sat inside ±10px of that box, which is the tell that it is rendered UI and not a photograph. Agreed with the visual count to within four files, all four resolved by eye. |
+| Mute / tagged-people icons, bottom corners | 56 | The white glyph is byte-identical across files: a 23x23 speaker-with-slash 46-48px from the right and 44-46px from the bottom, or a 22x20 person silhouette 49px from the left. Two detectors with different thresholds plus the bottom-strip sweep; the union was taken, because a missed icon ships and an extra 100px of crop does not. |
+| Letterbox and pillarbox bars | 60 | Run-length of near-black rows and columns from each edge. The naive version stopped early on the `r4-chas-*` set, because the counter pill sits *in* the black surround and makes those rows non-black. Fixed by falling back to where real content starts, guarded so it only fires on a band that is genuinely a flat black bar rather than dark artwork. |
+| White gutters and collage frames | 6 | Same run-length, near-white. |
+| Scan icon, app watermark, phone-mockup inset, browser UI panel | 4 | By eye, hand-boxed. |
+
+Worst case first: **`r2-brian-brian-05`** was not a photograph with chrome on
+it, it was an entire un-cropped Instagram post — account header, two handles,
+the music credit, the tagged-people icon, the mute icon, and the top of the
+next post bleeding in at the bottom. It is now the jaguar head and nothing
+else. **`r2-brian-brian-03`** and **`r2-brian-brian-22`**, both on the front
+page, carried a liked-by thumbnail showing a real person's face.
+
+139 masters were cropped. Median area loss 12%; on the 60 letterboxed files
+the crop is pure gain. The full gallery, every filter open on a DPR-3 phone,
+went from 6.40 MB to 4.38 MB as a side effect.
+
+**The one place this cost something.** On `orig-ig-193822` ("Eagle and cross
+Memorial Day art") the scan icon sits on top of the painting's bottom banner.
+Cropping it out clips the bottom of the GOD FAMILY COUNTRY scroll; cropping the
+right side instead would have cut the same banner's end. Inpainting it would
+have meant generating pixels of somebody's painting, which is not on the table.
+The crop won, and it is written down here and in OPEN-QUESTIONS.md rather than
+quietly absorbed.
+
+## The 23 new photos
+
+All 23 verified against the SHA-256 hashes and dimensions in `manifest.json`:
+23/23 match, nothing corrupt, nothing missing.
+
+`PHOTO_INDEX.md` in the package states "No Instagram or phone interface
+remains." That does not hold. Every one of the 23 carries a soft grey smear
+roughly 150x150px in the top-right corner, which is where the carousel counter
+lives, and the shape of it is unmistakable once you look at 1:1 rather than at
+a thumbnail: a flat blob with a visible boundary against sharper surroundings,
+grey regardless of what is underneath it. Photo 07 and photo 12 also still have
+the mute icon; 17 has a browser UI panel with pagination dots; 20, 21 and 22
+have white collage gutters with a slice of the neighbouring slide outside them;
+02 has a white band and a dark smear.
+
+All 23 were cropped. On photo 09 the smear overlapped the wolf's ear, so the
+crop takes the very tip of it. The whole face and both ears survive, and a
+visible grey smear over an artist's linework is worse.
+
+### Dedup, and the one photo that was dropped
+
+Compared against all 186 published masters by dHash, 32x32-DCT pHash, and
+scale-and-offset registration residual. Only one was an identical duplicate:
+
+| New photo | Existing | Residual | Verdict |
+|---|---|---|---|
+| `04_lady-head-skull` | `orig-ig-194153` "Lady head with flower and skull" | **0.28** | same frame — dropped |
+| `07_dragon-backpiece` | `r2-james-james-12` "Koi full-back bodysuit" | 0.48 | different shot of the same tattoo — kept, joined that set |
+| `05_dragon-sleeve` | `r2-brian-brian-15` | 0.70 | different tattoo — kept |
+
+The calibration from the earlier passes holds: under 0.30 is the same frame,
+0.42 and over is a different shot.
+
+Registration only answers "same frame or not". "Same tattoo or not" is a
+looking job, and three more turned out to be different angles of work already
+on the site, which under the standing one-tile-per-tattoo rule means they join
+that tile rather than making a new one:
+
+- **05** is the dragon sleeve in `set-james-dragon-sleeve` — same arm, same
+  red dragon over grey Japanese work, same subject. Now the cover, because a
+  full-arm front view beats the close-up detail that was leading.
+- **07** is the koi bodysuit in `r2-james-james-12`, one step further back.
+- **21** is the healed photo of `orig-ig-194150` "Lady head with pearls" —
+  same ornamental headdress, same hand under the chin, same pearl earring, same
+  red mark below it. The filename says "healed" and it is.
+
+Nine other plausible pairings were checked side by side and are genuinely
+different tattoos: the namakubi against the existing severed head, three
+different black-and-grey lady heads, the hannya against the existing demon
+mask, the new eagle against both existing eagles, the colour chrysanthemum
+against the black-and-grey one, and the cowboy skull against Thadius's.
+
+19 new tiles, 3 photos added to existing tiles, 1 dropped.
+
+**Style labels.** Taken from the manifest except `10_chest-blaster`, which the
+manifest calls colour and which has no colour ink anywhere in it. It is filed
+Black & grey. `18` and `22` were checked the same way and the manifest is right
+about both.
+
+## The duplicate-angle merges
+
+- **Panther.** "Black panther torso piece" and "Panther head piece" are one
+  tattoo photographed twice — the same red mouth, yellow eyes and spiderwebs.
+  One tile now, titled "Panther head piece", with the whole-tattoo shot leading
+  and the close-up second.
+- **Religious flash.** The two "Religious flash painting" entries are one
+  painting: flat against the wall, well lit, then framed and hung at an angle
+  with glare across it. One tile, flat shot first.
+
+Both had been sitting as two separate tiles, which is the mistake the
+one-tile-per-tattoo rule exists to prevent. It has now been caught four times
+by the shop and never by a test, so `tests/gallery.spec.js` pins all six merged
+sets and their covers.
+
+## Black ground
+
+Every colour on the page now comes from a token, and there are two token sets.
+The default is black ground, white lettering, red accent. The second, `.paper`,
+carries the shop's painted-sign colours and is scoped to the walk-in and
+booking section, which is the exception that was asked for. Because every rule
+reads tokens, that override is nine declarations and no duplicated CSS.
+
+Two contrast facts drove the palette. `--red` (#D81E2B) clears 3.90:1 against
+the black ground, which is enough for a rule, a border or a button face and
+short of the 4.5:1 that body text needs — so a second token, `--red-soft`
+(#FF5E68, 6.65:1), carries links and small type, and the brush script keeps the
+true red because at 25-37px it is large text under the 3:1 rule. White on black
+is 20.4:1. The contrast test in `tests/a11y.spec.js` measures rendered colours
+rather than the stylesheet, so all of this fails the suite if it regresses; it
+passes.
+
+The hero's painted sign keeps its own palette untouched. It is the one element
+on the page that is a painted object rather than a surface, and on black it
+reads the way the shop's actual sign does.
+
+## Hours, and the wording
+
+12:00 PM to 7:00 PM daily, shown in those words. The strings used to be
+hardcoded in three places in `app.js` and one in the footer; they are now all
+derived from `SITE.hours.weekly`, so the data is the only place the hours
+exist. The social card bakes them in too, which is why `npm run og` is now part
+of changing them.
+
+"The wall" and "card" are gone from everything a visitor reads: the gallery
+heading is "The work", the empty state and the crew note were rewritten, and a
+test reads `document.body.innerText` and fails on either word. The CSS class
+is still `.card` and the code comments still call a project a card, because
+renaming the data model would make the code harder to read and no visitor sees
+it.
+
+In their place, a **How it works** section sits directly after the gallery —
+work first, then how to get some — with the shop's three points in its own
+words: walk-ins first come first served whenever there is time between
+appointments and call early; a small deposit holds a specific day and time,
+goes toward the tattoo, gets the artwork drawn and holds the chair for as long
+as the tattoo takes; consultations free any time, no appointment. No deposit
+amount is published, and a test checks that no dollar figure appears there.
+
+## Lettering
+
+Deleted as a category. Its three pieces — Script with bow, Skull with
+lettering, Horseshoe with script, all three the shop's attribution to Thadius
+Gardner — are colour work with script in them. They moved to Color and sit last
+in `projects`, which puts them at the end of the Color filter without putting
+them in `buried`, where they would also have been sunk on the front page that
+nobody asked for. Horseshoe with script had no artist credit at all and now
+carries Thadius's.
+
+## Verification
+
+- `npm run lint`: clean. 208 masters, 165 projects, dimensions and derivatives
+  in agreement, no EXIF or GPS, no orphans, no duplicate photos.
+- `npm test`: 326 passed, 1 skipped (a compositor-gesture test that only
+  applies to touch), across desktop 1280x900, tablet 820x1180 and phone
+  390x844 at DPR 3.
+- Performance on CDP-throttled slow 4G, phone profile: 639 KB initial weight
+  (budget 1400), 22 requests (60), LCP 1116 ms (2500), CLS 0.0006 (0.1), app JS
+  28.3 KB (32), data JS 45.4 KB (60), CSS 23.7 KB (30). Whole gallery revealed:
+  4.38 MB (budget 8).

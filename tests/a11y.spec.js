@@ -132,7 +132,7 @@ test('reduced motion switches off smooth scrolling', async ({ page }) => {
   expect(await page.locator('#v-rail').evaluate(el => getComputedStyle(el).scrollBehavior)).toBe('auto');
   // and navigation still works without animation
   await page.locator('#v-next').click();
-  await expect(page.locator('#v-counter')).toHaveText('2 / 10');
+  await expect(page.locator('#v-counter')).toHaveText('2 / 11');
 });
 
 test('nothing autoplays and no element animates on load', async ({ page }) => {

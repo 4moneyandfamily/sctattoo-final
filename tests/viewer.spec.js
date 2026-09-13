@@ -1,6 +1,6 @@
 const { test, expect } = require('@playwright/test');
 
-const multi = '#card-set-james-dragon-sleeve';   // 10 photos
+const multi = '#card-set-james-dragon-sleeve';   // 11 photos
 const openMulti = async (page) => {
   await page.locator('#artist-filters button', { hasText: /^James Whelan$/ }).click();
   await page.locator(multi).click();
@@ -14,31 +14,31 @@ test.beforeEach(async ({ page }) => {
 
 test('the viewer only ever shows the selected project', async ({ page }) => {
   await openMulti(page);
-  await expect(page.locator('#v-rail .v-slide')).toHaveCount(10);
-  await expect(page.locator('#v-counter')).toHaveText('1 / 10');
+  await expect(page.locator('#v-rail .v-slide')).toHaveCount(11);
+  await expect(page.locator('#v-counter')).toHaveText('1 / 11');
   await expect(page.locator('#v-title')).toHaveText('Dragon sleeve');
 });
 
 test('prev, next and the counter wrap in both directions', async ({ page }) => {
   await openMulti(page);
   await page.locator('#v-next').click();
-  await expect(page.locator('#v-counter')).toHaveText('2 / 10');
+  await expect(page.locator('#v-counter')).toHaveText('2 / 11');
   await page.locator('#v-prev').click();
-  await expect(page.locator('#v-counter')).toHaveText('1 / 10');
+  await expect(page.locator('#v-counter')).toHaveText('1 / 11');
   await page.locator('#v-prev').click();                       // wrap backwards
-  await expect(page.locator('#v-counter')).toHaveText('10 / 10');
+  await expect(page.locator('#v-counter')).toHaveText('11 / 11');
   await page.locator('#v-next').click();                       // wrap forwards
-  await expect(page.locator('#v-counter')).toHaveText('1 / 10');
+  await expect(page.locator('#v-counter')).toHaveText('1 / 11');
 });
 
 test('keyboard navigation works and Escape closes', async ({ page }) => {
   await openMulti(page);
   await page.keyboard.press('ArrowRight');
-  await expect(page.locator('#v-counter')).toHaveText('2 / 10');
+  await expect(page.locator('#v-counter')).toHaveText('2 / 11');
   await page.keyboard.press('End');
-  await expect(page.locator('#v-counter')).toHaveText('10 / 10');
+  await expect(page.locator('#v-counter')).toHaveText('11 / 11');
   await page.keyboard.press('Home');
-  await expect(page.locator('#v-counter')).toHaveText('1 / 10');
+  await expect(page.locator('#v-counter')).toHaveText('1 / 11');
   await page.keyboard.press('Escape');
   await expect(page.locator('#viewer')).toHaveJSProperty('open', false);
 });
@@ -46,7 +46,7 @@ test('keyboard navigation works and Escape closes', async ({ page }) => {
 test('thumbnails jump to a photo and mark the current one', async ({ page }) => {
   await openMulti(page);
   await page.locator('#v-dots button').nth(4).click();
-  await expect(page.locator('#v-counter')).toHaveText('5 / 10');
+  await expect(page.locator('#v-counter')).toHaveText('5 / 11');
   await expect(page.locator('#v-dots button').nth(4)).toHaveAttribute('aria-current', 'true');
   await expect(page.locator('#v-dots button').nth(0)).toHaveAttribute('aria-current', 'false');
 });
@@ -132,12 +132,12 @@ test('a compositor gesture pages the rail both ways and never scrolls the page',
   const oneSlide = await rail.evaluate(el => el.clientWidth);
   // mandatory snap must land exactly on a slide, never between two
   expect(await rail.evaluate(el => el.scrollLeft)).toBe(oneSlide);
-  await expect(page.locator('#v-counter')).toHaveText('2 / 10');
+  await expect(page.locator('#v-counter')).toHaveText('2 / 11');
   expect(await page.evaluate(() => window.scrollY)).toBe(pageY);
 
   await gesture(500);
   expect(await rail.evaluate(el => el.scrollLeft)).toBe(0);
-  await expect(page.locator('#v-counter')).toHaveText('1 / 10');
+  await expect(page.locator('#v-counter')).toHaveText('1 / 11');
   expect(await page.evaluate(() => window.scrollY)).toBe(pageY);
 });
 
