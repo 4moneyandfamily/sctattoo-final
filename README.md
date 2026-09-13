@@ -214,20 +214,38 @@ Netlify, publish directory `.`, no build command. The booking form is wired to
 Netlify Forms (`name="booking"` + `data-netlify="true"` + the hidden
 `form-name` input); Netlify picks it up at deploy time.
 
-**Booking form safety.** On any host that is not `sanclementetattoo.com` the
-form runs in **dry-run** mode: it validates, logs the inquiry to the console
-and posts nothing, so testing on a preview URL can never drop a fake booking in
-the shop's inbox. Force it either way with `?dryrun=1` or `?dryrun=0`. A failed
-send never shows a success message — it shows the phone number and a
-pre-filled email instead, and shouts on the console. Set
-`SITE.forms = { alert: 'https://…' }` in `data/site.js` to also fire a beacon
-to a monitor.
+**Live hosts vs the canonical host.** These are two different lists on purpose,
+and right now they disagree. `LIVE_HOSTS` at the top of `app.js` is where the
+site actually serves the public: the shop's domain, its `www`, and
+`sc-tattoo.netlify.app`. `CANON` is the one host search engines should index.
+The shop's domain still points at the old OtherPeoplesPixels site, so the live
+address is the netlify.app one while the canonical address is not. When the
+domain moves over, drop the netlify.app entry from `LIVE_HOSTS` and everything
+else follows.
+
+**Booking form safety.** On any host outside `LIVE_HOSTS` the form runs in
+**dry-run** mode: it validates, logs the inquiry to the console and posts
+nothing, so testing can never drop a fake booking in the shop's inbox. The
+match is exact, so deploy-previews (`deploy-preview-N--sc-tattoo.netlify.app`),
+branch deploys and localhost are all covered while the real address is not.
+Force it either way with `?dryrun=1` or `?dryrun=0`. A failed send never shows
+a success message — it shows the phone number and a pre-filled email instead,
+and shouts on the console. Set `SITE.forms = { alert: 'https://…' }` in
+`data/site.js` to also fire a beacon to a monitor.
+
+This is the one thing to check after any change to hosting: a form that says
+"nothing was sent" to a real customer is worse than no form at all, and the
+only thing standing between those two states is that host list.
+`tests/forms.spec.js` pins it.
 
 **Preview deployments are `noindex`.** Netlify deploy-previews and branch
 deploys get `X-Robots-Tag: noindex, nofollow` from `netlify.toml`, and
-`app.js` adds a `noindex` robots meta on any hostname that is not the canonical
-domain. That covers `sc-tattoo.netlify.app`, which is a production context as
-far as Netlify is concerned and so cannot be handled by a context rule.
+`app.js` adds a `noindex` robots meta on any hostname that is not `CANON`.
+That currently includes `sc-tattoo.netlify.app` — it is a production context as
+far as Netlify is concerned, so no context rule reaches it, and it is
+deliberately kept out of search while `rel=canonical` points at a domain
+serving a different site. See OPEN-QUESTIONS.md: making the netlify.app address
+indexable is a decision for the shop, not a default.
 
 ## Before launch
 

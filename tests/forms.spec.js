@@ -178,3 +178,25 @@ test('the reference photo is sent as multipart so the file survives', async ({ p
   expect(body).toContain('old-tattoo.png');
   expect(body).toContain('Traditional panther on the calf');
 });
+
+test('the address the shop hands out submits for real; every rehearsal host does not', async ({ page }) => {
+  // The canonical domain and the live address are two different things right
+  // now: sanclementetattoo.com still serves the old site, so the shop hands out
+  // sc-tattoo.netlify.app. A customer standing on that address has to get a
+  // real submission rather than a "this is not the live site" message, and
+  // every preview and local run must still post nothing.
+  const live = (host) => page.evaluate(h => window.liveHost(h), host);
+
+  for (const host of ['sanclementetattoo.com', 'www.sanclementetattoo.com',
+                      'sc-tattoo.netlify.app']) {
+    expect(await live(host), `${host} should submit for real`).toBe(true);
+  }
+  // exact match only, so previews, branch deploys and lookalikes stay dry
+  for (const host of ['deploy-preview-6--sc-tattoo.netlify.app',
+                      'greg-sept-update--sc-tattoo.netlify.app',
+                      'sc-tattoo.netlify.app.evil.example',
+                      'notsc-tattoo.netlify.app',
+                      '127.0.0.1', 'localhost']) {
+    expect(await live(host), `${host} must stay in dry run`).toBe(false);
+  }
+});

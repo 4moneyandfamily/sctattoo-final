@@ -131,3 +131,47 @@ that carry the shop's painted-sign colours and say "walk-ins":
 Everything else is black, white and red. If the intended exception was only
 one of those two, or something else entirely, say which and it is a
 three-line change in `assets/css/app.css`.
+
+## 11. Should sc-tattoo.netlify.app be findable on Google?
+
+The site is live at `sc-tattoo.netlify.app` and it is currently **`noindex`** —
+deliberately, and now worth a decision.
+
+The reasoning that put it there: `sanclementetattoo.com` is the canonical
+address in the page's `rel=canonical`, its Open Graph tags, its structured data
+and its sitemap, and that domain still serves the old OtherPeoplesPixels site.
+A `noindex` on the netlify.app address stops two versions of the shop competing
+in search results.
+
+The cost: while the domain has not moved, the shop's actual website cannot be
+found on Google at all.
+
+Two ways out, and it is the shop's call:
+
+1. **Move the domain.** DNS goes to Cloudflare, `sanclementetattoo.com` points
+   at Netlify, and nothing in the code changes — the canonical address starts
+   serving this site and indexes normally. This is the right answer and it is
+   blocked on things outside this repo (the OtherPeoplesPixels login, registrar
+   access, the $16/mo subscription). Nothing here touches DNS, the registrar,
+   hosting or billing without Greg's say-so.
+2. **Index the netlify.app address in the meantime.** Point `CANON`,
+   `rel=canonical`, the OG and Twitter URLs, the structured data `url` and
+   `sitemap.xml` at `sc-tattoo.netlify.app`, so the live site is the canonical
+   one and gets indexed. Roughly a dozen lines. The catch is that search
+   engines cache canonicals, so when the real domain does come over there is a
+   second switch and a spell where Google catches up. Worth it if the domain
+   move is months away; not worth it if it is days.
+
+## 12. Is Netlify Forms switched on for sc-tattoo?
+
+The booking form posts to Netlify Forms. Every Netlify project this session
+could inspect reported forms `not enabled`, and `sc-tattoo` itself sits under a
+different Netlify login than the one available here, so this could not be
+checked directly.
+
+If it is off, a real booking request fails. It fails *safely* — the page never
+claims success, and it hands the visitor a tap-to-call link and a mailto with
+their answers already filled in — but the request does not reach the inbox.
+Switching Forms on for the project in the Netlify dashboard is the fix, and it
+takes one click. Worth confirming with a single test submission through the
+live form once it is on.
